@@ -62,7 +62,7 @@ require BASE_PATH . '/includes/header.php';
 
     <div class="hero__visual reveal reveal--scale" aria-hidden="true">
       <div class="hero__frame">
-        <img src="<?= e(display_image($settings['hero_image'] ?? null, 'images/placeholder-fleet.svg')) ?>" alt="Aracım Gelsin filosu" loading="eager">
+        <?= image_tag($settings['hero_image'] ?? null, 'Aracım Gelsin filosu', 'Filo görseli eklenecek', 'eager') ?>
       </div>
       <?php if (isset($highlights[0])): ?>
       <div class="chip chip--tl">
@@ -164,7 +164,7 @@ require BASE_PATH . '/includes/header.php';
       <?php foreach ($fleetVehicles as $vehicle): ?>
         <article class="fleet-card lift reveal">
           <div class="fleet-card__media">
-            <img src="<?= e(display_image($vehicle['image_path'], 'images/placeholder-vehicle.svg')) ?>" alt="<?= e($vehicle['name']) ?>" loading="lazy">
+            <?= image_tag($vehicle['image_path'], $vehicle['name'], 'Araç görseli eklenecek') ?>
           </div>
           <div class="fleet-card__body">
             <span class="eyebrow" style="margin-bottom:.25rem;"><?= e($vehicle['category']) ?></span>

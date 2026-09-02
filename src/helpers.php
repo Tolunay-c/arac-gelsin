@@ -30,18 +30,25 @@ function upload_url(?string $path): string
     return UPLOAD_URL . '/' . ltrim($path, '/');
 }
 
-/**
- * Resolve an uploaded image, falling back to a bundled placeholder when
- * $path is empty OR points at a file that doesn't actually exist on disk
- * (e.g. seed data referencing a photo nobody has uploaded yet).
- */
-function display_image(?string $path, string $fallbackAssetPath): string
+/** True when $path is set AND the file it names actually exists on disk. */
+function has_upload(?string $path): bool
 {
-    if ($path !== null && $path !== '' && is_file(UPLOAD_PATH . '/' . ltrim($path, '/'))) {
-        return upload_url($path);
+    return $path !== null && $path !== '' && is_file(UPLOAD_PATH . '/' . ltrim($path, '/'));
+}
+
+/**
+ * Render either the real uploaded photo, or a neutral CSS placeholder
+ * (no stock artwork) when nothing has been uploaded yet — e.g. a brand
+ * new fleet vehicle before its photo is added. Caller supplies the
+ * placeholder's caption ("Araç görseli", "Filo görseli", …).
+ */
+function image_tag(?string $path, string $alt, string $placeholderLabel = 'Görsel eklenecek', string $loading = 'lazy'): string
+{
+    if (has_upload($path)) {
+        return '<img src="' . e(upload_url($path)) . '" alt="' . e($alt) . '" loading="' . e($loading) . '">';
     }
 
-    return asset($fallbackAssetPath);
+    return '<div class="img-placeholder">' . icon('image') . '<span>' . e($placeholderLabel) . '</span></div>';
 }
 
 function redirect(string $path): never
@@ -126,6 +133,23 @@ function icon_select(string $fieldName, ?string $selected = null): string
         . '<select name="' . e($fieldName) . '" class="admin-input" data-icon-picker>' . $options . '</select>'
         . '<span class="icon-picker__preview">' . icon($selected) . '</span>'
         . '</div>';
+}
+
+/**
+ * Render an App Store / Google Play badge link.
+ * $type is 'apple' or 'google'; $variant '' or 'sm' (see .store-badge--sm).
+ */
+function store_badge(string $url, string $type, string $variant = ''): string
+{
+    $eyebrow = $type === 'apple' ? 'İndirin' : 'Şuradan edinin';
+    $label = $type === 'apple' ? 'App Store' : 'Google Play';
+    $iconKey = $type === 'apple' ? 'smartphone' : 'play';
+    $class = 'store-badge' . ($variant !== '' ? ' store-badge--' . $variant : '');
+
+    return '<a href="' . e($url) . '" class="' . e($class) . '" target="_blank" rel="noopener" aria-label="' . e($label) . '">'
+        . '<span class="store-badge__icon">' . icon($iconKey) . '</span>'
+        . '<span class="store-badge__text"><small>' . e($eyebrow) . '</small><strong>' . e($label) . '</strong></span>'
+        . '</a>';
 }
 
 /** Format a MySQL datetime string for display, defensively. */

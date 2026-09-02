@@ -145,7 +145,7 @@ require __DIR__ . '/includes/admin-header.php';
     <label class="admin-field">
       Hero Görseli
       <input type="file" name="hero_image_file" accept=".jpg,.jpeg,.png,.webp,.svg">
-      <?php if (!empty($settings['hero_image']) && is_file(UPLOAD_PATH . '/' . ltrim($settings['hero_image'], '/'))): ?>
+      <?php if (has_upload($settings['hero_image'] ?? null)): ?>
         <img src="<?= e(upload_url($settings['hero_image'])) ?>" alt="" class="admin-thumb">
       <?php endif; ?>
     </label>

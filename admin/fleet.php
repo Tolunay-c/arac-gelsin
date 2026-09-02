@@ -40,7 +40,7 @@ require __DIR__ . '/includes/admin-header.php';
   <div class="admin-fleet-grid">
     <?php foreach ($vehicles as $vehicle): ?>
       <div class="admin-fleet-card">
-        <img src="<?= e(display_image($vehicle['image_path'], 'images/placeholder-vehicle.svg')) ?>" alt="">
+        <?= image_tag($vehicle['image_path'], $vehicle['name'], 'Görsel yok') ?>
         <div class="admin-fleet-card__body">
           <span class="admin-badge admin-badge--<?= $vehicle['is_active'] ? 'new' : 'closed' ?>"><?= $vehicle['is_active'] ? 'Aktif' : 'Pasif' ?></span>
           <h3><?= e($vehicle['name']) ?></h3>

@@ -140,10 +140,10 @@ require BASE_PATH . '/includes/header.php';
       <div class="contact-card__divider"></div>
       <div style="display:flex;gap:var(--sp-3);flex-wrap:wrap;">
         <?php if (!empty($settings['app_store_url'])): ?>
-          <a href="<?= e($settings['app_store_url']) ?>" class="btn btn--outline btn--sm" target="_blank" rel="noopener"><?= icon('download') ?> App Store</a>
+          <?= store_badge($settings['app_store_url'], 'apple') ?>
         <?php endif; ?>
         <?php if (!empty($settings['play_store_url'])): ?>
-          <a href="<?= e($settings['play_store_url']) ?>" class="btn btn--outline btn--sm" target="_blank" rel="noopener"><?= icon('download') ?> Google Play</a>
+          <?= store_badge($settings['play_store_url'], 'google') ?>
         <?php endif; ?>
       </div>
       <?php endif; ?>

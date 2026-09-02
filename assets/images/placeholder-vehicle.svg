@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Araç görseli">
-  <rect width="400" height="300" fill="#0f1b2d"/>
-  <g fill="none" stroke="#e0163c" stroke-width="4" opacity="0.9">
-    <rect x="90" y="150" width="220" height="80" rx="14"/>
-    <circle cx="140" cy="235" r="20"/>
-    <circle cx="260" cy="235" r="20"/>
-  </g>
-  <text x="200" y="100" text-anchor="middle" font-family="sans-serif" font-size="14" letter-spacing="2" fill="#aab4c6">ÖZİKİZLER</text>
-</svg>

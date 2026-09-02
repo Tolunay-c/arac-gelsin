@@ -129,8 +129,10 @@ h1, h2, h3 { font-family: var(--font-display); font-weight: 700; letter-spacing:
 .admin-flash--success { background: var(--green-soft); color: #227A3F; }
 .admin-flash--error { background: var(--red-soft); color: var(--red); }
 
-/* ---------- Kartlar / paneller ---------- */
-.admin-panel { background: var(--card); border: 1px solid var(--border); border-radius: var(--r-lg); box-shadow: var(--shadow); padding: 22px 26px; margin-bottom: 22px; }
+/* ---------- Kartlar / paneller ----------
+   overflow-x: auto — geniş bir tablo (ör. karşılaştırma tablosu) dar bir
+   ekranda panelin kendi içinde yatay kaydırılsın, sayfayı taşırmasın. */
+.admin-panel { background: var(--card); border: 1px solid var(--border); border-radius: var(--r-lg); box-shadow: var(--shadow); padding: 22px 26px; margin-bottom: 22px; overflow-x: auto; }
 .admin-panel__header { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 1.4rem; flex-wrap: wrap; }
 .admin-panel__header h2 { margin: 0; font-size: 15.5px; }
 .admin-panel__hint { font-size: 12.5px; color: var(--light); margin: 0; }
@@ -138,6 +140,7 @@ h1, h2, h3 { font-family: var(--font-display); font-weight: 700; letter-spacing:
 
 /* ---------- Dashboard stat kartları ---------- */
 .admin-stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 26px; }
+.admin-stat-grid > *, .admin-form-grid > *, .admin-fleet-grid > * { min-width: 0; } /* grid item'lar min-width:auto ile taşabilir */
 .admin-stat-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 18px 20px; box-shadow: var(--shadow); display: flex; align-items: center; gap: 14px; transition: transform .15s, box-shadow .15s; }
 .admin-stat-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
 .admin-stat-card .ic { width: 42px; height: 42px; border-radius: var(--r-sm); background: var(--red-soft); color: var(--ink); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
@@ -219,6 +222,21 @@ h1, h2, h3 { font-family: var(--font-display); font-weight: 700; letter-spacing:
 .admin-fleet-card { border: 1px solid var(--border); border-radius: var(--r-lg); overflow: hidden; transition: transform .15s, box-shadow .15s; }
 .admin-fleet-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
 .admin-fleet-card img { width: 100%; aspect-ratio: 4/3; object-fit: cover; background: var(--obsidian); }
+/* height:auto — grid satırı kart yüksekliğini eşitlemek için
+   .admin-fleet-card'a zaten sabit bir yükseklik veriyor (align-items:
+   stretch); height:100% (taban kural) bu durumda aspect-ratio'yu geçersiz
+   kılıp kutuyu aşırı uzatır, height:auto ile aspect-ratio tekrar geçerli olur. */
+.admin-fleet-card .img-placeholder { aspect-ratio: 4/3; height: auto; }
+
+/* ---------- Görsel yer tutucu (admin — kendi ayrı stil sayfası, site
+   component.css'ini paylaşmaz) ---------- */
+.img-placeholder {
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;
+  width: 100%; height: 100%; min-height: 100px;
+  background: #F2F5F7; color: var(--light);
+}
+.img-placeholder svg { width: 28px; height: 28px; opacity: .55; }
+.img-placeholder span { font-size: 10.5px; font-weight: 600; letter-spacing: .04em; text-align: center; padding-inline: 12px; }
 .admin-fleet-card__body { padding: 1.25rem; }
 .admin-fleet-card__body h3 { margin: .5rem 0 .1rem; font-size: 1.05rem; }
 .admin-fleet-card__body p { margin: 0 0 .75rem; color: var(--muted); font-size: .85rem; }

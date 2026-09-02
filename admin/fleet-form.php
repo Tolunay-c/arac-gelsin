@@ -92,7 +92,7 @@ require __DIR__ . '/includes/admin-header.php';
 
     <label class="admin-field admin-field--wide">Araç Görseli
       <input type="file" name="image_file" accept=".jpg,.jpeg,.png,.webp,.svg">
-      <?php if (!empty($vehicle['image_path']) && is_file(UPLOAD_PATH . '/' . ltrim($vehicle['image_path'], '/'))): ?>
+      <?php if (has_upload($vehicle['image_path'] ?? null)): ?>
         <img src="<?= e(upload_url($vehicle['image_path'])) ?>" alt="" class="admin-thumb">
       <?php endif; ?>
     </label>

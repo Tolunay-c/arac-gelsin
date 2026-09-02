@@ -44,7 +44,7 @@ require BASE_PATH . '/includes/header.php';
       <?php foreach ($fleetVehicles as $vehicle): ?>
         <article class="fleet-card lift reveal">
           <div class="fleet-card__media">
-            <img src="<?= e(display_image($vehicle['image_path'], 'images/placeholder-vehicle.svg')) ?>" alt="<?= e($vehicle['name']) ?>" loading="lazy">
+            <?= image_tag($vehicle['image_path'], $vehicle['name'], 'Araç görseli eklenecek') ?>
           </div>
           <div class="fleet-card__body">
             <span class="eyebrow" style="margin-bottom:.25rem;"><?= e($vehicle['category']) ?></span>

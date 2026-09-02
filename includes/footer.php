@@ -41,12 +41,12 @@
 
     <div>
       <h4>Uygulamayı İndirin</h4>
-      <div style="display:flex;flex-direction:column;gap:.65rem;">
+      <div style="display:flex;flex-direction:column;gap:.65rem;align-items:flex-start;">
         <?php if (!empty($settings['app_store_url'])): ?>
-          <a href="<?= e($settings['app_store_url']) ?>" class="btn btn--outline btn--sm" target="_blank" rel="noopener"><?= icon('download') ?> App Store</a>
+          <?= store_badge($settings['app_store_url'], 'apple', 'sm') ?>
         <?php endif; ?>
         <?php if (!empty($settings['play_store_url'])): ?>
-          <a href="<?= e($settings['play_store_url']) ?>" class="btn btn--outline btn--sm" target="_blank" rel="noopener"><?= icon('download') ?> Google Play</a>
+          <?= store_badge($settings['play_store_url'], 'google', 'sm') ?>
         <?php endif; ?>
       </div>
     </div>
@@ -75,21 +75,25 @@
       <?= csrf_field() ?>
       <input type="hidden" name="source_page" value="modal">
 
-      <div class="form-group">
-        <label class="form-label">Şirket Adı <span class="req">*</span></label>
-        <input class="form-input" type="text" name="company_name" data-rule="required" maxlength="150">
+      <div class="grid grid-2">
+        <div class="form-group">
+          <label class="form-label">Şirket Adı <span class="req">*</span></label>
+          <input class="form-input" type="text" name="company_name" data-rule="required" maxlength="150">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Yetkili Ad Soyad <span class="req">*</span></label>
+          <input class="form-input" type="text" name="contact_name" data-rule="required" maxlength="150">
+        </div>
       </div>
-      <div class="form-group">
-        <label class="form-label">Yetkili Ad Soyad <span class="req">*</span></label>
-        <input class="form-input" type="text" name="contact_name" data-rule="required" maxlength="150">
-      </div>
-      <div class="form-group">
-        <label class="form-label">Telefon <span class="req">*</span></label>
-        <input class="form-input" type="tel" name="phone" data-rule="required|phone" maxlength="14">
-      </div>
-      <div class="form-group">
-        <label class="form-label">E-posta <span class="req">*</span></label>
-        <input class="form-input" type="email" name="email" data-rule="required|email" maxlength="150">
+      <div class="grid grid-2">
+        <div class="form-group">
+          <label class="form-label">Telefon <span class="req">*</span></label>
+          <input class="form-input" type="tel" name="phone" data-rule="required|phone" maxlength="14">
+        </div>
+        <div class="form-group">
+          <label class="form-label">E-posta <span class="req">*</span></label>
+          <input class="form-input" type="email" name="email" data-rule="required|email" maxlength="150">
+        </div>
       </div>
       <div class="form-group">
         <label class="form-label">Mesajınız <span class="text-muted">(opsiyonel)</span></label>

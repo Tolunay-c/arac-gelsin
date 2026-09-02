@@ -46,6 +46,7 @@
   box-shadow: var(--shadow-lg); padding: var(--sp-6); overflow: hidden;
 }
 .hero__frame img { border-radius: var(--r-md); aspect-ratio: 4/3.4; object-fit: cover; width: 100%; }
+.hero__frame .img-placeholder { border-radius: var(--r-md); aspect-ratio: 4/3.4; }
 
 .chip {
   position: absolute; display: flex; align-items: center; gap: var(--sp-3);
@@ -202,7 +203,7 @@
 .lead-modal.is-open { display: flex; }
 .lead-modal__backdrop { position: absolute; inset: 0; background: rgb(6 11 18 / .72); backdrop-filter: blur(3px); }
 .lead-modal__panel {
-  position: relative; z-index: 1; max-width: 460px; width: 100%;
+  position: relative; z-index: 1; max-width: 540px; width: 100%;
   background: var(--c-card); border: 1px solid var(--c-border); border-radius: var(--r-xl); padding: var(--sp-6);
   box-shadow: var(--shadow-lg); overflow-y: auto;
   /* 100dvh yerine 100vh, mobil tarayıcılarda adres çubuğu açıkken paneli
@@ -213,6 +214,10 @@
   animation: modal-in var(--dur-slow) var(--ease-out);
 }
 .lead-modal__panel .form-group { margin-bottom: var(--sp-4); }
+.lead-modal__panel .grid-2 { gap: var(--sp-4); }
+/* Modal 540px'lik dar bir kutu — 375px altı gerçek telefonlarda iki sütun
+   sıkışabileceğinden orada tek sütuna düşer (masaüstünde her zaman ikili). */
+@media (max-width: 400px) { .lead-modal__panel .grid-2 { grid-template-columns: 1fr; } }
 @keyframes modal-in { from { opacity: 0; transform: translateY(16px) scale(.98); } }
 .lead-modal__close { position: absolute; top: var(--sp-5); right: var(--sp-5); width: 36px; height: 36px; border-radius: 50%; background: var(--c-overlay-1); color: var(--c-heading); display: flex; align-items: center; justify-content: center; transition: background var(--dur) var(--ease); }
 .lead-modal__close:hover { background: var(--c-overlay-2); }

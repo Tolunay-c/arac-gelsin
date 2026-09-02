@@ -52,8 +52,12 @@
 
 /* Tema anahtarının topbar'daki küçük varyantı — üst şerit ince olduğundan
    ana nav satırını daraltmamak için anahtar buraya, en üste yerleştirilir. */
-.theme-toggle--sm { width: 26px; height: 26px; color: rgb(255 255 255 / .85); }
-.theme-toggle--sm:hover { background: rgb(255 255 255 / .1); color: #fff; }
+/* Topbar her iki temada da sabit koyu kaldığından bu varyant kendi rengini
+   her zaman korumalı — .theme-toggle temel kuralı (var(--c-text), açık
+   temada koyulaşır) tarafından ezilmesin diye zincirlenmiş sınıfla
+   özgüllüğü kasıtlı olarak yükseltiyoruz. */
+.theme-toggle.theme-toggle--sm { width: 26px; height: 26px; color: rgb(255 255 255 / .85); }
+.theme-toggle.theme-toggle--sm:hover { background: rgb(255 255 255 / .1); color: #fff; }
 .theme-toggle--sm .ic-svg { width: 15px; height: 15px; }
 
 /* ---------- Header ---------- */
