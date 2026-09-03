@@ -45,12 +45,12 @@ require __DIR__ . '/includes/admin-header.php';
       <tbody>
         <?php foreach ($sections as $section): ?>
           <tr>
-            <td><?= e($section['section_name']) ?></td>
-            <td><code><?= e($section['section_key']) ?></code></td>
-            <td>
+            <td data-label="Bölüm"><?= e($section['section_name']) ?></td>
+            <td data-label="Anahtar"><code><?= e($section['section_key']) ?></code></td>
+            <td data-label="Sıra">
               <input type="number" name="sections[<?= (int) $section['id'] ?>][sort_order]" value="<?= (int) $section['sort_order'] ?>" class="admin-input admin-input--sm">
             </td>
-            <td>
+            <td data-label="Aktif">
               <label class="admin-switch">
                 <input type="checkbox" name="sections[<?= (int) $section['id'] ?>][is_active]" <?= $section['is_active'] ? 'checked' : '' ?>>
                 <span></span>

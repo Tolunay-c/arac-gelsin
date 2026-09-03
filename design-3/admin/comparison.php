@@ -92,12 +92,12 @@ require __DIR__ . '/includes/admin-header.php';
     <tbody>
       <?php foreach ($items as $item): ?>
         <tr>
-          <td><?= (int) $item['sort_order'] ?></td>
-          <td><?= e($item['criterion_name']) ?></td>
-          <td><?= e($item['traditional_service_value']) ?></td>
-          <td><?= e($item['taxi_app_value']) ?></td>
-          <td><?= e($item['aracim_gelsin_value']) ?></td>
-          <td>
+          <td data-label="#"><?= (int) $item['sort_order'] ?></td>
+          <td data-label="Kriter"><?= e($item['criterion_name']) ?></td>
+          <td data-label="Geleneksel"><?= e($item['traditional_service_value']) ?></td>
+          <td data-label="Taksi/Uygulama"><?= e($item['taxi_app_value']) ?></td>
+          <td data-label="Aracım Gelsin"><?= e($item['aracim_gelsin_value']) ?></td>
+          <td data-label="Aktif">
             <form method="post">
               <?= csrf_field() ?>
               <input type="hidden" name="action" value="toggle">
@@ -107,7 +107,7 @@ require __DIR__ . '/includes/admin-header.php';
               </button>
             </form>
           </td>
-          <td class="admin-table__actions">
+          <td class="admin-table__actions" data-label="İşlemler">
             <a href="?edit=<?= (int) $item['id'] ?>" class="btn-admin btn-admin--sm"><?= icon('edit') ?> Düzenle</a>
             <form method="post" onsubmit="return confirm('Silinsin mi?');">
               <?= csrf_field() ?>

@@ -16,11 +16,22 @@
 
   // Mobile sidebar toggle.
   var menuBtn = document.getElementById('adminMenuToggle');
+  var navBackdrop = document.getElementById('adminNavBackdrop');
   if (menuBtn) {
     menuBtn.addEventListener('click', function () {
       document.body.classList.toggle('admin-nav-open');
     });
   }
+  // Tap the dimmed backdrop to close the drawer again.
+  if (navBackdrop) {
+    navBackdrop.addEventListener('click', function () {
+      document.body.classList.remove('admin-nav-open');
+    });
+  }
+  // Esc closes the drawer too.
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') document.body.classList.remove('admin-nav-open');
+  });
 
   // Preview the selected file before upload, if a preview <img> follows the input.
   document.querySelectorAll('input[type="file"]').forEach(function (input) {

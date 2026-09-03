@@ -112,10 +112,10 @@ require __DIR__ . '/includes/admin-header.php';
     <tbody>
       <?php foreach ($features as $feature): ?>
         <tr>
-          <td><?= (int) $feature['sort_order'] ?></td>
-          <td><span class="row-icon"><?= icon($feature['icon']) ?></span></td>
-          <td><?= e($feature['feature_text']) ?></td>
-          <td>
+          <td data-label="#"><?= (int) $feature['sort_order'] ?></td>
+          <td data-label="İkon"><span class="row-icon"><?= icon($feature['icon']) ?></span></td>
+          <td data-label="Metin"><?= e($feature['feature_text']) ?></td>
+          <td data-label="Aktif">
             <form method="post">
               <?= csrf_field() ?>
               <input type="hidden" name="entity" value="feature">
@@ -126,7 +126,7 @@ require __DIR__ . '/includes/admin-header.php';
               </button>
             </form>
           </td>
-          <td class="admin-table__actions">
+          <td class="admin-table__actions" data-label="İşlemler">
             <a href="?edit_feature=<?= (int) $feature['id'] ?>" class="btn-admin btn-admin--sm"><?= icon('edit') ?> Düzenle</a>
             <form method="post" onsubmit="return confirm('Silinsin mi?');">
               <?= csrf_field() ?>
@@ -183,10 +183,10 @@ require __DIR__ . '/includes/admin-header.php';
     <tbody>
       <?php foreach ($stats as $stat): ?>
         <tr>
-          <td><?= (int) $stat['sort_order'] ?></td>
-          <td><?= e($stat['stat_title']) ?></td>
-          <td><?= e($stat['stat_subtitle']) ?></td>
-          <td>
+          <td data-label="#"><?= (int) $stat['sort_order'] ?></td>
+          <td data-label="Başlık"><?= e($stat['stat_title']) ?></td>
+          <td data-label="Alt Başlık"><?= e($stat['stat_subtitle']) ?></td>
+          <td data-label="Aktif">
             <form method="post">
               <?= csrf_field() ?>
               <input type="hidden" name="entity" value="stat">
@@ -197,7 +197,7 @@ require __DIR__ . '/includes/admin-header.php';
               </button>
             </form>
           </td>
-          <td class="admin-table__actions">
+          <td class="admin-table__actions" data-label="İşlemler">
             <a href="?edit_stat=<?= (int) $stat['id'] ?>" class="btn-admin btn-admin--sm"><?= icon('edit') ?> Düzenle</a>
             <form method="post" onsubmit="return confirm('Silinsin mi?');">
               <?= csrf_field() ?>

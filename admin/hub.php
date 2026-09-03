@@ -127,11 +127,11 @@ require __DIR__ . '/includes/admin-header.php';
     <tbody>
       <?php foreach ($locations as $location): ?>
         <tr>
-          <td><?= (int) $location['sort_order'] ?></td>
-          <td><?= e($location['area_name']) ?></td>
-          <td><?= e($location['region_label']) ?></td>
-          <td><?= $location['is_center'] ? 'Evet' : '—' ?></td>
-          <td>
+          <td data-label="#"><?= (int) $location['sort_order'] ?></td>
+          <td data-label="Alan"><?= e($location['area_name']) ?></td>
+          <td data-label="Bölge"><?= e($location['region_label']) ?></td>
+          <td data-label="Merkez mi?"><?= $location['is_center'] ? 'Evet' : '—' ?></td>
+          <td data-label="Aktif">
             <form method="post">
               <?= csrf_field() ?>
               <input type="hidden" name="entity" value="location">
@@ -142,7 +142,7 @@ require __DIR__ . '/includes/admin-header.php';
               </button>
             </form>
           </td>
-          <td class="admin-table__actions">
+          <td class="admin-table__actions" data-label="İşlemler">
             <a href="?edit_location=<?= (int) $location['id'] ?>" class="btn-admin btn-admin--sm"><?= icon('edit') ?> Düzenle</a>
             <form method="post" onsubmit="return confirm('Silinsin mi?');">
               <?= csrf_field() ?>
@@ -194,9 +194,9 @@ require __DIR__ . '/includes/admin-header.php';
     <tbody>
       <?php foreach ($features as $feature): ?>
         <tr>
-          <td><?= (int) $feature['sort_order'] ?></td>
-          <td><?= e($feature['feature_text']) ?></td>
-          <td>
+          <td data-label="#"><?= (int) $feature['sort_order'] ?></td>
+          <td data-label="Metin"><?= e($feature['feature_text']) ?></td>
+          <td data-label="Aktif">
             <form method="post">
               <?= csrf_field() ?>
               <input type="hidden" name="entity" value="feature">
@@ -207,7 +207,7 @@ require __DIR__ . '/includes/admin-header.php';
               </button>
             </form>
           </td>
-          <td class="admin-table__actions">
+          <td class="admin-table__actions" data-label="İşlemler">
             <a href="?edit_feature=<?= (int) $feature['id'] ?>" class="btn-admin btn-admin--sm"><?= icon('edit') ?> Düzenle</a>
             <form method="post" onsubmit="return confirm('Silinsin mi?');">
               <?= csrf_field() ?>

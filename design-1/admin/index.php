@@ -51,12 +51,12 @@ require __DIR__ . '/includes/admin-header.php';
       <tbody>
         <?php foreach ($recentLeads as $lead): ?>
           <tr>
-            <td><?= e($lead['company_name']) ?></td>
-            <td><?= e($lead['contact_name']) ?></td>
-            <td><?= e($lead['phone']) ?></td>
-            <td><?= e($lead['email']) ?></td>
-            <td><span class="admin-badge admin-badge--<?= e($lead['status']) ?>"><?= e($lead['status']) ?></span></td>
-            <td><?= e(format_datetime($lead['created_at'])) ?></td>
+            <td data-label="Şirket"><?= e($lead['company_name']) ?></td>
+            <td data-label="Yetkili"><?= e($lead['contact_name']) ?></td>
+            <td data-label="Telefon"><?= e($lead['phone']) ?></td>
+            <td data-label="E-posta"><?= e($lead['email']) ?></td>
+            <td data-label="Durum"><span class="admin-badge admin-badge--<?= e($lead['status']) ?>"><?= e($lead['status']) ?></span></td>
+            <td data-label="Tarih"><?= e(format_datetime($lead['created_at'])) ?></td>
           </tr>
         <?php endforeach; ?>
       </tbody>

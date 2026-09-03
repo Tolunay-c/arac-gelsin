@@ -108,10 +108,10 @@ require __DIR__ . '/includes/admin-header.php';
     <tbody>
       <?php foreach ($items as $item): ?>
         <tr>
-          <td><?= (int) $item['step_number'] ?></td>
-          <td><span class="row-icon"><?= icon($item['icon']) ?></span></td>
-          <td><?= e($item['title']) ?></td>
-          <td>
+          <td data-label="#"><?= (int) $item['step_number'] ?></td>
+          <td data-label="İkon"><span class="row-icon"><?= icon($item['icon']) ?></span></td>
+          <td data-label="Başlık"><?= e($item['title']) ?></td>
+          <td data-label="Aktif">
             <form method="post">
               <?= csrf_field() ?>
               <input type="hidden" name="action" value="toggle">
@@ -122,7 +122,7 @@ require __DIR__ . '/includes/admin-header.php';
               </button>
             </form>
           </td>
-          <td class="admin-table__actions">
+          <td class="admin-table__actions" data-label="İşlemler">
             <a href="?flow=<?= e($activeFlow) ?>&edit=<?= (int) $item['id'] ?>" class="btn-admin btn-admin--sm"><?= icon('edit') ?> Düzenle</a>
             <form method="post" onsubmit="return confirm('Silinsin mi?');">
               <?= csrf_field() ?>

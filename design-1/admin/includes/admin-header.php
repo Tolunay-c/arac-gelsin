@@ -43,6 +43,8 @@ $initials = mb_strtoupper(mb_substr($fullName, 0, 1) . mb_substr((string) strrch
 <body class="admin">
 <div class="admin-shell">
 
+  <div class="admin-nav-backdrop" id="adminNavBackdrop"></div>
+
   <aside class="admin-sidebar">
     <a href="index.php" class="admin-sidebar__brand">Aracım<strong>Gelsin</strong><span>Yönetim Paneli</span></a>
     <nav class="admin-sidebar__nav">

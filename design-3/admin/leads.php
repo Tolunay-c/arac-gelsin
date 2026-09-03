@@ -45,12 +45,12 @@ require __DIR__ . '/includes/admin-header.php';
     <tbody>
       <?php foreach ($leads as $lead): ?>
         <tr>
-          <td><?= e($lead['company_name']) ?></td>
-          <td><?= e($lead['contact_name']) ?></td>
-          <td><a href="tel:<?= e($lead['phone']) ?>"><?= e($lead['phone']) ?></a></td>
-          <td><a href="mailto:<?= e($lead['email']) ?>"><?= e($lead['email']) ?></a></td>
-          <td class="admin-table__wrap"><?= e($lead['message'] ?? '') ?></td>
-          <td>
+          <td data-label="Şirket"><?= e($lead['company_name']) ?></td>
+          <td data-label="Yetkili"><?= e($lead['contact_name']) ?></td>
+          <td data-label="Telefon"><a href="tel:<?= e($lead['phone']) ?>"><?= e($lead['phone']) ?></a></td>
+          <td data-label="E-posta"><a href="mailto:<?= e($lead['email']) ?>"><?= e($lead['email']) ?></a></td>
+          <td class="admin-table__wrap" data-label="Mesaj"><?= e($lead['message'] ?? '') ?></td>
+          <td data-label="Durum">
             <form method="post">
               <?= csrf_field() ?>
               <input type="hidden" name="action" value="update_status">
@@ -62,8 +62,8 @@ require __DIR__ . '/includes/admin-header.php';
               </select>
             </form>
           </td>
-          <td><?= e(format_datetime($lead['created_at'])) ?></td>
-          <td class="admin-table__actions">
+          <td data-label="Tarih"><?= e(format_datetime($lead['created_at'])) ?></td>
+          <td class="admin-table__actions" data-label="">
             <form method="post" onsubmit="return confirm('Bu talebi silmek istediğinize emin misiniz?');">
               <?= csrf_field() ?>
               <input type="hidden" name="action" value="delete">
