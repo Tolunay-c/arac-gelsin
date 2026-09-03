@@ -1,0 +1,187 @@
+/* ============================================================
+   ARACIM GELSİN — Design 3 ("Split Konsol") katman stilleri
+   ------------------------------------------------------------
+   tokens.css'teki RENK ve FONT değişkenlerinin hiçbirini değiştirmez —
+   palet (kırmızı vurgu, obsidyen koyu zemin) ve tipografi (Sora/Inter)
+   Design 1 ile birebir aynı; yalnızca köşe yarıçapı keskinleştirildi
+   (bkz. tokens.css). Bu dosya, Design 2'nin alt-theme.css'i site
+   GENELİNİN bileşen dilini nasıl ezdiyse aynı yöntemle, ama TAMAMEN
+   FARKLI bir yönde çalışır: Design 1'in ortalanmış/yuvarlak "SaaS"
+   hissi ile Design 2'nin yüzen pill/bento "app" hissinin ikisinden de
+   uzak, tam genişlik bölünmüş panelli, keskin köşeli, ince kırmızı
+   şeritli bir "operasyon konsolu" kompozisyonu: tam-genişlik split
+   hero, bağlantı çizgisiz numaralı spec satırları, sol-şeritli kartlar,
+   dikey ayraçlı footer. Sadece design-3 kopyasında var.
+   ============================================================ */
+
+::selection { background: var(--c-red); color: #fff; }
+
+/* ---------- Header: cam/blur yerine düz zemin + ince kırmızı alt çizgi ---------- */
+.site-header { background: var(--c-header-bg-scrolled); backdrop-filter: none; border-bottom: 1px solid var(--c-border); }
+.site-header::after { content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; background: var(--c-red); transform: scaleX(0); transform-origin: left; transition: transform var(--dur-slow) var(--ease-out); }
+.site-header.is-scrolled::after { transform: scaleX(1); }
+.site-header { position: sticky; }
+
+.main-nav ul { gap: var(--sp-1); }
+.main-nav a { border-radius: var(--r-sm); }
+.main-nav a.nav-cta {
+  background: transparent; color: var(--c-red-light); border: 1.5px solid var(--c-red);
+}
+.main-nav a.nav-cta:hover { background: var(--c-red); color: #fff; border-color: var(--c-red); }
+
+/* ---------- Sabit iletişim butonu: köşeli mühür ---------- */
+.call-float { border-radius: var(--r-md); }
+
+/* ============================================================
+   HERO — tam genişlik split panel (Design 1'in çerçeveli/ortalanmış
+   hero'sunun ve Design 2'nin bento ızgarasının karşıtı)
+   ============================================================ */
+.split-hero {
+  position: relative; display: grid; grid-template-columns: minmax(0, 6.5fr) minmax(0, 5.5fr);
+  align-items: stretch; min-height: 640px; background: var(--c-bg); overflow: hidden;
+}
+.split-hero__content { display: flex; align-items: center; padding: var(--sp-16) var(--sp-8); }
+.split-hero__inner { max-width: 520px; margin-left: auto; width: 100%; }
+.split-hero__inner .pill { margin-bottom: var(--sp-6); }
+.split-hero__inner h1 { margin-bottom: var(--sp-5); }
+.split-hero__inner .lead { margin-bottom: var(--sp-8); }
+
+.split-hero__media { position: relative; overflow: hidden; background: linear-gradient(180deg, var(--c-tint-1), var(--c-tint-2)); }
+.split-hero__media::before {
+  content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background: linear-gradient(90deg, rgb(10 20 32 / .5), transparent 18%);
+}
+.split-hero__media > img, .split-hero__media > .img-placeholder { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.split-hero__media::after {
+  content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--c-red); z-index: 2;
+}
+.split-hero .chip { z-index: 3; }
+.split-hero .chip--tl { top: 7%; left: 7%; }
+.split-hero .chip--br { bottom: 9%; right: 7%; left: auto; }
+
+/* ---------- Hero slider: filo araçları arasında geçiş yapan görsel şerit ---------- */
+.hero-slider { position: absolute; inset: 0; }
+.hero-slider__track { position: relative; width: 100%; height: 100%; }
+.hero-slider__slide {
+  position: absolute; inset: 0; opacity: 0; visibility: hidden; pointer-events: none;
+  transition: opacity var(--dur-slow) var(--ease), visibility 0s linear var(--dur-slow);
+}
+.hero-slider__slide.is-active { opacity: 1; visibility: visible; pointer-events: auto; transition: opacity var(--dur-slow) var(--ease); }
+.hero-slider__slide img, .hero-slider__slide .img-placeholder { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+
+.hero-slider__caption {
+  position: absolute; left: var(--sp-8); bottom: 76px; z-index: 3;
+  display: flex; flex-direction: column; gap: 2px;
+  opacity: 0; transform: translateY(10px); transition: opacity var(--dur-slow) var(--ease), transform var(--dur-slow) var(--ease);
+}
+.hero-slider__slide.is-active .hero-slider__caption { opacity: 1; transform: none; transition-delay: 120ms; }
+.hero-slider__tag { font-family: var(--font-display); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: var(--c-red-light); }
+.hero-slider__caption strong { font-family: var(--font-display); font-size: var(--fs-xl); color: #fff; text-shadow: 0 2px 16px rgb(0 0 0 / .5); }
+
+.hero-slider__nav {
+  position: absolute; left: 0; right: 0; bottom: 0; z-index: 3;
+  display: flex; align-items: center; gap: var(--sp-4); padding: var(--sp-5) var(--sp-8);
+  /* Sağda .call-float (sabit, sayfanın her yerinde 58px'lik yuvarlak
+     buton) için pay bırakılır — aksi halde "ileri" oku onun altında kalır. */
+  padding-right: calc(var(--sp-8) + 74px);
+  background: linear-gradient(0deg, rgb(6 11 18 / .82), transparent);
+}
+.hero-slider__dots { display: flex; align-items: center; gap: 8px; flex: 1; }
+.hero-slider__dot {
+  position: relative; flex: 1; max-width: 46px; height: 3px; border-radius: var(--r-full);
+  background: rgb(255 255 255 / .28); overflow: hidden; padding: 0;
+}
+.hero-slider__dot-fill { position: absolute; inset: 0; background: var(--c-red); transform: scaleX(0); transform-origin: left; }
+.hero-slider__dot.is-active .hero-slider__dot-fill { background: var(--c-red-light); }
+.hero-slider__arrow {
+  flex-shrink: 0; width: 34px; height: 34px; border-radius: var(--r-sm); border: 1px solid rgb(255 255 255 / .3);
+  color: #fff; display: flex; align-items: center; justify-content: center;
+  transition: background var(--dur) var(--ease), border-color var(--dur) var(--ease);
+}
+.hero-slider__arrow:hover { background: var(--c-red); border-color: var(--c-red); }
+.hero-slider__arrow svg { width: 16px; height: 16px; }
+.hero-slider__arrow .icon-prev { transform: rotate(180deg); }
+
+@media (max-width: 1023px) {
+  .split-hero { grid-template-columns: 1fr; min-height: 0; }
+  .split-hero__media { order: -1; aspect-ratio: 16/10; }
+  .split-hero__media::after { width: 100%; height: 4px; top: auto; bottom: 0; }
+  .split-hero__content { padding: var(--sp-10) var(--sp-5); }
+  .split-hero__inner { margin-inline: auto; }
+}
+@media (max-width: 560px) {
+  .split-hero .chip { display: none; }
+  .hero-slider__caption { left: var(--sp-5); bottom: 60px; }
+  /* Dar ekranda ok butonları çıkar — sadece noktalarla gezinme, sağda
+     sabit .call-float için hâlâ pay bırakılır. */
+  .hero-slider__nav { padding: var(--sp-4) var(--sp-5); padding-right: calc(var(--sp-5) + 66px); gap: 0; }
+  .hero-slider__arrow { display: none; }
+  .hero-slider__dot { max-width: none; }
+}
+
+/* ============ GÜVEN ŞERİDİ: sade çizgili, kırmızı numaralı ============ */
+.trust { border-top: 2px solid var(--c-red); border-bottom: 1px solid var(--c-border); }
+
+/* ============ STATS BAND: gradyan yerine düz zemin + üst kırmızı çizgi ============ */
+.stats { background: var(--c-surface); border-block: 1px solid var(--c-border); border-top: 2px solid var(--c-red); }
+
+/* ---------- İş problemi: kart yerine sol-şeritli çağrı kutusu ---------- */
+.problem-callout {
+  border-radius: var(--r-sm); border: 1px solid var(--c-border); border-left: 3px solid var(--c-red);
+  background: var(--c-surface);
+}
+
+/* ---------- Hedef / goal banner: sol-şeritli düz panel ---------- */
+.goal-banner { border-radius: var(--r-sm); border-left: 3px solid var(--c-red); }
+
+/* ---------- Süreç adımları: dairesel + noktalı bağlantı yerine
+   numaralı, sol-şeritli düz spec satırları ---------- */
+.process { display: flex; flex-direction: column; gap: 0; border-top: 1px solid var(--c-border); }
+.process__step {
+  display: flex; align-items: center; gap: var(--sp-6); text-align: left; padding: var(--sp-6) var(--sp-2);
+  border-bottom: 1px solid var(--c-border); border-left: 3px solid transparent;
+  transition: border-color var(--dur) var(--ease), background var(--dur) var(--ease), padding-left var(--dur) var(--ease);
+}
+.process__step:hover { border-left-color: var(--c-red); background: var(--c-overlay-1); padding-left: var(--sp-4); }
+.process__step-num {
+  flex-shrink: 0; margin: 0; width: 52px; height: 52px; border-radius: var(--r-sm);
+  background: var(--c-card); border: 1.5px solid var(--c-border-strong); color: var(--c-red-light);
+}
+.process__step:hover .process__step-num { transform: none; }
+.process__step::before { display: none; }
+.process__step h3 { margin-bottom: 2px; }
+.process__step p { font-size: var(--fs-sm); }
+
+/* ---------- CTA band: ışıma yerine sol-şeritli düz panel ---------- */
+.cta-band {
+  border-radius: var(--r-sm); background: var(--c-card); border: 1px solid var(--c-border);
+  border-left: 4px solid var(--c-red); text-align: left; padding: var(--sp-12) var(--sp-10);
+}
+.cta-band h2, .cta-band p { text-align: left; margin-left: 0; margin-right: 0; }
+.cta-band .hero-actions { justify-content: flex-start; }
+@media (max-width: 767px) { .cta-band { text-align: center; } .cta-band h2, .cta-band p { text-align: center; } .cta-band .hero-actions { justify-content: center; } }
+
+/* ---------- Sayfa başlığı: ring dekorasyonu yerine sol kırmızı şerit ---------- */
+.page-head { overflow: visible; }
+.page-head::after { display: none; }
+.page-head .container { border-left: 3px solid var(--c-red); padding-left: var(--sp-8); }
+@media (max-width: 767px) { .page-head .container { border-left: none; padding-left: var(--sp-5); } }
+
+/* ---------- Fleet / özellik kartları: hover'da sol kırmızı şerit ---------- */
+.fleet-card, .feature-card { border-left: 3px solid transparent; transition: border-color var(--dur) var(--ease), transform var(--dur-slow) var(--ease-out), box-shadow var(--dur-slow) var(--ease-out); }
+.fleet-card:hover, .feature-card:hover { border-left-color: var(--c-red); }
+
+/* ---------- Karşılaştırma tablosu: köşeler zaten keskin (tokens.css) ---------- */
+.compare-table thead th.compare-table__highlight-col { border-bottom: 2px solid var(--c-red); }
+
+/* ---------- Footer: dikey kırmızı-tonlu ayraçlar ---------- */
+.site-footer .footer-grid > div { position: relative; padding-left: var(--sp-8); }
+.site-footer .footer-grid > div:first-child { padding-left: 0; }
+.site-footer .footer-grid > div::before {
+  content: ""; position: absolute; left: 0; top: 2px; bottom: 2px; width: 1px; background: rgb(224 22 60 / .3);
+}
+.site-footer .footer-grid > div:first-child::before { display: none; }
+@media (max-width: 1023px) { .site-footer .footer-grid > div { padding-left: 0; } .site-footer .footer-grid > div::before { display: none; } }
+
+/* ---------- Lead modal ---------- */
+.lead-modal__panel { border-left: 4px solid var(--c-red); }
