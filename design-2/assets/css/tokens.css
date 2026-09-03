@@ -1,0 +1,172 @@
+/* ============================================================
+   ARACIM GELSİN — Design Tokens
+   İki tema: Obsidyen (koyu, varsayılan) ve Gündüz (açık).
+   Tek vurgu rengi her iki temada da: kırmızı.
+   Tema anahtarı: <html data-theme="dark|light">, bkz. assets/js/main.js.
+   ============================================================ */
+
+:root {
+  /* ---------- Marka (tema-bağımsız) ---------- */
+  --c-red:            #E0163C;  /* tek vurgu rengi */
+  --c-red-dark:       #B3102F;
+  --c-red-light:      #FF4D6D;
+  --c-red-soft:       rgb(224 22 60 / .13);
+  --c-success:        #4FBE7A;
+  --c-success-soft:   rgb(79 190 122 / .14);
+  --c-error:          #E36A5F;
+  --c-error-soft:     rgb(227 106 95 / .14);
+  --c-amber:          #E0A63C;
+  --c-amber-soft:     rgb(224 166 60 / .14);
+
+  /* Topbar ve footer her iki temada da sabit koyu kalır (marka şeridi). */
+  --c-topbar-bg:       #060B12;
+  --c-footer-bg:       #060B12;
+  --c-footer-text:     rgb(255 255 255 / .72);
+  --c-footer-heading:  #ffffff;
+
+  /* ---------- Tipografi ---------- */
+  --font-display: "Sora", "Inter", system-ui, sans-serif;
+  --font-sans:    "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --fs-xs:   0.8125rem;
+  --fs-sm:   0.9375rem;
+  --fs-base: 1rem;
+  --fs-md:   1.125rem;
+  --fs-lg:   1.375rem;
+  --fs-xl:   1.75rem;
+  --fs-2xl:  clamp(1.75rem, 1.2rem + 2vw, 2.5rem);
+  --fs-3xl:  clamp(2.25rem, 1.3rem + 3.4vw, 3.75rem);
+
+  --lh-tight: 1.14;
+  --lh-base:  1.7;
+
+  /* ---------- Spacing (4px taban) ---------- */
+  --sp-1: 4px;  --sp-2: 8px;   --sp-3: 12px; --sp-4: 16px;
+  --sp-5: 20px; --sp-6: 24px;  --sp-8: 32px; --sp-10: 40px;
+  --sp-12: 48px; --sp-16: 64px; --sp-20: 80px; --sp-24: 96px; --sp-32: 128px;
+
+  /* ---------- Radius ----------
+     Design 2 ("BiTaksi esintili"): renkler/tokens.css'in geri kalanı
+     Design 1 ile birebir aynı — sadece köşe yuvarlaklığı, uygulama/ürün
+     hissi için sitede belirgin biçimde artırıldı. */
+  --r-sm: 10px; --r-md: 16px; --r-lg: 28px; --r-xl: 36px; --r-full: 999px;
+
+  /* ---------- Motion ---------- */
+  --ease:      cubic-bezier(.4, 0, .2, 1);
+  --ease-out:  cubic-bezier(.16, 1, .3, 1);
+  --dur:       200ms;
+  --dur-slow:  480ms;
+  --dur-theme: 220ms;
+
+  /* ---------- Layout ---------- */
+  --container: 1200px;
+  --container-narrow: 860px;
+  --gap: 24px;
+  --section-y: clamp(64px, 5vw + 40px, 120px);
+  --header-h: 76px;
+  --topbar-h: 40px;
+}
+
+/* ============================================================
+   OBSİDYEN (koyu) — varsayılan tema
+   ============================================================ */
+:root, :root[data-theme="dark"] {
+  --c-heading:        #ffffff;
+  --c-text:           #ECF1F6;
+  --c-text-muted:     #93A1B4;
+  --c-text-light:     #647184;
+  --c-bg:             #0A1420;  /* gövde */
+  --c-surface:        #0D1826;  /* alternatif bölüm */
+  --c-card:           #101C2C;  /* kart yüzeyi */
+  --c-card-hover:     #142339;
+  --c-inset:          #0B1522;  /* input / çukur yüzey */
+  --c-border:         rgb(255 255 255 / .08);
+  --c-border-strong:  rgb(255 255 255 / .18);
+  --c-tint-1:         #132234;
+  --c-tint-2:         #0D1826;
+
+  --c-ink:            #F3F6FA;  /* birincil ikincil-CTA dolgusu: buz beyazı */
+  --c-ink-hover:      #DCE3EC;
+  --c-ink-text:       #0B1522;  /* ink buton üstü metin */
+
+  --c-overlay-1:      rgb(255 255 255 / .05);   /* çok hafif hover zemini */
+  --c-overlay-2:      rgb(255 255 255 / .1);    /* orta hover zemini */
+  --c-overlay-3:      rgb(255 255 255 / .5);    /* belirgin hover kenarlığı */
+  --c-ring:           rgb(255 255 255 / .025);  /* dekoratif halka/parıltı */
+
+  --c-header-bg:          rgb(10 20 32 / .78);
+  --c-header-bg-scrolled: rgb(10 20 32 / .96);
+  --c-mobile-nav-bg:      #0B141F;
+  --c-chip-bg:            #111E2E;
+  --c-toast-bg:           #101C2C;
+
+  --c-hero-grad-top:      #0E1B2B;
+  --c-stats-grad-a:       #0D1826;
+  --c-stats-grad-b:       #0A1420;
+  --c-page-head-grad-top: #0E1B2B;
+
+  --shadow-sm: 0 1px 2px rgb(0 0 0 / .35);
+  --shadow-md: 0 10px 28px rgb(0 0 0 / .38);
+  --shadow-lg: 0 24px 60px rgb(0 0 0 / .5);
+  --shadow-red: 0 14px 32px rgb(224 22 60 / .28);
+
+  color-scheme: dark;
+}
+
+/* ============================================================
+   GÜNDÜZ (açık) tema
+   ============================================================ */
+:root[data-theme="light"] {
+  --c-heading:        #0B1420;
+  --c-text:           #1B2735;
+  --c-text-muted:     #5B6C80;
+  --c-text-light:     #8492A3;
+  --c-bg:             #F5F6FA;  /* gövde */
+  --c-surface:        #EEF0F6;  /* alternatif bölüm */
+  --c-card:           #FFFFFF;  /* kart yüzeyi */
+  --c-card-hover:     #FBFBFE;
+  --c-inset:          #F1F2F7;  /* input / çukur yüzey */
+  --c-border:         rgb(11 20 32 / .1);
+  --c-border-strong:  rgb(11 20 32 / .2);
+  --c-tint-1:         #ECEEF4;
+  --c-tint-2:         #E3E6EE;
+
+  --c-ink:            #101C2C;  /* açık temada ink buton koyu zemine döner */
+  --c-ink-hover:      #0A141F;
+  --c-ink-text:       #FFFFFF;
+
+  --c-overlay-1:      rgb(11 20 32 / .045);
+  --c-overlay-2:      rgb(11 20 32 / .08);
+  --c-overlay-3:      rgb(11 20 32 / .35);
+  --c-ring:           rgb(11 20 32 / .035);
+
+  --c-header-bg:          rgb(255 255 255 / .82);
+  --c-header-bg-scrolled: rgb(255 255 255 / .96);
+  --c-mobile-nav-bg:      #FFFFFF;
+  --c-chip-bg:            #FFFFFF;
+  --c-toast-bg:           #101C2C;  /* toast bilinçli olarak her iki temada koyu kalır */
+
+  --c-hero-grad-top:      #E9ECF4;
+  --c-stats-grad-a:       #EEF0F6;
+  --c-stats-grad-b:       #F5F6FA;
+  --c-page-head-grad-top: #E9ECF4;
+
+  --shadow-sm: 0 1px 2px rgb(16 28 44 / .06);
+  --shadow-md: 0 10px 28px rgb(16 28 44 / .1);
+  --shadow-lg: 0 24px 60px rgb(16 28 44 / .16);
+  --shadow-red: 0 14px 32px rgb(224 22 60 / .2);
+
+  color-scheme: light;
+}
+
+/* Açık tercihi olan ama henüz seçim yapmamış ziyaretçi için sistem tercihine
+   saygı göstermeyi main.js'in ilk-yükleme betiği yapar (bkz. includes/header.php);
+   burada yalnızca <html> üzerinde data-theme olmadığında tarayıcı native
+   kontrollerinin (scrollbar vb.) makul görünmesi için bir son çare tanımlanır. */
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme]) { color-scheme: light; }
+}
+
+@media (max-width: 767px) {
+  :root { --header-h: 64px; --gap: 16px; }
+}

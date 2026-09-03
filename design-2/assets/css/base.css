@@ -1,0 +1,71 @@
+/* ============================================================
+   ARACIM GELSİN — Base (reset + tipografi + erişilebilirlik)
+   ============================================================ */
+
+*, *::before, *::after { box-sizing: border-box; }
+* { margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-sans);
+  font-size: var(--fs-base);
+  line-height: var(--lh-base);
+  color: var(--c-text);
+  background: var(--c-bg);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+  transition: background-color var(--dur-theme) var(--ease), color var(--dur-theme) var(--ease);
+}
+
+img, svg, video { display: block; max-width: 100%; height: auto; }
+/* Low-specificity fallback size for every icon() SVG — see App\Support\Icons. */
+.ic-svg { width: 20px; height: 20px; flex-shrink: 0; }
+a { color: var(--c-red-light); text-decoration: none; transition: color var(--dur) var(--ease); }
+a:hover { color: var(--c-red); }
+ul, ol { list-style: none; }
+button, input, select, textarea { font: inherit; color: inherit; }
+button { cursor: pointer; background: none; border: none; }
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  line-height: var(--lh-tight);
+  font-weight: 700;
+  color: var(--c-heading);
+  letter-spacing: -0.015em;
+  overflow-wrap: break-word;
+}
+h1 { font-size: var(--fs-3xl); }
+h2 { font-size: var(--fs-2xl); }
+h3 { font-size: var(--fs-lg); letter-spacing: -0.005em; }
+h4 { font-size: var(--fs-md); }
+
+p { color: var(--c-text-muted); }
+
+.text-muted { color: var(--c-text-muted); }
+.text-center { text-align: center; }
+.lead { font-size: var(--fs-md); color: var(--c-text-muted); line-height: 1.7; }
+
+/* ---------- Erişilebilirlik ---------- */
+:focus-visible { outline: 3px solid var(--c-red); outline-offset: 2px; border-radius: var(--r-sm); }
+.skip-link {
+  position: absolute; left: -999px; top: 0; z-index: 1000;
+  background: var(--c-red); color: #fff; padding: .85rem 1.4rem; border-radius: 0 0 10px 0; font-weight: 700;
+}
+.skip-link:focus { left: 0; }
+.visually-hidden { position: absolute; width: 1px; height: 1px; clip-path: inset(50%); overflow: hidden; white-space: nowrap; }
+
+/* ---------- Scroll reveal ---------- */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s var(--ease-out), transform .7s var(--ease-out); }
+.reveal.in { opacity: 1; transform: none; }
+.reveal--scale { transform: translateY(16px) scale(.96); }
+.reveal--scale.in { transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal { opacity: 1; transform: none; }
+}
