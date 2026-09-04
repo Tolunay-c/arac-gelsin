@@ -8,7 +8,7 @@ use App\Core\Model;
 
 /**
  * Short "stat + label" badges reused across the Hero strip and the
- * "Neden Farklı?" positioning cards — e.g. 30 DK / Elektrikli / İzmir / B2B.
+ * "Neden Farklı?" positioning cards — e.g. 30 DK / Elektrikli / İzmir.
  */
 final class HighlightStat extends Model
 {

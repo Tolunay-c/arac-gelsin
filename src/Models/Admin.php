@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-use App\Core\Database;
 use App\Core\Model;
 
 /** Admin panel operator account. */
@@ -12,6 +11,7 @@ final class Admin extends Model
 {
     protected static string $table = 'admins';
     protected static array $fillable = ['username', 'email', 'full_name', 'password_hash', 'last_login_at'];
+    protected static string $defaultOrder = 'id ASC';
 
     public static function findByUsername(string $username): ?array
     {
@@ -31,20 +31,19 @@ final class Admin extends Model
 
     public static function touchLastLogin(int $id): void
     {
-        Database::connection()
-            ->prepare('UPDATE ' . self::$table . ' SET last_login_at = NOW() WHERE id = :id')
-            ->execute(['id' => $id]);
+        self::mutate($id, static function (array $row): array {
+            $row['last_login_at'] = date('Y-m-d H:i:s');
+
+            return $row;
+        });
     }
 
     public static function updatePassword(int $id, string $plainPassword): bool
     {
-        $statement = Database::connection()->prepare(
-            'UPDATE ' . self::$table . ' SET password_hash = :hash WHERE id = :id'
-        );
+        return self::mutate($id, static function (array $row) use ($plainPassword): array {
+            $row['password_hash'] = password_hash($plainPassword, PASSWORD_DEFAULT);
 
-        return $statement->execute([
-            'hash' => password_hash($plainPassword, PASSWORD_DEFAULT),
-            'id' => $id,
-        ]);
+            return $row;
+        });
     }
 }

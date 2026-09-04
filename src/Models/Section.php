@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-use App\Core\Database;
+use App\Core\MockDatabase;
 use App\Core\Model;
 
 /**
@@ -20,12 +20,12 @@ final class Section extends Model
 
     public static function byPage(string $pageKey): array
     {
-        $statement = Database::connection()->prepare(
-            'SELECT * FROM ' . self::$table . ' WHERE page_key = :page_key ORDER BY sort_order ASC, id ASC'
+        $rows = array_filter(
+            MockDatabase::table(self::$table),
+            static fn (array $row): bool => ($row['page_key'] ?? '') === $pageKey
         );
-        $statement->execute(['page_key' => $pageKey]);
 
-        return $statement->fetchAll();
+        return MockDatabase::sort($rows, 'sort_order ASC, id ASC');
     }
 
     /** @return array<string,bool> section_key => true, for every active block on $pageKey. */

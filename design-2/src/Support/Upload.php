@@ -26,6 +26,13 @@ final class Upload
             return null;
         }
 
+        // Demo (mock) modunda dosya sistemi salt-okunur olabilir (Vercel gibi
+        // serverless ortamlar). Böyle bir durumda yükleme sessizce atlanır ki
+        // formun geri kalan alanları yine de kaydedilebilsin.
+        if (defined('DEMO_MODE') && DEMO_MODE && !is_writable(UPLOAD_PATH)) {
+            return null;
+        }
+
         $file = $_FILES[$fieldName];
 
         if ($file['error'] !== UPLOAD_ERR_OK) {

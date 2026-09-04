@@ -64,8 +64,9 @@ require BASE_PATH . '/includes/header.php';
         </div>
       </div>
 
+      <?php $lastHighlight = count($highlights) - 1; ?>
       <?php foreach ($highlights as $i => $stat): ?>
-        <div class="bento-tile<?= $i === 0 ? ' bento-tile--accent' : '' ?> reveal">
+        <div class="bento-tile<?= $i === 0 ? ' bento-tile--accent' : '' ?><?= $i === $lastHighlight ? ' bento-tile--wide' : '' ?> reveal">
           <span class="ic"><?= icon($stat['icon']) ?></span>
           <span class="bento-tile__value"><?= e($stat['stat_value']) ?></span>
           <span class="bento-tile__label"><?= e($stat['stat_label']) ?></span>

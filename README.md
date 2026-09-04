@@ -47,6 +47,7 @@ gibi uzantısız URL'ler de `.htaccess` üzerinden opsiyonel olarak çalışır.
 ```
 config/              Uygulama ayarları, bootstrap, DB bağlantısı
 database/             schema.sql (yapı) + seed.sql (başlangıç içerikleri)
+                      mock_data.php (demo modunda kullanılan hazır içerik)
 routes/web.php        Public site route tanımları
 pages/                Her route'un kendi şablonu (home, about, fleet, …)
 src/
@@ -64,7 +65,48 @@ admin/                 Yönetim paneli (login + her bölüm için CRUD sayfası)
 index.php              Public site front controller (tüm route'ları dispatch eder)
 ```
 
-## Kurulum
+## Demo (mock) modu — mevcut durum
+
+> **Bu kurulum şu anda veritabanına bağlanmıyor.** Müşteri sunumu için
+> Vercel'e deploy edilebilsin diye MySQL katmanı devre dışı bırakıldı;
+> `src/Core/Database.php` kaldırıldı ve tüm sorgular
+> [`database/mock_data.php`](database/mock_data.php) içindeki PHP
+> dizilerinden karşılanıyor (bkz. `src/Core/MockDatabase.php`).
+>
+> - Mock veri, `database/schema.sql` + `database/seed.sql` içeriğinden
+>   birebir üretildi; şema dosyaları gerçek kuruluma dönmek için duruyor.
+> - Admin panelindeki tüm CRUD işlemleri çalışır ve değişiklikler sitede
+>   anında görünür; ancak kalıcı değildir. Değişiklikler geçici klasördeki
+>   tek bir JSON dosyasında tutulur (yazılamıyorsa oturumda), sunucu/instance
+>   yeniden başladığında içerik ilk haline döner.
+> - Panelin ana ekranındaki **"Demo İçeriğini Sıfırla"** düğmesi içeriği
+>   istediğiniz an başlangıç haline döndürür.
+> - Demo modunda görsel yükleme, dosya sistemi salt-okunur olduğunda
+>   sessizce atlanır; formun diğer alanları normal şekilde kaydedilir.
+>
+> **Gerçek MySQL'e dönmek için:** `config/config.php` içindeki `DEMO_MODE`
+> bloğunu eski `DB_*` tanımlarıyla değiştirin, `src/Core/Database.php`
+> (PDO singleton) dosyasını geri ekleyin ve `src/Core/Model.php` +
+> ilgili model sınıflarını PDO sürümlerine döndürün (git geçmişinde mevcut).
+
+### Vercel'e deploy
+
+Kök dizindeki [`vercel.json`](vercel.json) ve [`api/index.php`](api/index.php)
+üç tasarımı da tek bir serverless fonksiyon üzerinden yayınlar:
+
+| Yol | Tasarım |
+| --- | --- |
+| `/` | kök tasarım |
+| `/design-2/…` | design-2 |
+| `/design-3/…` | design-3 |
+
+`api/index.php`, Apache `.htaccess` kurallarının PHP karşılığıdır: gerçek
+`.php` dosyaları (admin sayfaları) doğrudan çalışır, `/admin/settings` gibi
+uzantısız yollar `.php`'ye eşlenir, kalan her istek ilgili tasarımın
+`index.php` front controller'ına gider. Vercel'de PHP çalıştırmak için
+`vercel-php` runtime'ı kullanılır.
+
+## Kurulum (gerçek veritabanıyla)
 
 1. **Veritabanını oluştur**
    ```bash

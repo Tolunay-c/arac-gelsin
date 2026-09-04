@@ -23,9 +23,10 @@ $navLinks = [
 <head>
 <meta charset="UTF-8">
 <script>
-/* Tema, CSS/gövde boyanmadan önce uygulanır — açık/koyu geçişinde yanıp
-   sönme (FOUC) olmaması için ilk şey bu olmalı. Tercih localStorage'da
-   yoksa mevcut karanlık marka kimliği varsayılan kalır. */
+/* AÇIK/KOYU TEMA GEÇİŞİ ŞİMDİLİK DEVRE DIŞI — müşteriye henüz
+   sunulmayacak, site her zaman koyu (varsayılan marka) temasıyla açılır.
+   Özelliği geri almak için bloğu yorumdan çıkarın ve altındaki tek
+   satırı silin.
 (function () {
   try {
     var fromUrl = new URLSearchParams(location.search).get('theme');
@@ -37,6 +38,8 @@ $navLinks = [
     document.documentElement.setAttribute('data-theme', 'dark');
   }
 })();
+*/
+document.documentElement.setAttribute('data-theme', 'dark');
 </script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title><?= e($pageTitle ?? ($settings['meta_title'] ?? $siteName)) ?></title>
@@ -82,10 +85,14 @@ $navLinks = [
         <?php endif; ?>
       </div>
       <?php endif; ?>
+      <?php // Açık/koyu tema anahtarı şimdilik kapalı — müşteriye henüz
+            // sunulmayacak. Geri almak için `if (false)`'u kaldırın. ?>
+      <?php if (false): ?>
       <button type="button" class="theme-toggle theme-toggle--sm" id="themeToggle" aria-label="Açık/koyu temayı değiştir">
         <?= icon('sun', 'icon-sun') ?>
         <?= icon('moon', 'icon-moon') ?>
       </button>
+      <?php endif; ?>
     </div>
   </div>
 </div>

@@ -110,6 +110,12 @@ body { background: var(--c-bg); }
 }
 .bento-tile:hover { transform: translateY(-3px); border-color: var(--c-border-strong); }
 .bento-tile--accent { background: linear-gradient(135deg, var(--c-red), var(--c-red-dark)); border-color: transparent; color: #fff; }
+/* Vurgu kutusuyla birlikte tekil vitrin öğesi sayısı tek/çift değişse
+   bile (örn. 3 rozet), son kutu 2 sütuna yayılıp ızgarada boşluk
+   kalmasını önler. */
+.bento-tile--wide { grid-column: span 2; flex-direction: row; align-items: center; gap: 14px; }
+.bento-tile--wide .bento-tile__value { margin-right: 2px; }
+@media (max-width: 560px) { .bento-tile--wide { grid-column: span 1; flex-direction: column; align-items: flex-start; } }
 .bento-tile .ic { width: 34px; height: 34px; border-radius: var(--r-sm); background: var(--c-red-soft); color: var(--c-red-light); display: flex; align-items: center; justify-content: center; margin-bottom: 4px; }
 .bento-tile--accent .ic { background: rgb(255 255 255 / .18); color: #fff; }
 .bento-tile__value { font-family: var(--font-display); font-weight: 800; font-size: 1.5rem; color: var(--c-heading); }
@@ -326,15 +332,9 @@ body { background: var(--c-bg); }
 }
 .manifesto .divider { background: var(--c-red); }
 
-/* ---------- Hub / operasyon haritası: home'daki app-kartı haritasıyla
-   aynı ızgara dokusu — aynı "canlı harita" motifi sitede tekrar eder. ---------- */
-.hub-map { background-color: var(--c-card); }
-.hub-map::before {
-  background-image:
-    linear-gradient(rgb(255 255 255 / .06) 1px, transparent 1px),
-    linear-gradient(90deg, rgb(255 255 255 / .06) 1px, transparent 1px);
-  background-size: 34px 34px;
-}
+/* ---------- Hub / operasyon haritası: sokak ızgarası + körfez lekesi
+   artık components.css'teki .hub-map temel kuralında (Design 1/3 ile
+   aynı görsel dil) — burada ayrıca ezmeye gerek yok. ---------- */
 
 /* ---------- Hakkımızda: konumlandırma bento şeridi (home'daki hero
    bento kutularıyla aynı .bento-tile dili, satır halinde) ---------- */

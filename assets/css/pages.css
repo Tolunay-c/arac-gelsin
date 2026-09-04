@@ -115,7 +115,10 @@
 .positioning-statement p { font-style: italic; font-weight: 600; color: var(--c-text); }
 
 /* ============ OPERASYON / HUB ============ */
-.operation-grid { display: grid; grid-template-columns: 1.4fr .8fr; gap: var(--sp-16); align-items: start; }
+/* align-items: stretch — harita ve "Hub Modeli" kartı aynı yükseklikte,
+   üstten hizalı otursun diye (bkz. .hub-map: aspect-ratio yerine bu
+   satırda kart neyse o yüksekliğe geriliyor). */
+.operation-grid { display: grid; grid-template-columns: 1.4fr .8fr; gap: var(--sp-16); align-items: stretch; }
 .operation-grid > * { min-width: 0; }
 @media (max-width: 900px) { .operation-grid { grid-template-columns: 1fr; } }
 .hub-model-card { background: var(--c-card); border: 1px solid var(--c-border); border-radius: var(--r-lg); padding: var(--sp-8); }
@@ -141,7 +144,11 @@
 .cta-gap { height: var(--sp-20); }
 
 /* ============ İLETİŞİM SAYFASI ============ */
-.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-16); align-items: start; }
+/* align-items: stretch — form kartı ile bilgi kartı taban çizgisinde
+   birbirinden kopmasın diye ikisi de aynı yüksekliğe gerilir (bkz.
+   .contact-card--info > *:last-child: fazla boşluk rastgele altta
+   kalmasın diye, en alttaki blok (uygulama linkleri) tabana yaslanır). */
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-16); align-items: stretch; }
 .contact-grid > * { min-width: 0; }
 @media (max-width: 900px) { .contact-grid { grid-template-columns: 1fr; } }
 .contact-card {
@@ -155,6 +162,7 @@
 }
 .contact-card__badge svg { width: 24px; height: 24px; }
 .contact-card--info { display: flex; flex-direction: column; }
+.contact-card--info > *:last-child { margin-top: auto; }
 .contact-card__divider { height: 1px; background: var(--c-border); margin-block: var(--sp-6); }
 .contact-card__subhead {
   display: flex; align-items: center; gap: var(--sp-2); font-size: var(--fs-sm);

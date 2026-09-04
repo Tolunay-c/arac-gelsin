@@ -58,7 +58,7 @@ require BASE_PATH . '/includes/header.php';
       <h2><?= e($settings['positioning_title'] ?? '') ?></h2>
     </div>
 
-    <div class="grid grid-4">
+    <div class="grid grid-3">
       <?php foreach ($highlights as $stat): ?>
         <div class="feature-card lift reveal" style="text-align:left;">
           <span class="feature-card__icon"><?= icon($stat['icon']) ?></span>
@@ -80,15 +80,17 @@ require BASE_PATH . '/includes/header.php';
 <?php endif; ?>
 
 <?php if (isset($active['operation_model'])): ?>
-<section class="section">
-  <div class="container operation-grid">
-    <div class="reveal">
+<section class="section" id="operation">
+  <div class="container">
+    <div class="section-head reveal">
       <span class="eyebrow"><?= e($settings['operation_badge'] ?? '') ?></span>
       <h2><?= e($settings['operation_title'] ?? '') ?></h2>
-      <p class="lead"><?= e($settings['operation_subtitle'] ?? '') ?></p>
+      <p><?= e($settings['operation_subtitle'] ?? '') ?></p>
+    </div>
 
+    <div class="operation-grid">
       <?php if ($hubLocations): ?>
-      <div class="hub-map" style="margin-top:var(--sp-8);" aria-hidden="true">
+      <div class="hub-map reveal" aria-hidden="true">
         <?php foreach ($hubLocations as $location): ?>
           <div class="hub-map__pin <?= $location['is_center'] ? 'hub-map__pin--center' : '' ?>"
                style="top: <?= e($location['position_top']) ?>; left: <?= e($location['position_left']) ?>;">
@@ -96,20 +98,21 @@ require BASE_PATH . '/includes/header.php';
             <span class="hub-map__label"><?= e($location['area_name']) ?><small><?= e($location['region_label']) ?></small></span>
           </div>
         <?php endforeach; ?>
+        <span class="hub-map__caption">İzmir Körfezi</span>
       </div>
       <?php endif; ?>
-    </div>
 
-    <?php if ($hubFeatures): ?>
-    <aside class="hub-model-card reveal">
-      <h3><?= e($settings['operation_hub_title'] ?? 'Hub Modeli') ?></h3>
-      <ul>
-        <?php foreach ($hubFeatures as $feature): ?>
-          <li><?= icon('check') ?><?= e($feature['feature_text']) ?></li>
-        <?php endforeach; ?>
-      </ul>
-    </aside>
-    <?php endif; ?>
+      <?php if ($hubFeatures): ?>
+      <aside class="hub-model-card reveal">
+        <h3><?= e($settings['operation_hub_title'] ?? 'Hub Modeli') ?></h3>
+        <ul>
+          <?php foreach ($hubFeatures as $feature): ?>
+            <li><?= icon('check') ?><?= e($feature['feature_text']) ?></li>
+          <?php endforeach; ?>
+        </ul>
+      </aside>
+      <?php endif; ?>
+    </div>
   </div>
 </section>
 <?php endif; ?>

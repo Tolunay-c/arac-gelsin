@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-use App\Core\Database;
+use App\Core\MockDatabase;
 
 /**
  * Key/value site settings (hero copy, store links, contact info, SEO meta…).
@@ -23,13 +23,9 @@ final class Setting
     public static function all(): array
     {
         if (self::$cache === null) {
-            $rows = Database::connection()
-                ->query('SELECT setting_key, setting_value FROM ' . self::$table)
-                ->fetchAll();
-
             self::$cache = [];
-            foreach ($rows as $row) {
-                self::$cache[$row['setting_key']] = $row['setting_value'];
+            foreach (MockDatabase::table(self::$table) as $row) {
+                self::$cache[$row['setting_key']] = (string) ($row['setting_value'] ?? '');
             }
         }
 
@@ -45,14 +41,7 @@ final class Setting
 
     public static function set(string $key, string $value): void
     {
-        $statement = Database::connection()->prepare(
-            'INSERT INTO ' . self::$table . ' (setting_key, setting_value)
-             VALUES (:key, :value)
-             ON DUPLICATE KEY UPDATE setting_value = VALUES(setting_value)'
-        );
-        $statement->execute(['key' => $key, 'value' => $value]);
-
-        self::$cache = null;
+        self::setMany([$key => $value]);
     }
 
     /**
@@ -62,18 +51,33 @@ final class Setting
      */
     public static function setMany(array $values): void
     {
-        $pdo = Database::connection();
-        $statement = $pdo->prepare(
-            'INSERT INTO ' . self::$table . ' (setting_key, setting_value)
-             VALUES (:key, :value)
-             ON DUPLICATE KEY UPDATE setting_value = VALUES(setting_value)'
-        );
+        $rows = MockDatabase::table(self::$table);
 
-        $pdo->beginTransaction();
-        foreach ($values as $key => $value) {
-            $statement->execute(['key' => $key, 'value' => (string) $value]);
+        $indexByKey = [];
+        foreach ($rows as $index => $row) {
+            $indexByKey[$row['setting_key']] = $index;
         }
-        $pdo->commit();
+
+        $nextId = MockDatabase::nextId(self::$table);
+
+        foreach ($values as $key => $value) {
+            $value = (string) $value;
+
+            if (isset($indexByKey[$key])) {
+                $rows[$indexByKey[$key]]['setting_value'] = $value;
+                $rows[$indexByKey[$key]]['updated_at'] = date('Y-m-d H:i:s');
+                continue;
+            }
+
+            $rows[] = [
+                'id' => $nextId++,
+                'setting_key' => $key,
+                'setting_value' => $value,
+                'updated_at' => date('Y-m-d H:i:s'),
+            ];
+        }
+
+        MockDatabase::put(self::$table, $rows);
 
         self::$cache = null;
     }

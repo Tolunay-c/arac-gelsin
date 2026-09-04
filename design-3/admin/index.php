@@ -4,12 +4,22 @@ declare(strict_types=1);
 
 require_once __DIR__ . '/includes/admin-bootstrap.php';
 
+use App\Core\MockDatabase;
 use App\Models\FleetVehicle;
 use App\Models\LeadRequest;
 use App\Models\Section;
 use App\Models\UseCase;
 
 $pageTitle = 'Panel';
+
+// Demo (mock) modu: panelden yapılan düzenlemeler geçici olarak saklanır.
+// Bu form, tüm içeriği database/mock_data.php'deki ilk haline döndürür.
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && post('action') === 'reset_demo') {
+    verify_csrf($_POST['csrf_token'] ?? null);
+    MockDatabase::reset();
+    flash_set('success', 'Demo içeriği başlangıç haline döndürüldü.');
+    redirect('index.php');
+}
 
 $stats = [
     ['icon' => 'inbox', 'label' => 'Yeni Kurumsal Talep', 'value' => LeadRequest::countByStatus(LeadRequest::STATUS_NEW)],
@@ -22,6 +32,22 @@ $recentLeads = array_slice(LeadRequest::all(), 0, 8);
 
 require __DIR__ . '/includes/admin-header.php';
 ?>
+
+<div class="admin-panel">
+  <div class="admin-panel__header">
+    <h2>Demo Sürümü</h2>
+    <form method="post" onsubmit="return confirm('Tüm içerik başlangıç demo verisine dönecek. Devam edilsin mi?');">
+      <?= csrf_field() ?>
+      <input type="hidden" name="action" value="reset_demo">
+      <button type="submit" class="btn-admin btn-admin--ghost">Demo İçeriğini Sıfırla</button>
+    </form>
+  </div>
+  <p class="admin-empty" style="text-align:left">
+    Bu kurulum veritabanı olmadan, <code>database/mock_data.php</code> içindeki demo veriyle çalışır.
+    Panelden yaptığınız değişiklikler sitede anında görünür fakat kalıcı değildir; sunucu yeniden
+    başladığında içerik ilk haline döner.
+  </p>
+</div>
 
 <div class="admin-stat-grid">
   <?php foreach ($stats as $stat): ?>

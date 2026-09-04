@@ -4,15 +4,13 @@ declare(strict_types=1);
 
 namespace App\Core;
 
-use PDO;
-
 /**
  * Minimal active-record-style base model shared by every domain entity.
  *
- * Concrete models only need to declare $table, $fillable and (optionally)
- * $defaultOrder — all CRUD/reorder/toggle behaviour lives here so entity
- * classes stay small and every query in the application goes through one
- * audited, prepared-statement code path.
+ * DEMO SÜRÜMÜ: Sorgular MySQL yerine App\Core\MockDatabase üzerindeki
+ * PHP dizilerine gider. Model sınıflarının arayüzü ($table, $fillable,
+ * $defaultOrder ve tüm public metotlar) aynı kaldı; sadece altındaki
+ * veri kaynağı değişti.
  */
 abstract class Model
 {
@@ -26,72 +24,73 @@ abstract class Model
 
     public static function all(bool $onlyActive = false): array
     {
-        $sql = 'SELECT * FROM ' . static::$table;
+        $rows = MockDatabase::table(static::$table);
 
         if ($onlyActive) {
-            $sql .= ' WHERE is_active = 1';
+            $rows = array_filter($rows, static fn (array $row): bool => (int) ($row['is_active'] ?? 1) === 1);
         }
 
-        $sql .= ' ORDER BY ' . static::$defaultOrder;
-
-        $statement = Database::connection()->query($sql);
-
-        return $statement->fetchAll();
+        return MockDatabase::sort($rows, static::$defaultOrder);
     }
 
     public static function find(int $id): ?array
     {
-        $statement = Database::connection()->prepare(
-            'SELECT * FROM ' . static::$table . ' WHERE ' . static::$primaryKey . ' = :id LIMIT 1'
-        );
-        $statement->execute(['id' => $id]);
-
-        $row = $statement->fetch();
-
-        return $row === false ? null : $row;
+        return static::findBy(static::$primaryKey, $id);
     }
 
     public static function findBy(string $column, $value): ?array
     {
-        $statement = Database::connection()->prepare(
-            'SELECT * FROM ' . static::$table . ' WHERE ' . static::sanitizeIdentifier($column) . ' = :value LIMIT 1'
-        );
-        $statement->execute(['value' => $value]);
+        $column = static::sanitizeIdentifier($column);
 
-        $row = $statement->fetch();
+        foreach (MockDatabase::table(static::$table) as $row) {
+            if (array_key_exists($column, $row) && (string) $row[$column] === (string) $value) {
+                return $row;
+            }
+        }
 
-        return $row === false ? null : $row;
+        return null;
     }
 
     public static function count(bool $onlyActive = false): int
     {
-        $sql = 'SELECT COUNT(*) FROM ' . static::$table;
-
-        if ($onlyActive) {
-            $sql .= ' WHERE is_active = 1';
-        }
-
-        return (int) Database::connection()->query($sql)->fetchColumn();
+        return count(static::all($onlyActive));
     }
 
     public static function create(array $data): int
     {
         $data = static::filterFillable($data);
 
-        $columns = array_keys($data);
-        $placeholders = array_map(static fn (string $column) => ':' . $column, $columns);
+        $id = MockDatabase::nextId(static::$table);
+        $now = date('Y-m-d H:i:s');
 
-        $sql = sprintf(
-            'INSERT INTO %s (%s) VALUES (%s)',
-            static::$table,
-            implode(', ', $columns),
-            implode(', ', $placeholders)
-        );
+        $row = [static::$primaryKey => $id];
 
-        $statement = Database::connection()->prepare($sql);
-        $statement->execute($data);
+        foreach (MockDatabase::columns(static::$table) as $column) {
+            if ($column === static::$primaryKey) {
+                continue;
+            }
 
-        return (int) Database::connection()->lastInsertId();
+            $row[$column] = match (true) {
+                array_key_exists($column, $data) => $data[$column],
+                $column === 'created_at', $column === 'updated_at' => $now,
+                $column === 'is_active' => 1,
+                $column === 'sort_order' => $id,
+                default => null,
+            };
+        }
+
+        // mock_data.php'de hiç satırı olmayan tablolar için: gelen alanları aynen al.
+        foreach ($data as $column => $value) {
+            if (!array_key_exists($column, $row)) {
+                $row[$column] = $value;
+            }
+        }
+
+        $rows = MockDatabase::table(static::$table);
+        $rows[] = $row;
+        MockDatabase::put(static::$table, $rows);
+
+        return $id;
     }
 
     public static function update(int $id, array $data): bool
@@ -102,38 +101,39 @@ abstract class Model
             return false;
         }
 
-        $assignments = array_map(static fn (string $column) => $column . ' = :' . $column, array_keys($data));
+        return static::mutate($id, static function (array $row) use ($data): array {
+            foreach ($data as $column => $value) {
+                $row[$column] = $value;
+            }
 
-        $sql = sprintf(
-            'UPDATE %s SET %s WHERE %s = :primary_key',
-            static::$table,
-            implode(', ', $assignments),
-            static::$primaryKey
-        );
+            if (array_key_exists('updated_at', $row)) {
+                $row['updated_at'] = date('Y-m-d H:i:s');
+            }
 
-        $data['primary_key'] = $id;
-
-        $statement = Database::connection()->prepare($sql);
-
-        return $statement->execute($data);
+            return $row;
+        });
     }
 
     public static function delete(int $id): bool
     {
-        $statement = Database::connection()->prepare(
-            'DELETE FROM ' . static::$table . ' WHERE ' . static::$primaryKey . ' = :id'
+        $rows = MockDatabase::table(static::$table);
+        $remaining = array_filter(
+            $rows,
+            static fn (array $row): bool => (int) ($row[static::$primaryKey] ?? 0) !== $id
         );
 
-        return $statement->execute(['id' => $id]);
+        MockDatabase::put(static::$table, $remaining);
+
+        return count($remaining) !== count($rows);
     }
 
     public static function toggleActive(int $id): bool
     {
-        $statement = Database::connection()->prepare(
-            'UPDATE ' . static::$table . ' SET is_active = 1 - is_active WHERE ' . static::$primaryKey . ' = :id'
-        );
+        return static::mutate($id, static function (array $row): array {
+            $row['is_active'] = (int) ($row['is_active'] ?? 1) === 1 ? 0 : 1;
 
-        return $statement->execute(['id' => $id]);
+            return $row;
+        });
     }
 
     /**
@@ -143,16 +143,39 @@ abstract class Model
      */
     public static function reorder(array $orderedIds): void
     {
-        $pdo = Database::connection();
-        $statement = $pdo->prepare(
-            'UPDATE ' . static::$table . ' SET sort_order = :position WHERE ' . static::$primaryKey . ' = :id'
-        );
+        $positions = array_flip(array_map('intval', array_values($orderedIds)));
 
-        $pdo->beginTransaction();
-        foreach (array_values($orderedIds) as $position => $id) {
-            $statement->execute(['position' => $position, 'id' => (int) $id]);
+        $rows = MockDatabase::table(static::$table);
+        foreach ($rows as &$row) {
+            $id = (int) ($row[static::$primaryKey] ?? 0);
+            if (isset($positions[$id])) {
+                $row['sort_order'] = $positions[$id];
+            }
         }
-        $pdo->commit();
+        unset($row);
+
+        MockDatabase::put(static::$table, $rows);
+    }
+
+    /** Tek bir satırı callback ile günceller. */
+    protected static function mutate(int $id, callable $callback): bool
+    {
+        $rows = MockDatabase::table(static::$table);
+        $changed = false;
+
+        foreach ($rows as $index => $row) {
+            if ((int) ($row[static::$primaryKey] ?? 0) === $id) {
+                $rows[$index] = $callback($row);
+                $changed = true;
+                break;
+            }
+        }
+
+        if ($changed) {
+            MockDatabase::put(static::$table, $rows);
+        }
+
+        return $changed;
     }
 
     protected static function filterFillable(array $data): array
@@ -160,10 +183,8 @@ abstract class Model
         return array_intersect_key($data, array_flip(static::$fillable));
     }
 
-    private static function sanitizeIdentifier(string $column): string
+    protected static function sanitizeIdentifier(string $column): string
     {
-        // Defence in depth: column names are developer-supplied, never user
-        // input, but we still restrict to a safe identifier character set.
         return preg_replace('/[^a-zA-Z0-9_]/', '', $column) ?? '';
     }
 }

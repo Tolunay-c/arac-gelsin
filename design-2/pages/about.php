@@ -63,7 +63,7 @@ require BASE_PATH . '/includes/header.php';
       <h2><?= e($settings['positioning_title'] ?? '') ?></h2>
     </div>
 
-    <div class="bento-row reveal">
+    <div class="bento-row bento-row--3 reveal">
       <?php foreach ($highlights as $i => $stat): ?>
         <div class="bento-tile<?= $i === 0 ? ' bento-tile--accent' : '' ?>">
           <span class="ic"><?= icon($stat['icon']) ?></span>
@@ -97,6 +97,7 @@ require BASE_PATH . '/includes/header.php';
           <span class="hub-map__label"><?= e($location['area_name']) ?><small><?= e($location['region_label']) ?></small></span>
         </div>
       <?php endforeach; ?>
+      <span class="hub-map__caption">İzmir Körfezi</span>
     </div>
     <?php endif; ?>
   </div>

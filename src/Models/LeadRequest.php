@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-use App\Core\Database;
 use App\Core\Model;
 
 /** Corporate "teklif al" form submissions captured from the public site. */
@@ -22,20 +21,20 @@ final class LeadRequest extends Model
 
     public static function updateStatus(int $id, string $status): bool
     {
-        $statement = Database::connection()->prepare(
-            'UPDATE ' . self::$table . ' SET status = :status WHERE id = :id'
-        );
+        return self::mutate($id, static function (array $row) use ($status): array {
+            $row['status'] = $status;
 
-        return $statement->execute(['status' => $status, 'id' => $id]);
+            return $row;
+        });
     }
 
     public static function countByStatus(string $status): int
     {
-        $statement = Database::connection()->prepare(
-            'SELECT COUNT(*) FROM ' . self::$table . ' WHERE status = :status'
+        $matching = array_filter(
+            self::all(),
+            static fn (array $row): bool => ($row['status'] ?? '') === $status
         );
-        $statement->execute(['status' => $status]);
 
-        return (int) $statement->fetchColumn();
+        return count($matching);
     }
 }

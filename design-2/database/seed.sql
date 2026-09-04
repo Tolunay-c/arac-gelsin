@@ -198,8 +198,7 @@ INSERT INTO `use_cases` (`icon`, `title`, `description`, `sort_order`) VALUES
 INSERT INTO `highlight_stats` (`stat_value`, `stat_label`, `stat_description`, `icon`, `sort_order`) VALUES
 ('30 DK', 'Hızlı Yanıt', 'Hedeflenen maksimum yanıt süresi', 'clock', 1),
 ('Elektrikli', 'Yeni Nesil Filo', 'Yeni nesil filo yaklaşımı', 'zap', 2),
-('İzmir', 'Bölgesel Odak', 'Stratejik bölgesel konuşlanma', 'map-pin', 3),
-('B2B', 'Kurumsal', 'Kurumsal ihtiyaçlara özel operasyon', 'briefcase', 4);
+('İzmir', 'Bölgesel Odak', 'Stratejik bölgesel konuşlanma', 'map-pin', 3);
 
 -- ---------------------------------------------------------------------
 -- hub_locations

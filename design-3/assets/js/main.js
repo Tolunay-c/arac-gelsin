@@ -245,7 +245,11 @@ var Toast = (function () {
   nums.forEach(function (n) { io.observe(n); });
 })();
 
-/* ---------- Hero slider (Design 3 — split-hero filo geçişi) ---------- */
+/* ---------- Hero slider (Design 3 — eski split-hero filo geçişi) ----------
+   Anasayfa hero'su artık tek panel/bilgi alanı; [data-hero-slider]
+   işaretli bir eleman kalmadığı için bu blok artık hiç çalışmıyor
+   (aşağıdaki guard sayesinde no-op). Slider markup'ı ileride geri
+   gelirse kod olduğu gibi çalışmaya devam eder. */
 (function () {
   var slider = document.querySelector('[data-hero-slider]');
   if (!slider) return;

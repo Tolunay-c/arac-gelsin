@@ -50,7 +50,7 @@ require __DIR__ . '/includes/admin-header.php';
 
 <div class="admin-panel">
   <div class="admin-panel__header"><h2><?= $editing ? 'İstatistiği Düzenle' : 'Yeni İstatistik Ekle' ?></h2>
-    <p class="admin-panel__hint">Bu kartlar hem Hero şeridinde hem "Neden Farklı?" bölümünde kullanılır (örn. 30 DK, Elektrikli, İzmir, B2B).</p>
+    <p class="admin-panel__hint">Bu kartlar hem Hero şeridinde hem "Neden Farklı?" bölümünde kullanılır (örn. 30 DK, Elektrikli, İzmir).</p>
   </div>
 
   <form method="post" class="admin-form-grid">

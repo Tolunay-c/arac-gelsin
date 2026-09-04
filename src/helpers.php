@@ -20,20 +20,40 @@ function asset(string $path): string
     return APP_URL . '/assets/' . ltrim($path, '/');
 }
 
-/** Build an absolute URL to an uploaded file. */
+/**
+ * Build an absolute URL to an uploaded file — or, when $path is already a
+ * full URL (http/https), pass it through unchanged. The latter is how the
+ * geçici (temporary) Pexels stok görselleri in database/mock_data.php are
+ * wired: no dosya diskte durmuyor, sadece dış URL'e işaret ediyor.
+ */
 function upload_url(?string $path): string
 {
     if ($path === null || $path === '') {
         return '';
     }
 
+    if (preg_match('#^https?://#i', $path) === 1) {
+        return $path;
+    }
+
     return UPLOAD_URL . '/' . ltrim($path, '/');
 }
 
-/** True when $path is set AND the file it names actually exists on disk. */
+/**
+ * True when $path is set AND renderable: either an external http(s) URL
+ * (geçici stok görsel) or a real uploaded file that exists on disk.
+ */
 function has_upload(?string $path): bool
 {
-    return $path !== null && $path !== '' && is_file(UPLOAD_PATH . '/' . ltrim($path, '/'));
+    if ($path === null || $path === '') {
+        return false;
+    }
+
+    if (preg_match('#^https?://#i', $path) === 1) {
+        return true;
+    }
+
+    return is_file(UPLOAD_PATH . '/' . ltrim($path, '/'));
 }
 
 /**

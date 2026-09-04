@@ -132,7 +132,7 @@ CREATE TABLE IF NOT EXISTS `use_cases` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ---------------------------------------------------------------------
--- highlight_stats — short stat badges (30 DK / Elektrikli / İzmir / B2B)
+-- highlight_stats — short stat badges (30 DK / Elektrikli / İzmir)
 -- reused by the Hero strip and the "Neden Farklı?" section
 -- ---------------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `highlight_stats` (

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-use App\Core\Database;
+use App\Core\MockDatabase;
 use App\Core\Model;
 
 /** A single "Kullanım Odağı" bullet belonging to a fleet vehicle. */
@@ -15,25 +15,18 @@ final class FleetVehicleFeature extends Model
 
     public static function byVehicle(int $vehicleId): array
     {
-        $statement = Database::connection()->prepare(
-            'SELECT * FROM ' . self::$table . ' WHERE fleet_vehicle_id = :id ORDER BY sort_order ASC, id ASC'
+        $rows = array_filter(
+            MockDatabase::table(self::$table),
+            static fn (array $row): bool => (int) $row['fleet_vehicle_id'] === $vehicleId
         );
-        $statement->execute(['id' => $vehicleId]);
 
-        return $statement->fetchAll();
+        return MockDatabase::sort($rows, 'sort_order ASC, id ASC');
     }
 
     public static function replaceForVehicle(int $vehicleId, array $featureTexts): void
     {
-        $pdo = Database::connection();
-        $pdo->beginTransaction();
-
-        $pdo->prepare('DELETE FROM ' . self::$table . ' WHERE fleet_vehicle_id = :id')
-            ->execute(['id' => $vehicleId]);
-
-        $insert = $pdo->prepare(
-            'INSERT INTO ' . self::$table . ' (fleet_vehicle_id, feature_text, sort_order) VALUES (:vehicle_id, :text, :position)'
-        );
+        $rows = self::withoutVehicle($vehicleId);
+        $nextId = MockDatabase::nextId(self::$table);
 
         $position = 0;
         foreach ($featureTexts as $text) {
@@ -41,10 +34,30 @@ final class FleetVehicleFeature extends Model
             if ($text === '') {
                 continue;
             }
-            $insert->execute(['vehicle_id' => $vehicleId, 'text' => $text, 'position' => $position]);
+
+            $rows[] = [
+                'id' => $nextId++,
+                'fleet_vehicle_id' => $vehicleId,
+                'feature_text' => $text,
+                'sort_order' => $position,
+            ];
             $position++;
         }
 
-        $pdo->commit();
+        MockDatabase::put(self::$table, $rows);
+    }
+
+    /** Remove every feature belonging to a vehicle (used when the vehicle is deleted). */
+    public static function deleteForVehicle(int $vehicleId): void
+    {
+        MockDatabase::put(self::$table, self::withoutVehicle($vehicleId));
+    }
+
+    private static function withoutVehicle(int $vehicleId): array
+    {
+        return array_values(array_filter(
+            MockDatabase::table(self::$table),
+            static fn (array $row): bool => (int) $row['fleet_vehicle_id'] !== $vehicleId
+        ));
     }
 }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-use App\Core\Database;
+use App\Core\MockDatabase;
 use App\Core\Model;
 
 /**
@@ -22,17 +22,17 @@ final class ProcessStep extends Model
 
     public static function byFlow(string $flowType, bool $onlyActive = false): array
     {
-        $sql = 'SELECT * FROM ' . self::$table . ' WHERE flow_type = :flow_type';
+        $rows = array_filter(
+            MockDatabase::table(self::$table),
+            static function (array $row) use ($flowType, $onlyActive): bool {
+                if (($row['flow_type'] ?? '') !== $flowType) {
+                    return false;
+                }
 
-        if ($onlyActive) {
-            $sql .= ' AND is_active = 1';
-        }
+                return !$onlyActive || (int) ($row['is_active'] ?? 1) === 1;
+            }
+        );
 
-        $sql .= ' ORDER BY ' . self::$defaultOrder;
-
-        $statement = Database::connection()->prepare($sql);
-        $statement->execute(['flow_type' => $flowType]);
-
-        return $statement->fetchAll();
+        return MockDatabase::sort($rows, self::$defaultOrder);
     }
 }

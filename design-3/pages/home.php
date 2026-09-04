@@ -33,13 +33,14 @@ require BASE_PATH . '/includes/header.php';
 ?>
 
 <?php if (isset($active['hero'])): ?>
-<!-- DESIGN 3: "Split Konsol" — Design 1'in ortalanmış, çerçeveli hero'su
-     ile Design 2'nin bento ızgarasının İKİSİNDEN de uzak, tam-genişlik
-     iki panelli (sol: içerik, sağ: kenara taşan görsel) bir kompozisyon.
-     Renkler ve fontlar Design 1 ile birebir aynı — sadece yerleşim. -->
-<section class="hero split-hero">
-  <div class="split-hero__content reveal">
-    <div class="split-hero__inner">
+<!-- DESIGN 3: "Operasyon Konsolu" hero — tek panel, tam genişlik bilgi
+     alanı (Design 1'in ortalanmış/çerçeveli hero'su ve Design 2'nin
+     bento ızgarasının ikisinden de uzak). Filo görselleri burada değil,
+     aşağıdaki "Filo" bölümünde kart olarak zaten gösteriliyor; hero
+     tek işe odaklanıyor: başlık + CTA + rakamsal kanıt şeridi. -->
+<section class="console-hero">
+  <div class="container">
+    <div class="console-hero__inner reveal">
       <span class="pill pill--red"><?= icon('zap') ?> <?= e($settings['hero_badge'] ?? '') ?></span>
       <h1><?= e($settings['hero_title'] ?? '') ?></h1>
       <p class="lead"><?= e($settings['hero_subtitle'] ?? '') ?></p>
@@ -50,6 +51,10 @@ require BASE_PATH . '/includes/header.php';
       </div>
 
       <?php if ($highlights): ?>
+      <!-- Aşağıdaki "Güven Şeridi" (.trust) bölümü zaten aynı rakamları
+           daha ayrıntılı (açıklama satırıyla) gösteriyor — burada bilerek
+           farklı bir görsel dil (yuvarlak rozet) kullanılıyor ki hemen
+           altındaki bölümle birebir aynı görünmesin. -->
       <ul class="hero__badges">
         <?php foreach ($highlights as $stat): ?>
           <li>
@@ -63,53 +68,6 @@ require BASE_PATH . '/includes/header.php';
       </ul>
       <?php endif; ?>
     </div>
-  </div>
-
-  <div class="split-hero__media reveal reveal--scale">
-    <?php if ($fleetVehicles): ?>
-    <div class="hero-slider" data-hero-slider>
-      <div class="hero-slider__track">
-        <?php foreach ($fleetVehicles as $i => $vehicle): ?>
-        <div class="hero-slider__slide<?= $i === 0 ? ' is-active' : '' ?>">
-          <?= image_tag($vehicle['image_path'], $vehicle['name'], 'Araç görseli eklenecek', $i === 0 ? 'eager' : 'lazy') ?>
-          <div class="hero-slider__caption">
-            <span class="hero-slider__tag"><?= e($vehicle['category']) ?></span>
-            <strong><?= e($vehicle['name']) ?></strong>
-          </div>
-        </div>
-        <?php endforeach; ?>
-      </div>
-
-      <?php if (count($fleetVehicles) > 1): ?>
-      <div class="hero-slider__nav">
-        <button type="button" class="hero-slider__arrow" data-slide-prev aria-label="Önceki araç"><?= icon('arrow-right', 'icon-prev') ?></button>
-        <div class="hero-slider__dots">
-          <?php foreach ($fleetVehicles as $i => $vehicle): ?>
-            <button type="button" class="hero-slider__dot<?= $i === 0 ? ' is-active' : '' ?>" data-slide-to="<?= $i ?>" aria-label="<?= e($vehicle['name']) ?>">
-              <span class="hero-slider__dot-fill"></span>
-            </button>
-          <?php endforeach; ?>
-        </div>
-        <button type="button" class="hero-slider__arrow" data-slide-next aria-label="Sonraki araç"><?= icon('arrow-right') ?></button>
-      </div>
-      <?php endif; ?>
-    </div>
-    <?php else: ?>
-    <?= image_tag($settings['hero_image'] ?? null, 'Aracım Gelsin filosu', 'Filo görseli eklenecek', 'eager') ?>
-    <?php endif; ?>
-
-    <?php if (isset($highlights[0])): ?>
-    <div class="chip chip--tl">
-      <span class="chip__icon"><?= icon($highlights[0]['icon']) ?></span>
-      <span><?= e($highlights[0]['stat_label']) ?><strong><?= e($highlights[0]['stat_value']) ?></strong></span>
-    </div>
-    <?php endif; ?>
-    <?php if (isset($highlights[1])): ?>
-    <div class="chip chip--br">
-      <span class="chip__icon"><?= icon($highlights[1]['icon']) ?></span>
-      <span><?= e($highlights[1]['stat_label']) ?><strong><?= e($highlights[1]['stat_value']) ?></strong></span>
-    </div>
-    <?php endif; ?>
   </div>
 </section>
 <?php endif; ?>

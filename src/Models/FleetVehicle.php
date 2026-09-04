@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-use App\Core\Database;
 use App\Core\Model;
 
 /** A vehicle class in the fleet architecture (TOGG, Ford Explorer, …). */
@@ -34,13 +33,8 @@ final class FleetVehicle extends Model
     {
         $vehicles = self::all($onlyActive);
 
-        $statement = Database::connection()->prepare(
-            'SELECT * FROM fleet_vehicle_features WHERE fleet_vehicle_id = :id ORDER BY sort_order ASC, id ASC'
-        );
-
         foreach ($vehicles as &$vehicle) {
-            $statement->execute(['id' => $vehicle['id']]);
-            $vehicle['features'] = $statement->fetchAll();
+            $vehicle['features'] = FleetVehicleFeature::byVehicle((int) $vehicle['id']);
         }
         unset($vehicle);
 
@@ -49,16 +43,8 @@ final class FleetVehicle extends Model
 
     public static function delete(int $id): bool
     {
-        $pdo = Database::connection();
-        $pdo->beginTransaction();
+        FleetVehicleFeature::deleteForVehicle($id);
 
-        $pdo->prepare('DELETE FROM fleet_vehicle_features WHERE fleet_vehicle_id = :id')
-            ->execute(['id' => $id]);
-
-        $deleted = $pdo->prepare('DELETE FROM fleet_vehicles WHERE id = :id')->execute(['id' => $id]);
-
-        $pdo->commit();
-
-        return $deleted;
+        return parent::delete($id);
     }
 }

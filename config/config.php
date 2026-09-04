@@ -24,14 +24,16 @@ $detectedHost   = $_SERVER['HTTP_HOST'] ?? 'localhost';
 define('APP_URL', rtrim(getenv('APP_URL') ?: ($detectedScheme . '://' . $detectedHost), '/'));
 
 // ---------------------------------------------------------------------
-// Database
+// Veri kaynağı — DEMO (mock) MOD
 // ---------------------------------------------------------------------
-define('DB_HOST', getenv('DB_HOST') ?: '127.0.0.1');
-define('DB_PORT', getenv('DB_PORT') ?: '3306');
-define('DB_NAME', getenv('DB_NAME') ?: 'aracim_gelsin');
-define('DB_USER', getenv('DB_USER') ?: 'root');
-define('DB_PASS', getenv('DB_PASS') ?: '');
-define('DB_CHARSET', 'utf8mb4');
+// Bu sürüm MySQL'e bağlanmaz. Tüm içerik database/mock_data.php içindeki
+// PHP dizilerinden okunur (bkz. App\Core\MockDatabase), böylece proje
+// Vercel gibi veritabanı sunucusu olmayan ortamlarda da sorunsuz çalışır.
+//
+// Gerçek veritabanına dönmek istendiğinde: database/schema.sql +
+// database/seed.sql dosyaları olduğu gibi duruyor; App\Core\Model ve
+// App\Core\MockDatabase yerine PDO tabanlı eski katman geri konabilir.
+define('DEMO_MODE', true);
 
 // ---------------------------------------------------------------------
 // Filesystem paths
