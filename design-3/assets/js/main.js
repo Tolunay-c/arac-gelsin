@@ -17,7 +17,7 @@
 
   // İlk boyamadan önce <head> içindeki blocking script zaten data-theme'i
   // ayarladı; burada sadece meta/etiketleri o değerle senkronlarız.
-  apply(document.documentElement.getAttribute('data-theme') || 'dark');
+  apply(document.documentElement.getAttribute('data-theme') || 'light');
 
   if (!toggle) return;
   toggle.addEventListener('click', function () {

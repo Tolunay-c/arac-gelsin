@@ -24,7 +24,7 @@ $navLinks = [
 <meta charset="UTF-8">
 <script>
 /* AÇIK/KOYU TEMA GEÇİŞİ ŞİMDİLİK DEVRE DIŞI — müşteriye henüz
-   sunulmayacak, site her zaman koyu (varsayılan marka) temasıyla açılır.
+   sunulmayacak, site her zaman açık (varsayılan marka) temasıyla açılır.
    Özelliği geri almak için bloğu yorumdan çıkarın ve altındaki tek
    satırı silin.
 (function () {
@@ -32,21 +32,21 @@ $navLinks = [
     var fromUrl = new URLSearchParams(location.search).get('theme');
     var saved = localStorage.getItem('aracimgelsin-theme');
     var theme = fromUrl === 'light' || fromUrl === 'dark' ? fromUrl
-      : (saved === 'light' || saved === 'dark' ? saved : 'dark');
+      : (saved === 'light' || saved === 'dark' ? saved : 'light');
     document.documentElement.setAttribute('data-theme', theme);
   } catch (e) {
-    document.documentElement.setAttribute('data-theme', 'dark');
+    document.documentElement.setAttribute('data-theme', 'light');
   }
 })();
 */
-document.documentElement.setAttribute('data-theme', 'dark');
+document.documentElement.setAttribute('data-theme', 'light');
 </script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title><?= e($pageTitle ?? ($settings['meta_title'] ?? $siteName)) ?></title>
 <meta name="description" content="<?= e($pageDescription ?? ($settings['meta_description'] ?? '')) ?>">
 <meta name="keywords" content="<?= e($settings['meta_keywords'] ?? '') ?>">
-<meta name="theme-color" content="#0A1420">
-<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#F5F6FA">
+<meta name="color-scheme" content="light dark">
 <meta name="geo.region" content="TR-35">
 <meta name="geo.placename" content="İzmir">
 <link rel="canonical" href="<?= e(APP_URL . $currentPath) ?>">
