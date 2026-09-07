@@ -137,12 +137,18 @@
 .site-footer a { color: var(--c-footer-text); }
 .site-footer a:hover { color: var(--c-red-light); }
 
+/* .text-muted, sitenin geri kalanında temaya göre değişir (açık temada koyu
+   gri) — footer her zaman koyu kaldığı için burada aynı sınıf neredeyse
+   okunmaz hale geliyordu (kontrast sorunu). Footer içinde sabit, temadan
+   bağımsız, kontrastı yeterli bir kırık-beyaz tona sabitliyoruz. */
+.site-footer .text-muted { color: rgb(255 255 255 / .58); }
+
 .footer-contact li { display: flex; gap: var(--sp-3); align-items: flex-start; }
 .footer-contact svg { width: 18px; height: 18px; flex-shrink: 0; margin-top: 3px; color: var(--c-red-light); }
 
 .footer-bottom {
   display: flex; justify-content: space-between; gap: var(--sp-4); flex-wrap: wrap;
-  padding-block: var(--sp-6); color: rgb(255 255 255 / .4); font-size: var(--fs-xs);
+  padding-block: var(--sp-6); color: rgb(255 255 255 / .58); font-size: var(--fs-xs);
 }
 
 /* ---------- Sabit iletişim butonu ---------- */

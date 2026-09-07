@@ -29,6 +29,18 @@ $guaranteeFeatures = GuaranteeFeature::all(true);
 $pageTitle = 'Hakkımızda | ' . ($settings['site_name'] ?? 'Aracım Gelsin');
 $pageDescription = $settings['about_intro'] ?? ($settings['meta_description'] ?? '');
 
+// Operasyon haritası: gerçek Leaflet karoları yalnızca bu sayfada kullanıldığı için
+// kütüphane sadece burada, sayfaya özel $pageStyles/$pageScripts ile yükleniyor.
+if ($hubLocations) {
+    $pageStyles = [
+        'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css',
+    ];
+    $pageScripts = [
+        'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js',
+        asset('js/hub-map.js'),
+    ];
+}
+
 require BASE_PATH . '/includes/header.php';
 ?>
 
@@ -44,7 +56,12 @@ require BASE_PATH . '/includes/header.php';
   </div>
 </section>
 
-<?php if (isset($active['manifesto'])): ?>
+<!-- Manifesto bölümü kaldırıldı: page-head (yukarıda) zaten ortalanmış,
+     büyük başlıklı bir "hero" — manifesto da aynı düzende (ortalanmış
+     rozet + büyük başlık + büyük ifade) hemen altına geliyordu, üst üste
+     iki hero gibi okunuyordu. İçerik veritabanından silinmedi; yalnızca
+     bu sayfada render edilmiyor. -->
+<?php if (false && isset($active['manifesto'])): ?>
 <section class="section manifesto">
   <div class="container manifesto__inner reveal">
     <span class="eyebrow" style="justify-content:center;"><?= e($settings['manifesto_badge'] ?? '') ?></span>
@@ -68,7 +85,7 @@ require BASE_PATH . '/includes/header.php';
         <div class="bento-tile<?= $i === 0 ? ' bento-tile--accent' : '' ?>">
           <span class="ic"><?= icon($stat['icon']) ?></span>
           <span class="bento-tile__value"><?= e($stat['stat_value']) ?></span>
-          <span class="bento-tile__label"><?= e($stat['stat_label']) ?> — <?= e($stat['stat_description']) ?></span>
+          <span class="bento-tile__label"><strong><?= e($stat['stat_label']) ?></strong> — <?= e($stat['stat_description']) ?></span>
         </div>
       <?php endforeach; ?>
     </div>
@@ -89,14 +106,16 @@ require BASE_PATH . '/includes/header.php';
     <p class="lead" style="margin-top:.75rem;"><?= e($settings['operation_subtitle'] ?? '') ?></p>
 
     <?php if ($hubLocations): ?>
-    <div class="hub-map" style="margin-top:var(--sp-8);" aria-hidden="true">
-      <?php foreach ($hubLocations as $location): ?>
-        <div class="hub-map__pin <?= $location['is_center'] ? 'hub-map__pin--center' : '' ?>"
-             style="top: <?= e($location['position_top']) ?>; left: <?= e($location['position_left']) ?>;">
-          <span class="hub-map__dot"><?= icon($location['is_center'] ? 'radar' : 'map-pin') ?></span>
-          <span class="hub-map__label"><?= e($location['area_name']) ?><small><?= e($location['region_label']) ?></small></span>
-        </div>
-      <?php endforeach; ?>
+    <?php
+      $mapLocations = array_map(static fn (array $loc) => [
+          'lat' => (float) $loc['lat'],
+          'lng' => (float) $loc['lng'],
+          'area_name' => $loc['area_name'],
+          'region_label' => $loc['region_label'],
+          'is_center' => (bool) $loc['is_center'],
+      ], $hubLocations);
+    ?>
+    <div id="hub-map" class="hub-map" style="margin-top:var(--sp-8);" role="application" aria-label="İzmir operasyon bölgeleri haritası" data-locations="<?= e(json_encode($mapLocations, JSON_UNESCAPED_UNICODE)) ?>">
       <span class="hub-map__caption">İzmir Körfezi</span>
     </div>
     <?php endif; ?>

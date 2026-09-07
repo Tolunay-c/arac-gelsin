@@ -266,3 +266,45 @@ var Toast = (function () {
     io.observe(el);
   });
 })();
+
+/* ---------- Senaryo slider (kırmızı vitrin kutusu) ---------- */
+(function () {
+  var root = document.getElementById('ucSlider');
+  if (!root) return;
+
+  var slides = root.querySelectorAll('.uc-slide');
+  var dots = root.querySelectorAll('.uc-slider__dot');
+  if (slides.length < 2) return;
+
+  var current = 0;
+  var AUTO_MS = 4500;
+  var timer = null;
+
+  function show(index) {
+    slides[current].classList.remove('is-active');
+    if (dots[current]) dots[current].classList.remove('is-active');
+    current = (index + slides.length) % slides.length;
+    slides[current].classList.add('is-active');
+    if (dots[current]) dots[current].classList.add('is-active');
+  }
+
+  function start() {
+    stop();
+    timer = window.setInterval(function () { show(current + 1); }, AUTO_MS);
+  }
+  function stop() {
+    if (timer) { window.clearInterval(timer); timer = null; }
+  }
+
+  dots.forEach(function (dot) {
+    dot.addEventListener('click', function () {
+      show(parseInt(dot.dataset.slideIndex, 10) || 0);
+      start(); // manuel seçimden sonra döngüyü sıfırla
+    });
+  });
+
+  root.addEventListener('mouseenter', stop);
+  root.addEventListener('mouseleave', start);
+
+  start();
+})();

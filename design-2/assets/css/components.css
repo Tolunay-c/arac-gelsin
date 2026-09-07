@@ -66,15 +66,25 @@
    içeriği App\Support\Icons + görsel etiketiyle App\Support helpers'taki
    image_tag() üretir; bu sınıf yalnızca görünümü tanımlar. */
 .img-placeholder {
-  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--sp-2);
+  position: relative; overflow: hidden;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--sp-3);
   width: 100%; height: 100%; min-height: 120px;
-  background:
-    repeating-linear-gradient(135deg, var(--c-border) 0 1px, transparent 1px 14px),
-    linear-gradient(160deg, var(--c-tint-1), var(--c-tint-2));
+  background: linear-gradient(160deg, var(--c-tint-1), var(--c-tint-2));
   color: var(--c-text-light);
 }
-.img-placeholder svg { width: 34px; height: 34px; opacity: .55; }
-.img-placeholder span { font-size: 11px; font-weight: 600; letter-spacing: .04em; text-align: center; padding-inline: var(--sp-4); opacity: .8; }
+.img-placeholder::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background-image: linear-gradient(var(--c-border) 1px, transparent 1px), linear-gradient(90deg, var(--c-border) 1px, transparent 1px);
+  background-size: 26px 26px;
+  mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, #000 0%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, #000 0%, transparent 75%);
+}
+.img-placeholder svg {
+  position: relative; z-index: 1; width: 26px; height: 26px; padding: 19px; box-sizing: content-box;
+  border-radius: 50%; background: var(--c-card); border: 1px solid var(--c-border-strong); color: var(--c-red-light);
+  box-shadow: 0 10px 24px -10px rgba(0, 0, 0, .3);
+}
+.img-placeholder span { position: relative; z-index: 1; font-size: 11px; font-weight: 600; letter-spacing: .04em; text-align: center; padding-inline: var(--sp-4); opacity: .8; }
 
 /* ---------- Hover ile büyüyen kart taşıyıcı ---------- */
 .lift {
@@ -140,7 +150,7 @@
 .form-input:focus, .form-textarea:focus, .form-select:focus {
   outline: none; border-color: var(--c-red); box-shadow: 0 0 0 4px var(--c-red-soft);
 }
-.form-textarea { min-height: 130px; resize: vertical; }
+.form-textarea { min-height: 130px; max-height: 260px; resize: vertical; }
 .form-input.is-invalid, .form-textarea.is-invalid { border-color: var(--c-error); }
 .form-error { display: none; font-size: var(--fs-xs); color: var(--c-error); margin-top: var(--sp-1); }
 .has-error .form-error { display: block; }
@@ -209,40 +219,49 @@
 .compare-table thead th.compare-table__highlight-col { color: var(--c-red-light); }
 
 /* ---------- Harita / hub ----------
-   Gerçek harita karosu kullanmıyoruz (dış görsele bağımlı olmasın diye);
-   bunun yerine sokak ızgarası + iki ana yol + körfez lekesi ile stilize
-   edilmiş bir "harita" izlenimi CSS gradyanlarıyla üretiliyor. */
+   Gerçek harita karoları (Leaflet + OpenStreetMap/CARTO) — bkz. assets/js/hub-map.js.
+   Konum pinleri PHP tarafında değil, JS'te gerçek lat/lng üzerinden çiziliyor. */
 .hub-map {
   position: relative;
   min-height: 360px;
+  height: 100%;
   border: 1px solid var(--c-border);
   border-radius: var(--r-lg);
   overflow: hidden;
-  background-color: var(--c-card);
-  background-image:
-    radial-gradient(ellipse 62% 50% at 12% 92%, rgb(59 130 246 / .24) 0%, rgb(59 130 246 / .14) 45%, transparent 72%),
-    linear-gradient(128deg, transparent 46.5%, var(--c-border-strong) 47.2%, var(--c-border-strong) 48.2%, transparent 49%),
-    linear-gradient(35deg, transparent 62%, var(--c-border-strong) 62.7%, var(--c-border-strong) 63.7%, transparent 64.4%),
-    repeating-linear-gradient(90deg, var(--c-border) 0 1px, transparent 1px 58px),
-    repeating-linear-gradient(0deg, var(--c-border) 0 1px, transparent 1px 58px);
+  background: var(--c-card);
+  box-shadow: 0 20px 40px -28px rgba(0, 0, 0, .3);
+  z-index: 0;
 }
-@media (max-width: 900px) { .hub-map { aspect-ratio: 4/3; min-height: 0; } }
+@media (max-width: 900px) { .hub-map { aspect-ratio: 4/3; min-height: 0; height: auto; } }
+.hub-map .leaflet-control-attribution { font-size: 10px; }
 .hub-map__caption {
-  position: absolute; left: var(--sp-5); bottom: var(--sp-4); z-index: 1;
+  position: absolute; left: var(--sp-5); bottom: var(--sp-4); z-index: 401;
   font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--c-text-light);
+  background: var(--c-card); padding: 3px 10px; border-radius: var(--r-full); border: 1px solid var(--c-border);
+  pointer-events: none;
 }
-.hub-map__pin { position: absolute; transform: translate(-50%, -50%); text-align: center; z-index: 1; }
-.hub-map__dot {
-  display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 50%;
-  background: var(--c-red); color: #fff; box-shadow: var(--shadow-red);
-  transition: transform var(--dur) var(--ease);
+.hub-map-marker span {
+  display: block; width: 14px; height: 14px; border-radius: 50%;
+  background: var(--c-red); border: 2px solid var(--c-card); box-shadow: 0 0 0 3px rgb(224 22 60 / .25);
 }
-.hub-map__pin:hover .hub-map__dot { transform: scale(1.15); }
-.hub-map__dot svg { width: 20px; height: 20px; }
-.hub-map__pin--center .hub-map__dot { background: var(--c-ink); color: var(--c-ink-text); width: 58px; height: 58px; }
-.hub-map__pin--center .hub-map__dot svg { width: 24px; height: 24px; }
-.hub-map__label { display: block; margin-top: var(--sp-2); font-size: var(--fs-xs); font-weight: 700; color: var(--c-heading); white-space: nowrap; }
-.hub-map__label small { display: block; font-weight: 500; color: var(--c-text-light); text-transform: uppercase; letter-spacing: .05em; font-size: 10px; }
+.hub-map-marker--center span {
+  width: 20px; height: 20px; background: var(--c-ink); border-color: var(--c-card);
+  box-shadow: 0 0 0 6px rgb(224 22 60 / .18);
+  animation: hubMapPulse 2.4s ease-out infinite;
+}
+@keyframes hubMapPulse {
+  0%   { box-shadow: 0 0 0 0 rgb(224 22 60 / .35); }
+  70%  { box-shadow: 0 0 0 14px rgb(224 22 60 / 0); }
+  100% { box-shadow: 0 0 0 0 rgb(224 22 60 / 0); }
+}
+.leaflet-tooltip.hub-map__tooltip {
+  background: var(--c-card); color: var(--c-heading); border: 1px solid var(--c-border);
+  border-radius: var(--r-md); padding: 5px 10px; box-shadow: 0 8px 20px -10px rgba(0, 0, 0, .3);
+  font-family: var(--font-sans); font-size: 11.5px; line-height: 1.35; white-space: nowrap;
+}
+.leaflet-tooltip.hub-map__tooltip strong { display: block; font-weight: 700; color: var(--c-heading); }
+.leaflet-tooltip.hub-map__tooltip small { display: block; font-weight: 500; color: var(--c-text-light); text-transform: uppercase; letter-spacing: .05em; font-size: 10px; }
+.leaflet-tooltip.hub-map__tooltip::before { border-top-color: var(--c-border); }
 
 /* ---------- Sekmeler ---------- */
 .tabs { display: inline-flex; gap: var(--sp-1); padding: var(--sp-1); background: var(--c-inset); border: 1px solid var(--c-border); border-radius: var(--r-full); }

@@ -156,4 +156,9 @@ require BASE_PATH . '/includes/header.php';
   </div>
 </section>
 
+<!-- Diğer tüm sayfalar (angle-cta bandı ya da .cta-gap ile) footer'dan
+     önce nefes payı bırakıyor; bu sayfa form panelinden doğrudan footer'a
+     geçiyordu — tutarlılık için aynı boşluk eklendi. -->
+<div class="container cta-gap"></div>
+
 <?php require BASE_PATH . '/includes/footer.php'; ?>

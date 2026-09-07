@@ -11,6 +11,6 @@ final class HubLocation extends Model
 {
     protected static string $table = 'hub_locations';
     protected static array $fillable = [
-        'region_label', 'area_name', 'position_top', 'position_left', 'is_center', 'sort_order', 'is_active',
+        'region_label', 'area_name', 'lat', 'lng', 'is_center', 'sort_order', 'is_active',
     ];
 }

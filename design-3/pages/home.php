@@ -105,10 +105,11 @@ require BASE_PATH . '/includes/header.php';
       </ol>
     </div>
 
-    <aside class="problem-callout reveal">
-      <span class="eyebrow"><?= e($settings['problem_callout_badge'] ?? '') ?></span>
-      <p><?= e($settings['problem_callout_title'] ?? '') ?></p>
-    </aside>
+    <div class="problem-side reveal">
+      <div class="problem-media">
+        <span class="problem-media__icon"><?= icon('image') ?></span>
+      </div>
+    </div>
   </div>
 </section>
 <?php endif; ?>

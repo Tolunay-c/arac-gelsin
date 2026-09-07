@@ -20,8 +20,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $data = [
                 'region_label'  => post('region_label'),
                 'area_name'     => post('area_name'),
-                'position_top'  => post('position_top', '50%'),
-                'position_left' => post('position_left', '50%'),
+                'lat'           => (float) post('lat', '38.4237'),
+                'lng'           => (float) post('lng', '27.1428'),
                 'is_center'     => isset($_POST['is_center']) ? 1 : 0,
                 'sort_order'    => (int) post('sort_order', '0'),
                 'is_active'     => isset($_POST['is_active']) ? 1 : 0,
@@ -80,7 +80,7 @@ require __DIR__ . '/includes/admin-header.php';
 
 <div class="admin-panel">
   <div class="admin-panel__header"><h2><?= $editingLocation ? 'Operasyon Noktasını Düzenle' : 'Yeni Operasyon Noktası Ekle' ?></h2>
-    <p class="admin-panel__hint">Konum% değerleri harita üzerindeki nokta konumunu belirler (üstten % ve soldan %).</p>
+    <p class="admin-panel__hint">Enlem/boylam değerleri, gerçek harita üzerinde noktanın konumunu belirler.</p>
   </div>
   <form method="post" class="admin-form-grid">
     <?= csrf_field() ?>
@@ -94,11 +94,11 @@ require __DIR__ . '/includes/admin-header.php';
     <label class="admin-field">Alan Adı (örn. Alsancak / Bayraklı)
       <input type="text" name="area_name" required value="<?= e($editingLocation['area_name'] ?? '') ?>">
     </label>
-    <label class="admin-field">Konum - Üst (%)
-      <input type="text" name="position_top" value="<?= e($editingLocation['position_top'] ?? '50%') ?>">
+    <label class="admin-field">Enlem (lat)
+      <input type="number" step="0.000001" name="lat" value="<?= e((string) ($editingLocation['lat'] ?? '38.4237')) ?>">
     </label>
-    <label class="admin-field">Konum - Sol (%)
-      <input type="text" name="position_left" value="<?= e($editingLocation['position_left'] ?? '50%') ?>">
+    <label class="admin-field">Boylam (lng)
+      <input type="number" step="0.000001" name="lng" value="<?= e((string) ($editingLocation['lng'] ?? '27.1428')) ?>">
     </label>
     <label class="admin-field admin-field--checkbox">
       <input type="checkbox" name="is_center" <?= ($editingLocation['is_center'] ?? 0) ? 'checked' : '' ?>> Merkez Nokta

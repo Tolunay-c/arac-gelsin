@@ -86,7 +86,7 @@
 .manifesto p.statement { font-size: var(--fs-lg); color: var(--c-text); font-style: italic; font-family: var(--font-display); }
 
 /* ============ İŞ PROBLEMİ ============ */
-.problem-grid { display: grid; grid-template-columns: 1.3fr .9fr; gap: var(--sp-16); align-items: start; }
+.problem-grid { display: grid; grid-template-columns: 1.3fr .9fr; gap: var(--sp-16); align-items: center; }
 .problem-grid > * { min-width: 0; }
 @media (max-width: 900px) { .problem-grid { grid-template-columns: 1fr; } }
 .problem-list li {
@@ -96,9 +96,29 @@
 .problem-list li:hover { padding-left: var(--sp-2); }
 .problem-num { font-family: var(--font-display); font-weight: 800; color: var(--c-red-light); font-size: var(--fs-lg); min-width: 2.2ch; }
 .problem-text { color: var(--c-text); font-size: 1.02rem; }
+.problem-side { display: flex; flex-direction: column; justify-content: center; gap: var(--sp-6); height: 100%; }
+.problem-media {
+  position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center;
+  aspect-ratio: 4 / 3; width: 100%; border-radius: var(--r-lg);
+  border: 1px solid var(--c-border); background: var(--c-surface);
+  box-shadow: 0 20px 40px -24px rgba(0, 0, 0, .25);
+}
+.problem-media::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background-image: linear-gradient(var(--c-border) 1px, transparent 1px), linear-gradient(90deg, var(--c-border) 1px, transparent 1px);
+  background-size: 28px 28px;
+  mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, #000 0%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, #000 0%, transparent 75%);
+}
+.problem-media__icon {
+  position: relative; z-index: 1; width: 64px; height: 64px; display: flex; align-items: center; justify-content: center;
+  border-radius: 50%; background: var(--c-card); border: 1px solid var(--c-border-strong); color: var(--c-red-light);
+  box-shadow: 0 10px 24px -10px rgba(0, 0, 0, .3);
+}
+.problem-media__icon svg { width: 26px; height: 26px; }
 .problem-callout {
   background: var(--c-card); border: 1px solid var(--c-border); border-radius: var(--r-lg);
-  padding: var(--sp-10); display: flex; flex-direction: column; justify-content: center; height: 100%;
+  padding: var(--sp-10); display: flex; flex-direction: column; justify-content: center; flex: 1;
 }
 .problem-callout p { color: var(--c-heading); font-family: var(--font-display); font-size: var(--fs-xl); font-weight: 700; margin: 0; }
 

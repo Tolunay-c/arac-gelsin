@@ -36,6 +36,11 @@ body { background: var(--c-bg); }
   background: transparent; border-bottom: none; backdrop-filter: none;
   padding-inline: var(--sp-4);
 }
+/* layout.css'teki taban kural (.site-header.is-scrolled) dış çubuğu scroll'da
+   neredeyse opak beyaza boyuyordu — yüzen şeffaf hap yerine tam genişlik
+   düz bir beyaz bant görünmesine yol açıyordu. Dış çubuk her zaman şeffaf
+   kalmalı; "scrolled" görünümü yalnızca iç hapta (.container) olmalı. */
+.site-header.is-scrolled { background: transparent; box-shadow: none; }
 .site-header .container {
   height: auto; max-width: calc(var(--container) - 40px);
   background: var(--c-header-bg); backdrop-filter: blur(16px) saturate(140%);
@@ -70,17 +75,19 @@ body { background: var(--c-bg); }
    yerleşim/kompozisyon dili tamamen farklı.
    ============================================================ */
 
-/* ---------- Hero: bento ızgara (tek büyük kutu + 4 küçük kutu) ---------- */
+/* ---------- Hero: büyük kutu + CSS masonry vitrin kutuları ----------
+   Önceki sürüm 4 sütunlu, grid-auto-flow:dense bir "bento" ızgarasıydı;
+   sabit satır yüksekliğine zorlandığı için kutular hizasız/boşluklu
+   duruyordu. Artık iki ayrı alan var: sol tarafta ana içerik kutusu, sağda
+   çok-sütunlu (CSS "masonry") bir akış — her rozet kendi yüksekliğinde en
+   kısa sütuna akar, dense-grid'in aksine zorla eşit satırlara sığdırılmaz. */
 .hero { background: var(--c-bg); overflow: visible; }
 .hero::before, .hero::after { display: none; }
 .hero .container { display: block; padding-block: var(--sp-12) var(--sp-16); }
 .bento-badge { margin-bottom: var(--sp-6); }
-.bento-grid {
-  display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: minmax(120px, auto);
-  gap: 16px; grid-auto-flow: dense;
-}
+.bento-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 16px; }
 .bento-main {
-  grid-column: span 2; grid-row: span 2; position: relative; overflow: hidden;
+  position: relative; overflow: hidden; height: 100%;
   background: linear-gradient(155deg, var(--c-card), var(--c-surface));
   border: 1px solid var(--c-border-strong); border-radius: var(--r-xl);
   padding: 44px; display: flex; flex-direction: column; justify-content: center;
@@ -103,33 +110,38 @@ body { background: var(--c-bg); }
 .bento-store small { display: block; font-size: .62rem; color: var(--c-text-light); }
 .bento-store strong { display: block; font-size: .84rem; color: var(--c-heading); font-family: var(--font-display); }
 
+/* CSS masonry: çok-sütunlu akış (native grid-template-rows:masonry henüz
+   yalnızca Firefox'ta var; column-count tekniği tüm modern tarayıcılarda
+   çalışan, üretimde güvenilir masonry yöntemi). */
+.bento-tiles { columns: 2; column-gap: 16px; }
 .bento-tile {
+  break-inside: avoid; margin-bottom: 16px;
   background: var(--c-card); border: 1px solid var(--c-border); border-radius: var(--r-lg);
   padding: 22px; display: flex; flex-direction: column; justify-content: center; gap: 6px;
   transition: transform var(--dur) var(--ease), border-color var(--dur) var(--ease);
 }
 .bento-tile:hover { transform: translateY(-3px); border-color: var(--c-border-strong); }
 .bento-tile--accent { background: linear-gradient(135deg, var(--c-red), var(--c-red-dark)); border-color: transparent; color: #fff; }
-/* Vurgu kutusuyla birlikte tekil vitrin öğesi sayısı tek/çift değişse
-   bile (örn. 3 rozet), son kutu 2 sütuna yayılıp ızgarada boşluk
-   kalmasını önler. */
-.bento-tile--wide { grid-column: span 2; flex-direction: row; align-items: center; gap: 14px; }
+.bento-tile--wide { flex-direction: row; align-items: center; gap: 14px; }
 .bento-tile--wide .bento-tile__value { margin-right: 2px; }
-@media (max-width: 560px) { .bento-tile--wide { grid-column: span 1; flex-direction: column; align-items: flex-start; } }
 .bento-tile .ic { width: 34px; height: 34px; border-radius: var(--r-sm); background: var(--c-red-soft); color: var(--c-red-light); display: flex; align-items: center; justify-content: center; margin-bottom: 4px; }
 .bento-tile--accent .ic { background: rgb(255 255 255 / .18); color: #fff; }
 .bento-tile__value { font-family: var(--font-display); font-weight: 800; font-size: 1.5rem; color: var(--c-heading); }
 .bento-tile--accent .bento-tile__value { color: #fff; }
 .bento-tile__label { font-size: .78rem; color: var(--c-text-muted); }
+/* Etiket (kısa) ile açıklama (uzun cümle) tek span'de aynı ağırlıkta
+   basılıyordu — hiyerarşisiz okunuyordu. Etiket kısmı vurgulanıyor. */
+.bento-tile__label strong { color: var(--c-heading); font-weight: 700; }
+.bento-tile--accent .bento-tile__label strong { color: #fff; }
 .bento-tile--accent .bento-tile__label { color: rgb(255 255 255 / .85); }
 
 @media (max-width: 900px) {
-  .bento-grid { grid-template-columns: repeat(2, 1fr); }
-  .bento-main { grid-column: span 2; grid-row: auto; padding: 34px; }
-}
-@media (max-width: 560px) {
   .bento-grid { grid-template-columns: 1fr; }
-  .bento-main { grid-column: span 1; }
+  .bento-main { margin-bottom: 16px; }
+}
+@media (max-width: 480px) {
+  .bento-tiles { columns: 1; }
+  .bento-tile--wide { flex-direction: column; align-items: flex-start; }
 }
 
 /* ---------- Split-screen: İş Problemi | Çözüm yan yana ---------- */
@@ -140,11 +152,39 @@ body { background: var(--c-bg); }
   border-right: 1px solid var(--c-border);
 }
 .split-ps__solution { background: var(--c-surface); }
+/* split-list, karşısındaki .timeline (sağ panel) ile aynı ekranda duruyor.
+   Numara rozetleri önceden .timeline__dot ile aynı vurgulu kırmızı/kalın
+   dilde tasarlanmıştı; ikisi de "sıralı adım" gibi okunup aynı şeyi
+   anlatıyormuş hissi veriyordu (problem listesi sıralı bir süreç değil,
+   bağımsız maddelerin dökümü). Rozet burada bilinçli olarak sade/nötr
+   tutuluyor ki göz, gerçek süreç göstergesini (timeline) bununla
+   karıştırmasın. */
 .split-list { list-style: none; margin-top: var(--sp-6); }
 .split-list li { display: flex; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--c-border); }
 .split-list li:first-child { border-top: 1px solid var(--c-border); }
-.split-num { font-family: var(--font-display); font-weight: 800; color: var(--c-red-light); font-size: 1.05rem; min-width: 2ch; }
+.split-num { font-family: var(--font-sans); font-weight: 700; color: var(--c-text-light); font-size: .78rem; min-width: 2ch; padding-top: 3px; }
 .split-text { color: var(--c-text); font-size: .98rem; padding-top: 1px; }
+
+/* ---------- Görsel yer tutucu (İş Problemi panelinde) ---------- */
+.problem-media {
+  position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center;
+  aspect-ratio: 16 / 9; width: 100%; margin-top: var(--sp-8); border-radius: var(--r-lg);
+  border: 1px solid var(--c-border); background: var(--c-surface);
+  box-shadow: 0 20px 40px -24px rgba(0, 0, 0, .25);
+}
+.problem-media::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background-image: linear-gradient(var(--c-border) 1px, transparent 1px), linear-gradient(90deg, var(--c-border) 1px, transparent 1px);
+  background-size: 28px 28px;
+  mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, #000 0%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, #000 0%, transparent 75%);
+}
+.problem-media__icon {
+  position: relative; z-index: 1; width: 64px; height: 64px; display: flex; align-items: center; justify-content: center;
+  border-radius: 50%; background: var(--c-card); border: 1px solid var(--c-border-strong); color: var(--c-red-light);
+  box-shadow: 0 10px 24px -10px rgba(0, 0, 0, .3);
+}
+.problem-media__icon svg { width: 26px; height: 26px; }
 
 .split-quote {
   margin: var(--sp-6) 0; padding: 18px 22px; border-left: 3px solid var(--c-red);
@@ -188,8 +228,15 @@ body { background: var(--c-bg); }
 .fleet-index__thumb {
   width: 68px; height: 68px; border-radius: var(--r-md); background: var(--c-card); border: 1px solid var(--c-border);
   display: flex; align-items: center; justify-content: center; color: var(--c-text-light); flex-shrink: 0;
+  overflow: hidden;
 }
-.fleet-index__thumb svg { width: 28px; height: 28px; }
+.fleet-index__thumb img { width: 100%; height: 100%; object-fit: cover; }
+/* Gerçek fotoğraf yüklenene kadar .img-placeholder burada da düşer, ama
+   68px'lik bir küçük resimde tam boy rozet + etiket metni sığmaz — kompakt
+   bir varyanta indiriyoruz. */
+.fleet-index__thumb .img-placeholder { min-height: 0; }
+.fleet-index__thumb .img-placeholder span:last-child { display: none; }
+.fleet-index__thumb .img-placeholder svg { width: 14px; height: 14px; padding: 9px; }
 @media (max-width: 640px) {
   .fleet-index__row { grid-template-columns: 40px 1fr; }
   .fleet-index__thumb { display: none; }
@@ -208,13 +255,24 @@ body { background: var(--c-bg); }
 }
 .uc-tile h3 { font-size: 1rem; margin-bottom: 6px; }
 .uc-tile p { color: var(--c-text-muted); font-size: .86rem; margin: 0; }
-.uc-tile--feature {
-  grid-column: span 2; grid-row: span 2; background: linear-gradient(140deg, var(--c-red), var(--c-red-dark));
-  color: #fff; display: flex; flex-direction: column; justify-content: flex-end;
+/* Kırmızı vitrin kutusu artık statik değil — tüm senaryoları döngüyle
+   gösteren küçük bir slider (bkz. main.js "Senaryo slider"ı). */
+.uc-tile--feature { grid-column: span 2; grid-row: span 2; position: relative; overflow: hidden; background: linear-gradient(140deg, var(--c-red), var(--c-red-dark)); color: #fff; }
+.uc-slide {
+  position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: flex-end;
+  opacity: 0; transform: translateY(6px); transition: opacity .5s var(--ease), transform .5s var(--ease);
+  pointer-events: none;
 }
-.uc-tile--feature .ic { width: 56px; height: 56px; background: rgb(255 255 255 / .18); color: #fff; }
-.uc-tile--feature h3 { font-size: 1.4rem; }
-.uc-tile--feature p { color: rgb(255 255 255 / .85); font-size: .95rem; max-width: 34ch; }
+.uc-slide.is-active { opacity: 1; transform: translateY(0); pointer-events: auto; }
+.uc-slide .ic { width: 56px; height: 56px; background: rgb(255 255 255 / .18); color: #fff; }
+.uc-slide h3 { font-size: 1.4rem; color: #fff; }
+.uc-slide p { color: rgb(255 255 255 / .85); font-size: .95rem; max-width: 34ch; margin: 0; }
+.uc-slider__dots { position: absolute; right: 26px; bottom: 26px; display: flex; gap: 6px; z-index: 2; }
+.uc-slider__dot {
+  width: 8px; height: 8px; border-radius: var(--r-full); background: rgb(255 255 255 / .4); border: none;
+  padding: 0; cursor: pointer; transition: width var(--dur) var(--ease), background var(--dur) var(--ease);
+}
+.uc-slider__dot.is-active { width: 22px; background: #fff; }
 @media (max-width: 900px) {
   .uc-bento { grid-template-columns: repeat(2, 1fr); }
   .uc-tile--feature { grid-column: span 2; grid-row: auto; }
@@ -226,12 +284,20 @@ body { background: var(--c-bg); }
 
 /* ---------- İstatistikler: kart değil, ayraçlı editoryal şerit ---------- */
 .ticker { border-top: 1px solid var(--c-border); border-bottom: 1px solid var(--c-border); background: var(--c-surface); }
-.ticker__row { display: flex; flex-wrap: wrap; gap: 32px; padding-block: 40px; }
-.ticker__item { flex: 1 1 200px; padding-left: 24px; border-left: 2px solid var(--c-border-strong); }
+.ticker__row { display: flex; flex-wrap: wrap; row-gap: 28px; column-gap: 40px; padding-block: 44px; }
+.ticker__item { flex: 1 1 230px; padding-left: 24px; border-left: 2px solid var(--c-border-strong); }
 .ticker__item:first-child { padding-left: 0; border-left: none; }
-.ticker__num { font-family: var(--font-display); font-weight: 800; font-size: clamp(2rem, 1.5rem + 1.6vw, 2.7rem); color: var(--c-heading); display: block; }
-.ticker__label { font-size: .85rem; color: var(--c-text-muted); max-width: 22ch; }
-@media (max-width: 767px) { .ticker__item { flex: 1 1 45%; border-left: none; padding-left: 0; } }
+.ticker__num {
+  font-family: var(--font-display); font-weight: 800; font-size: clamp(2rem, 1.5rem + 1.6vw, 2.7rem);
+  color: var(--c-heading); display: block; line-height: 1.1; margin-bottom: 8px;
+}
+.ticker__label { display: block; font-size: .88rem; line-height: 1.45; color: var(--c-text-muted); max-width: 30ch; }
+/* 4 öğe + uzun etiketler dar/orta genişlikte satır sarıyor; border-left
+   ayracı yalnızca :first-child'a göre çalıştığından sarılan satırın ilk
+   öğesinde de yanlışlıkla ayraç kalıyordu — o yüzden tek satırın garanti
+   olmadığı genişliklerde ayracı tamamen kaldırıp boşluğa bırakıyoruz. */
+@media (max-width: 1023px) { .ticker__item { border-left: none; padding-left: 0; } }
+@media (max-width: 767px) { .ticker__item { flex: 1 1 45%; } }
 
 /* ---------- CTA: açılı (clip-path), tam genişlik afiş bandı ---------- */
 .angle-cta {
@@ -240,7 +306,10 @@ body { background: var(--c-bg); }
   padding: 88px 24px; text-align: center; color: #fff;
 }
 .angle-cta h2 { font-size: clamp(1.8rem, 1.4rem + 1.8vw, 2.6rem); }
-.angle-cta p { color: rgb(255 255 255 / .85); margin: 16px auto 32px; max-width: 50ch; }
+/* %85 opak beyaz, gradyanın açık ucunda (#E0163C) ~3.78:1 veriyordu —
+   WCAG AA (4.5:1) altında. Tam opak beyaza çekildi; hiyerarşi opaklıkla
+   değil zaten mevcut olan boyut/kalınlık farkıyla korunuyor. */
+.angle-cta p { color: #fff; margin: 16px auto 32px; max-width: 50ch; }
 .angle-cta .hero-actions { justify-content: center; }
 .angle-cta .btn--outline { border-color: rgb(255 255 255 / .5); color: #fff; }
 .angle-cta .btn--outline:hover { background: rgb(255 255 255 / .12); border-color: #fff; }
@@ -262,8 +331,11 @@ body { background: var(--c-bg); }
 }
 /* Bu satır artık koyu kartın DIŞINDA, sayfanın kendi (tema'ya göre
    değişen) zemininde duruyor — sabit yarı saydam beyaz yerine tema
-   farkında bir renk kullanılmalı, yoksa açık temada okunmaz. */
-.site-footer .footer-bottom { max-width: calc(var(--container) - 40px); margin-inline: auto; color: var(--c-text-light); }
+   farkında bir renk kullanılmalı, yoksa açık temada okunmaz.
+   --c-text-light açık temada (#8492A3) sayfa zeminine (#F5F6FA) karşı
+   yalnızca ~2.9:1 veriyordu (AA altı); --c-text-muted (#5B6C80) ~5:1 ile
+   AA'yı geçiyor. */
+.site-footer .footer-bottom { max-width: calc(var(--container) - 40px); margin-inline: auto; color: var(--c-text-muted); }
 @media (max-width: 639px) { .site-footer .footer-grid { padding: var(--sp-8) var(--sp-6); } }
 
 /* ============================================================
@@ -348,9 +420,15 @@ body { background: var(--c-bg); }
 
 /* ---------- Hakkımızda: operasyon modeli — tam genişlik split panel
    (home'daki split-ps ile aynı iki-panel mantığı, nötr tonlarda) ---------- */
-.op-split { display: grid; grid-template-columns: 1.3fr .9fr; }
+.op-split { display: grid; grid-template-columns: 1.3fr .9fr; align-items: start; }
 .op-split__map { padding: 72px 56px; background: var(--c-bg); border-right: 1px solid var(--c-border); }
 .op-split__info { padding: 72px 56px; background: var(--c-surface); }
+/* .hub-map'in paylaşılan height:100% kuralı, grid stretch ile komşu
+   sütunun (Hub Modeli özellik listesi) doğal yüksekliğine kadar geriyordu
+   — bu da büyük, çoğunlukla boş bir harita alanına yol açıyordu. Sütunları
+   artık stretch yerine start hizalıyoruz ve haritaya makul bir tavan
+   veriyoruz. */
+.op-split__map .hub-map { height: auto; max-height: 460px; }
 .op-split__info h3 { margin-bottom: var(--sp-5); }
 .op-split__list { display: flex; flex-direction: column; }
 .op-split__list li { display: flex; align-items: center; gap: var(--sp-3); padding: var(--sp-3) 0; border-bottom: 1px solid var(--c-border); font-size: var(--fs-sm); color: var(--c-text-muted); }
@@ -438,6 +516,24 @@ body { background: var(--c-bg); }
 .uc-row__icon svg { width: 28px; height: 28px; }
 .uc-row h3 { font-size: 1.15rem; margin-bottom: 4px; }
 .uc-row p { color: var(--c-text-muted); margin: 0; max-width: 64ch; }
+
+/* Tüm satırlar birebir eşit ağırlıktaydı — görsel öncelik yoktu ve
+   anasayfadaki vitrin kutusuyla (aynı senaryo verisi, kırmızı gradyanlı
+   slider) hiçbir görsel devamlılığı yoktu. İlk senaryo burada da aynı
+   kırmızı gradyanla işaretleniyor, ki kullanıcı anasayfada gördüğü
+   "öne çıkan" senaryoyu burada tanısın (bağlam/continuity kurulsun). */
+.uc-row--feature {
+  background: linear-gradient(135deg, var(--c-red), var(--c-red-dark)); border-radius: var(--r-lg);
+  border-bottom-color: transparent;
+}
+.uc-row--feature:hover { background: linear-gradient(135deg, var(--c-red), var(--c-red-dark)); }
+.uc-row--feature .uc-row__icon { background: rgb(255 255 255 / .18); color: #fff; }
+.uc-row--feature h3 { color: #fff; }
+.uc-row--feature p { color: #fff; }
+.uc-row__badge {
+  display: inline-block; font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em;
+  background: rgb(255 255 255 / .2); color: #fff; padding: 3px 10px; border-radius: var(--r-full); margin-bottom: 6px;
+}
 @media (max-width: 640px) {
   .uc-row { grid-template-columns: 52px 1fr; gap: 16px; padding: 24px 4px; }
   .uc-row__icon { width: 52px; height: 52px; }

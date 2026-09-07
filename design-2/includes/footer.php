@@ -106,5 +106,8 @@
 </div>
 
 <script src="<?= e(asset('js/main.js')) ?>" defer></script>
+<?php foreach ($pageScripts ?? [] as $pageScriptSrc): ?>
+<script src="<?= e($pageScriptSrc) ?>" defer></script>
+<?php endforeach; ?>
 </body>
 </html>

@@ -203,11 +203,11 @@ INSERT INTO `highlight_stats` (`stat_value`, `stat_label`, `stat_description`, `
 -- ---------------------------------------------------------------------
 -- hub_locations
 -- ---------------------------------------------------------------------
-INSERT INTO `hub_locations` (`region_label`, `area_name`, `position_top`, `position_left`, `is_center`, `sort_order`) VALUES
-('30 DK Hedef', 'İzmir', '50%', '50%', 1, 1),
-('Merkez', 'Alsancak / Bayraklı', '15%', '15%', 0, 2),
-('Kuzey / Batı', 'Karşıyaka / Çiğli', '15%', '85%', 0, 3),
-('Güney / Havalimanı', 'Gaziemir / Havalimanı', '85%', '50%', 0, 4);
+INSERT INTO `hub_locations` (`region_label`, `area_name`, `lat`, `lng`, `is_center`, `sort_order`) VALUES
+('30 DK Hedef', 'İzmir', 38.4237, 27.1428, 1, 1),
+('Merkez', 'Alsancak / Bayraklı', 38.4400, 27.1466, 0, 2),
+('Kuzey / Batı', 'Karşıyaka / Çiğli', 38.4874, 27.0977, 0, 3),
+('Güney / Havalimanı', 'Gaziemir / Havalimanı', 38.2872, 27.1547, 0, 4);
 
 -- ---------------------------------------------------------------------
 -- hub_features

@@ -39,10 +39,11 @@ require BASE_PATH . '/includes/header.php';
 <section class="section">
   <div class="container">
     <div class="uc-rows reveal">
-      <?php foreach ($useCases as $useCase): ?>
-        <div class="uc-row">
+      <?php foreach ($useCases as $index => $useCase): ?>
+        <div class="uc-row<?= $index === 0 ? ' uc-row--feature' : '' ?>">
           <span class="uc-row__icon"><?= icon($useCase['icon']) ?></span>
           <div>
+            <?php if ($index === 0): ?><span class="uc-row__badge">Öne Çıkan Senaryo</span><?php endif; ?>
             <h3><?= e($useCase['title']) ?></h3>
             <p><?= e($useCase['description']) ?></p>
           </div>

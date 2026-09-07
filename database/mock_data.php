@@ -45,9 +45,9 @@ return [
     ],
 
     'fleet_vehicles' => [
-        ['id' => 1, 'name' => 'TOGG', 'category' => 'Yönetici & Kurumsal Ulaşım', 'tagline' => 'Kurumsal Temsilin Prestij Sınıfı', 'description' => 'Bu araç sınıfı, teknik özellikleriyle değil; üstlendiği kurumsal görev ve hizmet standardıyla konumlandırılır.', 'image_path' => 'https://images.pexels.com/photos/14463716/pexels-photo-14463716.jpeg?auto=compress&cs=tinysrgb&w=1200', 'sort_order' => 1, 'is_active' => 1, 'created_at' => '2026-01-06 09:00:00', 'updated_at' => '2026-01-06 09:00:00'],
-        ['id' => 2, 'name' => 'Ford Explorer', 'category' => 'Yönetici / Ekip Ulaşımı', 'tagline' => 'Güçlü ve Konforlu Yönetim Sınıfı', 'description' => 'Bu araç sınıfı, teknik özellikleriyle değil; üstlendiği kurumsal görev ve hizmet standardıyla konumlandırılır.', 'image_path' => 'https://images.pexels.com/photos/3370332/pexels-photo-3370332.jpeg?auto=compress&cs=tinysrgb&w=1200', 'sort_order' => 2, 'is_active' => 1, 'created_at' => '2026-01-06 09:00:00', 'updated_at' => '2026-01-06 09:00:00'],
-        ['id' => 3, 'name' => 'Ford Tourneo Custom', 'category' => 'Personel & Grup Ulaşımı', 'tagline' => 'Ekipler İçin Esnek Ulaşım', 'description' => 'Personel gruplarının ve saha ekiplerinin şehir içi hareketliliği için esnek kapasiteli konforlu ulaşım.', 'image_path' => 'https://images.pexels.com/photos/36377064/pexels-photo-36377064.jpeg?auto=compress&cs=tinysrgb&w=1200', 'sort_order' => 3, 'is_active' => 1, 'created_at' => '2026-01-06 09:00:00', 'updated_at' => '2026-01-06 09:00:00'],
+        ['id' => 1, 'name' => 'TOGG', 'category' => 'Yönetici & Kurumsal Ulaşım', 'tagline' => 'Kurumsal Temsilin Prestij Sınıfı', 'description' => 'Bu araç sınıfı, teknik özellikleriyle değil; üstlendiği kurumsal görev ve hizmet standardıyla konumlandırılır.', 'image_path' => null, 'sort_order' => 1, 'is_active' => 1, 'created_at' => '2026-01-06 09:00:00', 'updated_at' => '2026-01-06 09:00:00'],
+        ['id' => 2, 'name' => 'Ford Explorer', 'category' => 'Yönetici / Ekip Ulaşımı', 'tagline' => 'Güçlü ve Konforlu Yönetim Sınıfı', 'description' => 'Bu araç sınıfı, teknik özellikleriyle değil; üstlendiği kurumsal görev ve hizmet standardıyla konumlandırılır.', 'image_path' => null, 'sort_order' => 2, 'is_active' => 1, 'created_at' => '2026-01-06 09:00:00', 'updated_at' => '2026-01-06 09:00:00'],
+        ['id' => 3, 'name' => 'Ford Tourneo Custom', 'category' => 'Personel & Grup Ulaşımı', 'tagline' => 'Ekipler İçin Esnek Ulaşım', 'description' => 'Personel gruplarının ve saha ekiplerinin şehir içi hareketliliği için esnek kapasiteli konforlu ulaşım.', 'image_path' => null, 'sort_order' => 3, 'is_active' => 1, 'created_at' => '2026-01-06 09:00:00', 'updated_at' => '2026-01-06 09:00:00'],
     ],
 
     'guarantee_features' => [
@@ -71,10 +71,10 @@ return [
     ],
 
     'hub_locations' => [
-        ['id' => 1, 'region_label' => '30 DK Hedef', 'area_name' => 'İzmir', 'position_top' => '50%', 'position_left' => '50%', 'is_center' => 1, 'sort_order' => 1, 'is_active' => 1, 'created_at' => '2026-01-06 09:00:00', 'updated_at' => '2026-01-06 09:00:00'],
-        ['id' => 2, 'region_label' => 'Merkez', 'area_name' => 'Alsancak / Bayraklı', 'position_top' => '15%', 'position_left' => '15%', 'is_center' => 0, 'sort_order' => 2, 'is_active' => 1, 'created_at' => '2026-01-06 09:00:00', 'updated_at' => '2026-01-06 09:00:00'],
-        ['id' => 3, 'region_label' => 'Kuzey / Batı', 'area_name' => 'Karşıyaka / Çiğli', 'position_top' => '15%', 'position_left' => '85%', 'is_center' => 0, 'sort_order' => 3, 'is_active' => 1, 'created_at' => '2026-01-06 09:00:00', 'updated_at' => '2026-01-06 09:00:00'],
-        ['id' => 4, 'region_label' => 'Güney / Havalimanı', 'area_name' => 'Gaziemir / Havalimanı', 'position_top' => '85%', 'position_left' => '50%', 'is_center' => 0, 'sort_order' => 4, 'is_active' => 1, 'created_at' => '2026-01-06 09:00:00', 'updated_at' => '2026-01-06 09:00:00'],
+        ['id' => 1, 'region_label' => '30 DK Hedef', 'area_name' => 'İzmir', 'lat' => 38.4237, 'lng' => 27.1428, 'is_center' => 1, 'sort_order' => 1, 'is_active' => 1, 'created_at' => '2026-01-06 09:00:00', 'updated_at' => '2026-01-06 09:00:00'],
+        ['id' => 2, 'region_label' => 'Merkez', 'area_name' => 'Alsancak / Bayraklı', 'lat' => 38.4400, 'lng' => 27.1466, 'is_center' => 0, 'sort_order' => 2, 'is_active' => 1, 'created_at' => '2026-01-06 09:00:00', 'updated_at' => '2026-01-06 09:00:00'],
+        ['id' => 3, 'region_label' => 'Kuzey / Batı', 'area_name' => 'Karşıyaka / Çiğli', 'lat' => 38.4874, 'lng' => 27.0977, 'is_center' => 0, 'sort_order' => 3, 'is_active' => 1, 'created_at' => '2026-01-06 09:00:00', 'updated_at' => '2026-01-06 09:00:00'],
+        ['id' => 4, 'region_label' => 'Güney / Havalimanı', 'area_name' => 'Gaziemir / Havalimanı', 'lat' => 38.2872, 'lng' => 27.1547, 'is_center' => 0, 'sort_order' => 4, 'is_active' => 1, 'created_at' => '2026-01-06 09:00:00', 'updated_at' => '2026-01-06 09:00:00'],
     ],
 
     'lead_requests' => [
@@ -146,7 +146,7 @@ return [
         ['id' => 4, 'setting_key' => 'hero_badge', 'setting_value' => 'Kurumsal Mobilite', 'updated_at' => '2026-01-06 09:00:00'],
         ['id' => 5, 'setting_key' => 'hero_title', 'setting_value' => 'Şirketinizin Aracı, İhtiyacınız Olduğunda.', 'updated_at' => '2026-01-06 09:00:00'],
         ['id' => 6, 'setting_key' => 'hero_subtitle', 'setting_value' => 'İzmir\'e özel, elektrikli ve talep bazlı yeni nesil kurumsal mobilite modeli.', 'updated_at' => '2026-01-06 09:00:00'],
-        ['id' => 7, 'setting_key' => 'hero_image', 'setting_value' => 'https://images.pexels.com/photos/5058352/pexels-photo-5058352.jpeg?auto=compress&cs=tinysrgb&w=1600', 'updated_at' => '2026-01-06 09:00:00'],
+        ['id' => 7, 'setting_key' => 'hero_image', 'setting_value' => '', 'updated_at' => '2026-01-06 09:00:00'],
         ['id' => 8, 'setting_key' => 'manifesto_badge', 'setting_value' => 'Marka Manifestosu', 'updated_at' => '2026-01-06 09:00:00'],
         ['id' => 9, 'setting_key' => 'manifesto_title', 'setting_value' => 'Bu Bir Servis Hizmeti Değil. Yeni Bir Kurumsal Ulaşım Modeli.', 'updated_at' => '2026-01-06 09:00:00'],
         ['id' => 10, 'setting_key' => 'manifesto_body', 'setting_value' => 'Özikizler Turizm yeni bir servis hizmeti çıkarmıyor; yeni bir mobilite markası yaratıyor.', 'updated_at' => '2026-01-06 09:00:00'],

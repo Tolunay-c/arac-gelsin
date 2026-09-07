@@ -64,24 +64,24 @@
 /* ============ STATS BAND: gradyan yerine düz zemin + üst kırmızı çizgi ============ */
 .stats { background: var(--c-surface); border-block: 1px solid var(--c-border); border-top: 2px solid var(--c-red); }
 
-/* ---------- İş problemi: kart yerine sol-şeritli çağrı kutusu ---------- */
-.problem-callout {
-  border-radius: var(--r-sm); border: 1px solid var(--c-border); border-left: 3px solid var(--c-red);
-  background: var(--c-surface);
-}
-
-/* ---------- Hedef / goal banner: sol-şeritli düz panel ---------- */
-.goal-banner { border-radius: var(--r-sm); border-left: 3px solid var(--c-red); }
+/* ---------- Hedef / goal banner ----------
+   Önceki sürüm sol kırmızı şerit taşıyordu; içerik (rozet + cümle) mobilde
+   sarınca şerit orantısız uzuyordu. Şerit kaldırıldı; dar ekranda rozet ve
+   metin satır yerine üst üste (column) diziliyor. */
+.goal-banner { border-radius: var(--r-sm); }
+@media (max-width: 560px) { .goal-banner { flex-direction: column; align-items: flex-start; } }
 
 /* ---------- Süreç adımları: dairesel + noktalı bağlantı yerine
-   numaralı, sol-şeritli düz spec satırları ---------- */
+   numaralı, düz spec satırları. Vurgu artık sol şerit yerine zeminle
+   veriliyor (hover'da arka plan değişir). Dar ekranda numara + başlık +
+   açıklama tek satırda sıkışmasın diye column'a geçiyor. */
 .process { display: flex; flex-direction: column; gap: 0; border-top: 1px solid var(--c-border); }
 .process__step {
   display: flex; align-items: center; gap: var(--sp-6); text-align: left; padding: var(--sp-6) var(--sp-2);
-  border-bottom: 1px solid var(--c-border); border-left: 3px solid transparent;
-  transition: border-color var(--dur) var(--ease), background var(--dur) var(--ease), padding-left var(--dur) var(--ease);
+  border-bottom: 1px solid var(--c-border);
+  transition: background var(--dur) var(--ease), padding-left var(--dur) var(--ease);
 }
-.process__step:hover { border-left-color: var(--c-red); background: var(--c-overlay-1); padding-left: var(--sp-4); }
+.process__step:hover { background: var(--c-overlay-1); padding-left: var(--sp-4); }
 .process__step-num {
   flex-shrink: 0; margin: 0; width: 52px; height: 52px; border-radius: var(--r-sm);
   background: var(--c-card); border: 1.5px solid var(--c-border-strong); color: var(--c-red-light);
@@ -90,37 +90,33 @@
 .process__step::before { display: none; }
 .process__step h3 { margin-bottom: 2px; }
 .process__step p { font-size: var(--fs-sm); }
+@media (max-width: 560px) {
+  .process__step { flex-direction: column; align-items: flex-start; gap: var(--sp-3); }
+}
 
-/* ---------- CTA band: ışıma yerine sol-şeritli düz panel ---------- */
+/* ---------- CTA band ----------
+   Sol şerit kaldırıldı: mobilde metin ortalanınca (aşağıdaki media query)
+   tek taraflı bir şeritle asimetrik duruyordu. */
 .cta-band {
   border-radius: var(--r-sm); background: var(--c-card); border: 1px solid var(--c-border);
-  border-left: 4px solid var(--c-red); text-align: left; padding: var(--sp-12) var(--sp-10);
+  text-align: left; padding: var(--sp-12) var(--sp-10);
 }
 .cta-band h2, .cta-band p { text-align: left; margin-left: 0; margin-right: 0; }
 .cta-band .hero-actions { justify-content: flex-start; }
 @media (max-width: 767px) { .cta-band { text-align: center; } .cta-band h2, .cta-band p { text-align: center; } .cta-band .hero-actions { justify-content: center; } }
 
-/* ---------- Sayfa başlığı: ring dekorasyonu yerine sol kırmızı şerit ---------- */
+/* ---------- Sayfa başlığı ---------- */
 .page-head { overflow: visible; }
 .page-head::after { display: none; }
-.page-head .container { border-left: 3px solid var(--c-red); padding-left: var(--sp-8); }
-@media (max-width: 767px) { .page-head .container { border-left: none; padding-left: var(--sp-5); } }
-
-/* ---------- Fleet / özellik kartları: hover'da sol kırmızı şerit ---------- */
-.fleet-card, .feature-card { border-left: 3px solid transparent; transition: border-color var(--dur) var(--ease), transform var(--dur-slow) var(--ease-out), box-shadow var(--dur-slow) var(--ease-out); }
-.fleet-card:hover, .feature-card:hover { border-left-color: var(--c-red); }
 
 /* ---------- Karşılaştırma tablosu: köşeler zaten keskin (tokens.css) ---------- */
 .compare-table thead th.compare-table__highlight-col { border-bottom: 2px solid var(--c-red); }
 
-/* ---------- Footer: dikey kırmızı-tonlu ayraçlar ---------- */
+/* ---------- Footer: dikey ayraçlar ---------- */
 .site-footer .footer-grid > div { position: relative; padding-left: var(--sp-8); }
 .site-footer .footer-grid > div:first-child { padding-left: 0; }
 .site-footer .footer-grid > div::before {
-  content: ""; position: absolute; left: 0; top: 2px; bottom: 2px; width: 1px; background: rgb(224 22 60 / .3);
+  content: ""; position: absolute; left: 0; top: 2px; bottom: 2px; width: 1px; background: var(--c-border-strong);
 }
 .site-footer .footer-grid > div:first-child::before { display: none; }
 @media (max-width: 1023px) { .site-footer .footer-grid > div { padding-left: 0; } .site-footer .footer-grid > div::before { display: none; } }
-
-/* ---------- Lead modal ---------- */
-.lead-modal__panel { border-left: 4px solid var(--c-red); }

@@ -64,14 +64,16 @@ require BASE_PATH . '/includes/header.php';
         </div>
       </div>
 
-      <?php $lastHighlight = count($highlights) - 1; ?>
-      <?php foreach ($highlights as $i => $stat): ?>
-        <div class="bento-tile<?= $i === 0 ? ' bento-tile--accent' : '' ?><?= $i === $lastHighlight ? ' bento-tile--wide' : '' ?> reveal">
-          <span class="ic"><?= icon($stat['icon']) ?></span>
-          <span class="bento-tile__value"><?= e($stat['stat_value']) ?></span>
-          <span class="bento-tile__label"><?= e($stat['stat_label']) ?></span>
-        </div>
-      <?php endforeach; ?>
+      <div class="bento-tiles">
+        <?php $lastHighlight = count($highlights) - 1; ?>
+        <?php foreach ($highlights as $i => $stat): ?>
+          <div class="bento-tile<?= $i === 0 ? ' bento-tile--accent' : '' ?><?= $i === $lastHighlight ? ' bento-tile--wide' : '' ?> reveal">
+            <span class="ic"><?= icon($stat['icon']) ?></span>
+            <span class="bento-tile__value"><?= e($stat['stat_value']) ?></span>
+            <span class="bento-tile__label"><?= e($stat['stat_label']) ?></span>
+          </div>
+        <?php endforeach; ?>
+      </div>
     </div>
   </div>
 </section>
@@ -88,6 +90,10 @@ require BASE_PATH . '/includes/header.php';
         <li><span class="split-num"><?= str_pad((string) ($index + 1), 2, '0', STR_PAD_LEFT) ?></span><span class="split-text"><?= e($item['description']) ?></span></li>
       <?php endforeach; ?>
     </ol>
+
+    <div class="problem-media">
+      <span class="problem-media__icon"><?= icon('image') ?></span>
+    </div>
   </div>
 
   <?php if (isset($active['solution']) && $howItWorksSteps): ?>
@@ -138,7 +144,7 @@ require BASE_PATH . '/includes/header.php';
             <div class="fleet-index__name"><?= e($vehicle['name']) ?></div>
             <p class="fleet-index__tagline"><?= e($vehicle['tagline']) ?></p>
           </div>
-          <span class="fleet-index__thumb"><?= icon('car') ?></span>
+          <span class="fleet-index__thumb"><?= image_tag($vehicle['image_path'], $vehicle['name'], 'Araç görseli eklenecek') ?></span>
         </div>
       <?php endforeach; ?>
     </div>
@@ -158,8 +164,26 @@ require BASE_PATH . '/includes/header.php';
     </div>
 
     <div class="uc-bento reveal">
+      <div class="uc-tile uc-tile--feature" id="ucSlider">
+        <?php foreach ($useCases as $index => $useCase): ?>
+          <div class="uc-slide<?= $index === 0 ? ' is-active' : '' ?>">
+            <span class="ic"><?= icon($useCase['icon']) ?></span>
+            <h3><?= e($useCase['title']) ?></h3>
+            <p><?= e($useCase['description']) ?></p>
+          </div>
+        <?php endforeach; ?>
+        <?php if (count($useCases) > 1): ?>
+        <div class="uc-slider__dots">
+          <?php foreach ($useCases as $index => $useCase): ?>
+            <button type="button" class="uc-slider__dot<?= $index === 0 ? ' is-active' : '' ?>" data-slide-index="<?= $index ?>" aria-label="<?= e($useCase['title']) ?>"></button>
+          <?php endforeach; ?>
+        </div>
+        <?php endif; ?>
+      </div>
+
       <?php foreach ($useCases as $index => $useCase): ?>
-        <div class="uc-tile<?= $index === 0 ? ' uc-tile--feature' : '' ?>">
+        <?php if ($index === 0) continue; ?>
+        <div class="uc-tile">
           <span class="ic"><?= icon($useCase['icon']) ?></span>
           <h3><?= e($useCase['title']) ?></h3>
           <p><?= e($useCase['description']) ?></p>

@@ -67,6 +67,9 @@ document.documentElement.setAttribute('data-theme', 'light');
 <link rel="stylesheet" href="<?= e(asset('css/components.css')) ?>">
 <link rel="stylesheet" href="<?= e(asset('css/pages.css')) ?>">
 <link rel="stylesheet" href="<?= e(asset('css/alt-theme.css')) ?>">
+<?php foreach ($pageStyles ?? [] as $pageStyleHref): ?>
+<link rel="stylesheet" href="<?= e($pageStyleHref) ?>">
+<?php endforeach; ?>
 </head>
 <body>
 
