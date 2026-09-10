@@ -30,10 +30,6 @@
       "dest": "/api/index.php"
     },
     {
-      "src": "/design-2(.*)",
-      "dest": "/api/index.php"
-    },
-    {
       "handle": "filesystem"
     },
     {
