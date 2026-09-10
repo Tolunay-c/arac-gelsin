@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aracım Gelsin — Tasarım Sistemi & Wireframe v2</title>
+<style>
+/* ============================================================
+   TOKENLAR — marka sunumundan çıkarıldı
+   ============================================================ */
+:root{
+  --navy-900:#141C2E;
+  --navy-800:#1B2436;
+  --navy-700:#2A3547;
+  --steel-600:#6E7A90;
+  --steel-500:#8B95A8;   /* sunum zemini */
+  --steel-300:#A9B2C1;
+  --crimson:#E4142C;
+  --crimson-dark:#B80F22;
+  --crimson-soft:#FDE9EB;
+  --ink-900:#141822;
+  --ink-700:#3A4252;
+  --ink-500:#6B7385;
+  --line:#D8DCE3;
+  --line-soft:#E9ECF0;
+  --mist:#F2F4F7;
+  --paper:#FFFFFF;
+  --ok:#2F7D4F;
+  --warn:#B26A00;
+
+  --t-xs:12px; --t-sm:14px; --t-base:16px; --t-md:18px; --t-lg:22px;
+  --t-xl:28px; --t-2xl:36px; --t-3xl:46px; --t-4xl:60px;
+
+  --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:24px;
+  --s6:32px; --s7:48px; --s8:64px; --s9:96px; --s10:128px;
+
+  --r-sm:3px; --r-md:6px; --r-lg:10px; --r-full:999px;
+  --sh-1:0 1px 2px rgba(20,24,34,.08);
+  --sh-2:0 6px 20px rgba(20,24,34,.12);
+
+  --container:1240px;
+  --gutter:24px;
+  --serif:"Playfair Display","PT Serif",Georgia,serif;
+  --sans:"Inter","Lato","Segoe UI",system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--mist);color:var(--ink-900);font-family:var(--sans);
+  font-size:var(--t-base);line-height:1.55;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{margin:0;line-height:1.15;font-weight:700}
+p{margin:0}
+ul{margin:0;padding:0;list-style:none}
+code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.875em;background:var(--line-soft);padding:2px 6px;border-radius:var(--r-sm)}
+
+.doc{max-width:1380px;margin:0 auto;padding:0 var(--s5) var(--s10)}
+.docnav{position:sticky;top:0;z-index:50;background:rgba(242,244,247,.95);backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line);margin:0 calc(var(--s5)*-1) var(--s7);padding:var(--s3) var(--s5);
+  display:flex;gap:var(--s5);align-items:center;flex-wrap:wrap}
+.docnav strong{font-size:var(--t-sm)}
+.docnav a{font-size:var(--t-sm);color:var(--ink-500);text-decoration:none;padding:4px 0;border-bottom:2px solid transparent}
+.docnav a:hover,.docnav a:focus-visible{color:var(--ink-900);border-bottom-color:var(--crimson)}
+
+.cover{padding:var(--s9) 0 var(--s7);border-bottom:1px solid var(--line);margin-bottom:var(--s8)}
+.eyebrow{font-size:var(--t-xs);letter-spacing:.22em;color:var(--crimson);font-weight:700;text-transform:uppercase;margin-bottom:var(--s4)}
+.cover h1{font-family:var(--serif);font-size:var(--t-4xl);max-width:18ch;letter-spacing:-.01em}
+.cover .lead{font-size:var(--t-md);color:var(--ink-700);max-width:64ch;margin-top:var(--s4)}
+
+.alert{background:#FFF8E6;border:1px solid #E8D9A8;border-left:4px solid var(--warn);
+  border-radius:var(--r-md);padding:var(--s5);margin-top:var(--s6)}
+.alert h3{font-size:var(--t-base);margin-bottom:var(--s3)}
+.alert table{margin-top:var(--s3)}
+
+.chapter{margin-bottom:var(--s10);scroll-margin-top:80px}
+.chapter>header{margin-bottom:var(--s6);padding-bottom:var(--s4);border-bottom:2px solid var(--navy-900)}
+.chapter>header h2{font-family:var(--serif);font-size:var(--t-2xl)}
+.chapter>header p{color:var(--ink-500);margin-top:var(--s2);max-width:72ch}
+
+.panel{background:var(--paper);border:1px solid var(--line);border-radius:var(--r-lg);padding:var(--s6);margin-bottom:var(--s5)}
+.panel h3{font-size:var(--t-lg);margin-bottom:var(--s4);font-family:var(--serif)}
+.panel h4{font-size:var(--t-base);margin:var(--s5) 0 var(--s3);color:var(--ink-700)}
+.grid{display:grid;gap:var(--s4)}
+.g2{grid-template-columns:repeat(2,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+.g5{grid-template-columns:repeat(5,1fr)}
+.g6{grid-template-columns:repeat(6,1fr)}
+.muted{color:var(--ink-500);font-size:var(--t-sm)}
+
+.sw{border:1px solid var(--line);border-radius:var(--r-md);overflow:hidden}
+.sw .chip{height:64px}
+.sw .meta{padding:var(--s2) var(--s3);font-size:var(--t-xs);line-height:1.4}
+.sw .meta b{display:block}
+.sw .meta span{color:var(--ink-500)}
+.scale-row{display:flex;align-items:baseline;gap:var(--s4);padding:var(--s3) 0;border-bottom:1px solid var(--line-soft)}
+.scale-row .tag{font-size:var(--t-xs);color:var(--ink-500);width:180px;flex:none}
+.space-bar{background:var(--crimson-soft);border-left:3px solid var(--crimson);height:18px}
+
+.demo{display:flex;gap:var(--s3);flex-wrap:wrap;align-items:center;padding:var(--s4);background:var(--mist);border-radius:var(--r-md);border:1px solid var(--line-soft)}
+.demo.dark{background:var(--navy-900)}
+.btn{display:inline-flex;align-items:center;border:1px solid transparent;border-radius:var(--r-md);
+  font:inherit;font-weight:700;font-size:var(--t-sm);padding:12px 20px;cursor:pointer;text-decoration:none;letter-spacing:.01em}
+.btn-primary{background:var(--crimson);color:#fff}
+.btn-primary:hover{background:var(--crimson-dark)}
+.btn-secondary{background:transparent;color:var(--navy-900);border-color:var(--navy-900)}
+.btn-onDark{background:transparent;color:#fff;border-color:rgba(255,255,255,.45)}
+.btn-ghost{background:transparent;color:var(--crimson);padding-left:0;padding-right:0}
+.btn-lg{font-size:var(--t-base);padding:16px 28px}
+.field{display:flex;flex-direction:column;gap:6px;min-width:190px}
+.field label{font-size:var(--t-xs);color:var(--ink-700);font-weight:700}
+.field .input{height:48px;border:1px solid var(--line);border-radius:var(--r-md);background:var(--paper);
+  display:flex;align-items:center;padding:0 var(--s3);color:var(--steel-300);font-size:var(--t-sm)}
+.field .input.focus{border-color:var(--crimson);box-shadow:0 0 0 3px var(--crimson-soft)}
+.field .input.err{border-color:var(--crimson-dark)}
+.field .hint{font-size:var(--t-xs);color:var(--ink-500)}
+.badge{display:inline-block;font-size:var(--t-xs);font-weight:700;padding:5px 11px;border-radius:var(--r-sm);background:var(--line-soft);color:var(--ink-700)}
+.badge-crimson{background:var(--crimson);color:#fff}
+.badge-navy{background:var(--navy-900);color:#fff}
+.badge-out{background:transparent;border:1px solid var(--line);color:var(--ink-500)}
+
+.wf-block{display:grid;grid-template-columns:300px 1fr;gap:var(--s6);margin-bottom:var(--s8);align-items:start}
+.wf-meta{position:sticky;top:88px}
+.wf-id{display:inline-block;font-size:var(--t-xs);font-weight:700;letter-spacing:.08em;color:#fff;
+  background:var(--crimson);border-radius:var(--r-sm);padding:3px 9px;margin-bottom:var(--s2)}
+.wf-meta h3{font-size:var(--t-md);margin-bottom:var(--s2)}
+.wf-meta p{font-size:var(--t-sm);color:var(--ink-700);margin-bottom:var(--s3)}
+.wf-notes li{font-size:var(--t-xs);color:var(--ink-500);padding-left:14px;position:relative;margin-bottom:6px;line-height:1.5}
+.wf-notes li::before{content:"";position:absolute;left:0;top:8px;width:6px;height:2px;background:var(--crimson)}
+.wf-notes li b{color:var(--ink-700)}
+
+.wf{background:var(--paper);border:1px solid var(--line);border-radius:var(--r-md);padding:var(--s5);overflow:hidden}
+.wf.navy{background:var(--navy-900);border-color:var(--navy-900)}
+.wf.steel{background:var(--steel-500);border-color:var(--steel-500)}
+.wf.mist{background:var(--mist)}
+.box{background:var(--line-soft);border:1px solid var(--line);border-radius:var(--r-sm)}
+.img{background:
+   linear-gradient(45deg,transparent 49.3%,var(--line) 49.3%,var(--line) 50.7%,transparent 50.7%),
+   linear-gradient(-45deg,transparent 49.3%,var(--line) 49.3%,var(--line) 50.7%,transparent 50.7%),
+   var(--line-soft);
+  border:1px solid var(--line);border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center}
+.img.dk{background:
+   linear-gradient(45deg,transparent 49.3%,#39435A 49.3%,#39435A 50.7%,transparent 50.7%),
+   linear-gradient(-45deg,transparent 49.3%,#39435A 49.3%,#39435A 50.7%,transparent 50.7%),
+   #212B3E;border-color:#39435A}
+.img i{font-style:normal;font-size:var(--t-xs);color:var(--ink-500);background:var(--paper);padding:2px 8px;border-radius:var(--r-sm);border:1px solid var(--line)}
+.ln{height:10px;background:var(--line-soft);border-radius:var(--r-full)}
+.ln.dk{background:var(--steel-300)}
+.ln.h{height:20px;background:var(--steel-300)}
+.ln.hh{height:32px;background:var(--ink-700)}
+.ln.w{background:rgba(255,255,255,.85)}
+.ln.wq{background:rgba(255,255,255,.28)}
+.w25{width:25%}.w33{width:33%}.w40{width:40%}.w50{width:50%}.w60{width:60%}.w70{width:70%}.w80{width:80%}.w90{width:90%}.w100{width:100%}
+.stack{display:flex;flex-direction:column}
+.stack.g1{gap:var(--s1)}.stack.g2{gap:var(--s2)}.stack.g3{gap:var(--s3)}.stack.g4{gap:var(--s4)}.stack.g5{gap:var(--s5)}
+.row{display:flex;align-items:center}
+.row.g2{gap:var(--s2)}.row.g3{gap:var(--s3)}.row.g4{gap:var(--s4)}.row.g5{gap:var(--s5)}
+.between{justify-content:space-between}
+.card{border:1px solid var(--line);border-radius:var(--r-md);background:var(--paper);padding:var(--s4)}
+.card.navy{background:var(--navy-900);border-color:var(--navy-900)}
+.dot{width:38px;height:38px;border-radius:50%;background:var(--crimson);flex:none}
+.num{font-family:var(--serif);font-size:var(--t-lg);color:var(--crimson);font-weight:700;line-height:1}
+.pill{border:1px solid var(--line);border-radius:var(--r-sm);padding:7px 14px;font-size:var(--t-xs);color:var(--ink-500);background:var(--paper);white-space:nowrap}
+.pill.on{background:var(--navy-900);color:#fff;border-color:var(--navy-900)}
+.btnw{background:var(--crimson);color:#fff;border-radius:var(--r-md);padding:12px 20px;font-size:var(--t-xs);font-weight:700;white-space:nowrap;text-align:center}
+.btnw.out{background:transparent;color:var(--ink-700);border:1px solid var(--line)}
+.btnw.outw{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.45)}
+.lbl{font-size:var(--t-xs);color:var(--ink-500)}
+.lbl.w{color:var(--steel-300)}
+.txt{font-size:var(--t-xs);color:var(--ink-700)}
+.txt.b{font-weight:700;color:var(--ink-900);font-size:var(--t-sm)}
+.txt.w{color:#fff}
+.divider{height:1px;background:var(--line);width:100%}
+.divider.w{background:rgba(255,255,255,.18)}
+
+.phones{display:flex;gap:var(--s5);flex-wrap:wrap}
+.phone{width:300px;border:10px solid var(--navy-900);border-radius:32px;background:var(--paper);padding:var(--s3);flex:none}
+.phone .notch{width:90px;height:5px;background:var(--navy-900);border-radius:var(--r-full);margin:0 auto var(--s3)}
+
+table{width:100%;border-collapse:collapse;font-size:var(--t-sm)}
+th,td{text-align:left;padding:11px 12px;border-bottom:1px solid var(--line-soft);vertical-align:top}
+th{font-size:var(--t-xs);color:var(--ink-500);font-weight:700;background:var(--mist)}
+td b{font-weight:700}
+.del{color:var(--ink-500);text-decoration:line-through}
+
+@media (max-width:1000px){
+  .wf-block{grid-template-columns:1fr}
+  .wf-meta{position:static}
+  .g4,.g5,.g6{grid-template-columns:repeat(2,1fr)}
+  .g3{grid-template-columns:1fr}
+}
+@media (max-width:640px){
+  .g2,.g4,.g5,.g6{grid-template-columns:1fr}
+  .cover h1{font-size:var(--t-2xl)}
+}
+</style>
+</head>
+<body>
+<div class="doc">
+
+<nav class="docnav">
+  <strong>Aracım Gelsin · v2</strong>
+  <a href="#degisen">Neler değişti</a>
+  <a href="#tokens">Tokenlar</a>
+  <a href="#components">Bileşenler</a>
+  <a href="#wireframe">Anasayfa</a>
+  <a href="#mobile">Mobil</a>
+  <a href="#pages">İç sayfalar</a>
+  <a href="#cms">Panel & SEO</a>
+</nav>
+
+<header class="cover">
+  <div class="eyebrow">Kurumsal Mobilite · Tasarım Sistemi</div>
+  <h1>Şirketinizin aracı, ihtiyacınız olduğunda.</h1>
+  <p class="lead">
+    Sunum, işin ne olduğunu netleştirdi: bu bir araç kiralama sitesi değil. Ürün, kurumsal şirketlerin anlık ulaşım
+    talebini 30 dakika içinde karşılayan, İzmir'e konuşlanmış, hub tabanlı bir mobilite operasyonu. Site de bunu
+    satmalı — araç değil, hazır bulunurluk.
+  </p>
+
+  <div class="alert" id="degisen">
+    <h3>v1'e göre neler değişti</h3>
+    <p class="muted" style="margin-bottom:var(--s3)">İlk sürüm uzun dönem filo kiralama varsayımıyla kurgulanmıştı. Sunumdaki iş modeli farklı, o yüzden şu bloklar değişti:</p>
+    <table>
+      <tr><th style="width:34%">v1 (yanlış varsayım)</th><th>v2 (sunuma göre)</th></tr>
+      <tr><td class="del">Aylık fiyatlı araç kartları, sınıf filtreleri, 8 araçlık vitrin</td><td><b>Görev bazlı 3 araç</b> — TOGG, Explorer, Tourneo Custom. Fiyat yok, "hangi ihtiyaç için" var.</td></tr>
+      <tr><td class="del">"Kiralamaya dahil olanlar" kapsam listesi</td><td><b>Kullanım senaryoları</b> — 6 kurumsal ihtiyaç. Ürünü bunlar anlatıyor.</td></tr>
+      <tr><td class="del">Türkiye geneli şehir sayfaları (GEO)</td><td><b>İzmir içi bölge sayfaları</b> — Alsancak/Bayraklı, Karşıyaka/Çiğli, Gaziemir/Havalimanı. Hub modeli zaten bu üçü.</td></tr>
+      <tr><td class="del">Teklif formu = tek dönüşüm</td><td><b>Kurumsal görüşme talebi</b> + sözleşmeli müşteri için <b>panel girişi</b>. İki farklı kitle, iki farklı kapı.</td></tr>
+      <tr><td class="del">Uygulama = herkese açık indirme</td><td><b>Uygulama = anlaşmalı müşterinin talep kanalı.</b> Rastgele indirenin işine yaramıyor, bölüm buna göre yazılmalı.</td></tr>
+      <tr><td>—</td><td><b>Yeni:</b> iş problemi bloğu, hub haritası, yönetim paneli tanıtımı, rekabet tablosu, Özikizler güvencesi.</td></tr>
+    </table>
+  </div>
+</header>
+
+<!-- ================= TOKENLAR ================= -->
+<section class="chapter" id="tokens">
+  <header>
+    <h2>1 — Tokenlar</h2>
+    <p>Renk ve tipografi artık yer tutucu değil; sunumdan okundu.</p>
+  </header>
+
+  <div class="panel">
+    <h3>Renk</h3>
+    <div class="grid g5">
+      <div class="sw"><div class="chip" style="background:#141C2E"></div><div class="meta"><b>--navy-900</b><span>#141C2E · kart, koyu blok</span></div></div>
+      <div class="sw"><div class="chip" style="background:#1B2436"></div><div class="meta"><b>--navy-800</b><span>#1B2436 · footer, hero zemin</span></div></div>
+      <div class="sw"><div class="chip" style="background:#8B95A8"></div><div class="meta"><b>--steel-500</b><span>#8B95A8 · sunumun imza zemini</span></div></div>
+      <div class="sw"><div class="chip" style="background:#E4142C"></div><div class="meta"><b>--crimson</b><span>#E4142C · eylem, vurgu, ikon</span></div></div>
+      <div class="sw"><div class="chip" style="background:#F2F4F7"></div><div class="meta"><b>--mist</b><span>#F2F4F7 · açık bölüm zemini</span></div></div>
+    </div>
+    <h4>Kural</h4>
+    <ul class="wf-notes">
+      <li><b>Steel</b> sunumun kimliği ama tam sayfa zemin olarak yorucu. Sitede sadece 2–3 bölümde kullan (manifesto, kapanış), gerisi beyaz ve mist.</li>
+      <li><b>Crimson</b> yalnızca üç iş yapar: birincil buton, eyebrow etiketi, ikon dolgusu. Gövde metninde ve büyük alanlarda kullanma — sunumda da öyle.</li>
+      <li>Koyu lacivert kart, açık zemin üstünde içeriği ayırmanın ana yolu. Kutu gölgesi yerine bunu kullan.</li>
+      <li>Kırmızı üstüne beyaz metin kontrastı 4.6:1 — 14px altında kullanma.</li>
+    </ul>
+  </div>
+
+  <div class="panel">
+    <h3>Tipografi</h3>
+    <p class="muted">Sunum iki sesli: başlıklar büyük harf serif, gövde sans. Bu ikilik markanın imzası, siteye taşınmalı.</p>
+    <div style="margin-top:var(--s4)">
+      <div class="scale-row"><span class="tag">Display / serif / 60 / caps</span><span style="font-family:var(--serif);font-size:56px;font-weight:700">ARACIM GELSİN</span></div>
+      <div class="scale-row"><span class="tag">Bölüm başlığı / serif / 46</span><span style="font-family:var(--serif);font-size:44px;font-weight:700">NEDEN FARKLI?</span></div>
+      <div class="scale-row"><span class="tag">Alt başlık / serif italik / 22</span><span style="font-family:var(--serif);font-size:22px;font-style:italic;font-weight:700">Kurumsal Temsilin Prestij Sınıfı</span></div>
+      <div class="scale-row"><span class="tag">Eyebrow / sans / 12 / .22em</span><span class="eyebrow" style="margin:0">KULLANIM SENARYOLARI</span></div>
+      <div class="scale-row"><span class="tag">Kart başlığı / sans 700 / 18</span><span style="font-size:18px;font-weight:700">MESAİ SONRASI ULAŞIM</span></div>
+      <div class="scale-row"><span class="tag">Gövde / sans / 16</span><span style="font-size:16px">Mesaiye kalan çalışanların güvenli ve planlı biçimde evlerine ulaştırılması.</span></div>
+      <div class="scale-row" style="border:0"><span class="tag">Etiket / sans / 12</span><span style="font-size:12px;color:var(--ink-500)">tarih · süre · dipnot</span></div>
+    </div>
+    <h4>Kurallar</h4>
+    <ul class="wf-notes">
+      <li>Serif yalnızca başlıkta ve marka cümlelerinde. Paragrafa serif girmesin — sunumdaki italik serif paragraflar ekranda okunaklılığı düşürüyor.</li>
+      <li>Büyük harf başlıklarda Türkçe İ/I ayrımını font destekliyor mu kontrol et. Playfair Display ediyor; alternatif seçersen İ, Ş, Ğ, Ç testini yap.</li>
+      <li>Eyebrow harf aralığı .22em, hep kırmızı, hep tek satır. Marka imzası olduğu için bu kalıyor.</li>
+      <li>Gövde satır uzunluğu 70 karakteri geçmesin.</li>
+    </ul>
+  </div>
+
+  <div class="grid g2">
+    <div class="panel" style="margin:0">
+      <h3>Boşluk ve ızgara</h3>
+      <ul class="wf-notes">
+        <li><b>Kapsayıcı</b> 1240px, yan pay 24px</li>
+        <li><b>Kolon</b> 12, oluk 24px</li>
+        <li><b>Bölüm arası</b> 96px masaüstü / 48px mobil</li>
+        <li><b>Kart ızgarası</b> 6'lı senaryo bloğu: 3→2→1</li>
+        <li><b>Hizalama</b> sola. Ortalanan tek yer kapanış CTA'sı</li>
+      </ul>
+      <h4>Köşe</h4>
+      <p class="muted">Sunumdaki kartlar neredeyse keskin. Sitede de 6px'i geçme; yuvarlak köşe markayı yumuşatıp kurumsal tonu düşürüyor. Tam yuvarlak sadece ikon dairelerinde.</p>
+      <div class="row g3" style="margin-top:var(--s3)">
+        <div class="box" style="width:64px;height:48px;border-radius:3px"></div>
+        <div class="box" style="width:64px;height:48px;border-radius:6px"></div>
+        <div class="dot"></div>
+      </div>
+    </div>
+    <div class="panel" style="margin:0">
+      <h3>İkon</h3>
+      <p class="muted">Sunumda ikonlar kırmızı daire içinde beyaz glif. Bunu bileşen yap: 48px daire, 20px glif, tek çizgi kalınlığı.</p>
+      <div class="row g4" style="margin-top:var(--s4);flex-wrap:wrap">
+        <div class="dot" style="width:48px;height:48px"></div>
+        <div class="dot" style="width:48px;height:48px"></div>
+        <div class="dot" style="width:48px;height:48px"></div>
+        <div class="dot" style="width:48px;height:48px"></div>
+      </div>
+      <ul class="wf-notes" style="margin-top:var(--s4)">
+        <li>Tek set kullan (Lucide ya da Phosphor), karıştırma.</li>
+        <li>Koyu kart üstünde kırmızı daire, açık zemin üstünde lacivert daire.</li>
+        <li>İkon dekorasyon değil; her senaryonun ayırt edilmesini sağlıyor. Ayırt etmiyorsa kaldır.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ================= BİLEŞENLER ================= -->
+<section class="chapter" id="components">
+  <header>
+    <h2>2 — Bileşenler</h2>
+    <p>Sitede tekrar eden parçalar. Her biri ayrı PHP partial'ı olacak.</p>
+  </header>
+
+  <div class="grid g2">
+    <div class="panel" style="margin:0">
+      <h3>Butonlar</h3>
+      <div class="demo">
+        <a class="btn btn-primary btn-lg" href="#">Kurumsal görüşme talep edin</a>
+        <a class="btn btn-secondary" href="#">Nasıl çalışır</a>
+      </div>
+      <div class="demo dark" style="margin-top:var(--s3)">
+        <a class="btn btn-primary" href="#">Kurumsal görüşme talep edin</a>
+        <a class="btn btn-onDark" href="#">Panele giriş</a>
+      </div>
+      <ul class="wf-notes" style="margin-top:var(--s4)">
+        <li>Birincil eylem her yerde aynı adı taşır: <b>"Kurumsal görüşme talep edin"</b>. "Teklif al", "Bize ulaşın", "İletişim" karışıklığı yaratır.</li>
+        <li>"Aracımı çağır" gibi bir buton siteye <b>konmamalı</b> — çağrı uygulamadan ve sözleşmeli müşteriden geliyor. Ziyaretçiyi yapamayacağı bir eyleme davet etme.</li>
+        <li>Koyu zeminde ikincil buton çerçeveli beyaz, dolgulu değil.</li>
+      </ul>
+    </div>
+
+    <div class="panel" style="margin:0">
+      <h3>Senaryo kartı</h3>
+      <div class="grid g2" style="margin-top:var(--s2)">
+        <div class="card navy">
+          <div class="dot" style="width:44px;height:44px;margin-bottom:var(--s4)"></div>
+          <div class="txt w" style="font-weight:700;margin-bottom:var(--s2)">MESAİ SONRASI ULAŞIM</div>
+          <div class="stack g2"><div class="ln wq w100"></div><div class="ln wq w70"></div></div>
+        </div>
+        <div class="card navy">
+          <div class="dot" style="width:44px;height:44px;margin-bottom:var(--s4)"></div>
+          <div class="txt w" style="font-weight:700;margin-bottom:var(--s2)">HAVALİMANI TRANSFERİ</div>
+          <div class="stack g2"><div class="ln wq w100"></div><div class="ln wq w80"></div></div>
+        </div>
+      </div>
+      <ul class="wf-notes" style="margin-top:var(--s4)">
+        <li>İkon → başlık (büyük harf) → 2 satır açıklama. Sabit yükseklik.</li>
+        <li>Kart tıklanabilir olsun ve kendi senaryo sayfasına gitsin — SEO'nun ana girişi burası.</li>
+        <li>Altı senaryo altı ayrı arama niyeti: "havalimanı transfer izmir kurumsal", "personel servisi izmir" vb.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="grid g2">
+    <div class="panel" style="margin:0">
+      <h3>Araç kartı — fiyatsız, görev odaklı</h3>
+      <div class="grid g3" style="margin-top:var(--s2)">
+        <div class="card" style="padding:0;overflow:hidden">
+          <div class="img dk" style="height:130px"><i>araç görseli</i></div>
+          <div style="padding:var(--s4)">
+            <div class="eyebrow" style="font-size:10px;margin-bottom:var(--s2)">YÖNETİCİ & KURUMSAL</div>
+            <div class="txt b" style="font-family:var(--serif);font-size:var(--t-md);margin-bottom:var(--s2)">TOGG</div>
+            <div class="lbl">Kurumsal Temsilin Prestij Sınıfı</div>
+          </div>
+        </div>
+        <div class="card" style="padding:0;overflow:hidden">
+          <div class="img dk" style="height:130px"><i>araç görseli</i></div>
+          <div style="padding:var(--s4)">
+            <div class="eyebrow" style="font-size:10px;margin-bottom:var(--s2)">YÖNETİCİ / EKİP</div>
+            <div class="txt b" style="font-family:var(--serif);font-size:var(--t-md);margin-bottom:var(--s2)">FORD EXPLORER</div>
+            <div class="lbl">Güçlü ve Konforlu Yönetim Sınıfı</div>
+          </div>
+        </div>
+        <div class="card" style="padding:0;overflow:hidden">
+          <div class="img dk" style="height:130px"><i>araç görseli</i></div>
+          <div style="padding:var(--s4)">
+            <div class="eyebrow" style="font-size:10px;margin-bottom:var(--s2)">PERSONEL & GRUP</div>
+            <div class="txt b" style="font-family:var(--serif);font-size:var(--t-md);margin-bottom:var(--s2)">TOURNEO CUSTOM</div>
+            <div class="lbl">Ekipler İçin Esnek Ulaşım</div>
+          </div>
+        </div>
+      </div>
+      <ul class="wf-notes" style="margin-top:var(--s4)">
+        <li>Vites, yakıt, motor gibi teknik alan yok. Sunum bunu açıkça söylüyor: araç teknik özellikle değil üstlendiği görevle konumlanıyor.</li>
+        <li>Görseller koyu zeminli stüdyo çekimi ve plakada ÖZİKİZLER yazıyor. Bu tutarlılığı bozma; yeni araç eklenirse aynı kurguda çekilsin.</li>
+        <li>Kart tıklanınca araç sınıfı sayfasına gider: kullanım odağı listesi + o araca uygun senaryolar.</li>
+      </ul>
+    </div>
+
+    <div class="panel" style="margin:0">
+      <h3>Form alanları</h3>
+      <div class="demo" style="align-items:flex-start">
+        <div class="field"><label>Firma adı</label><div class="input">Örn. Özikizler Turizm</div></div>
+        <div class="field"><label>Aylık tahmini talep</label><div class="input focus">10–30 yolculuk</div></div>
+      </div>
+      <ul class="wf-notes" style="margin-top:var(--s4)">
+        <li>Etiket üstte, placeholder örnek verir, etiket yerine geçmez.</li>
+        <li>Hata metni ne yapılacağını söyler: "Geçerli bir kurumsal e-posta yazın."</li>
+        <li>Kurumsal formda zorunlu alan 4'ü geçmesin.</li>
+      </ul>
+      <h4>Rozetler</h4>
+      <div class="demo">
+        <span class="badge badge-crimson">30 DK HEDEF</span>
+        <span class="badge badge-navy">ELEKTRİKLİ</span>
+        <span class="badge">İZMİR</span>
+        <span class="badge badge-out">B2B</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ANASAYFA ================= -->
+<section class="chapter" id="wireframe">
+  <header>
+    <h2>3 — Anasayfa</h2>
+    <p>Sunumun anlatım sırası satış sırası olarak zaten doğru kurulmuş: problem → çözüm → nasıl → kime → neyle → nerede → kanıt. Site bu akışı izliyor.</p>
+  </header>
+
+  <!-- S0 -->
+  <div class="wf-block">
+    <div class="wf-meta">
+      <span class="wf-id">S0</span>
+      <h3>Header</h3>
+      <p>Sticky, 76px, koyu lacivert. Hero da koyu olduğu için kaydırana kadar sınırı belli olmaz — kaydırınca ince kırmızı alt çizgi belirsin.</p>
+      <ul class="wf-notes">
+        <li><b>Menü</b> Nasıl Çalışır · Kullanım Senaryoları · Filo · Yönetim Paneli · Hakkımızda · İletişim</li>
+        <li><b>Sağ</b> "Panele giriş" (çerçeveli) + "Kurumsal görüşme" (kırmızı dolgulu)</li>
+        <li>İki farklı kitle burada ayrışıyor: mevcut müşteri panele, aday firma forma gider</li>
+        <li>Logo kilidi: Aracım Gelsin ana marka, altında küçük "powered by ÖZİKİZLER TURİZM"</li>
+      </ul>
+    </div>
+    <div class="wf navy">
+      <div class="row between g4">
+        <div class="stack g1"><div class="ln w" style="width:130px;height:18px"></div><div class="ln wq" style="width:110px;height:6px"></div></div>
+        <div class="row g4">
+          <div class="ln wq" style="width:86px"></div><div class="ln wq" style="width:118px"></div>
+          <div class="ln wq" style="width:44px"></div><div class="ln wq" style="width:100px"></div><div class="ln wq" style="width:82px"></div>
+        </div>
+        <div class="row g3"><div class="btnw outw">Panele giriş</div><div class="btnw">Kurumsal görüşme</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S1 -->
+  <div class="wf-block">
+    <div class="wf-meta">
+      <span class="wf-id">S1</span>
+      <h3>Hero</h3>
+      <p>Sunumun kapağı zaten hero: solda söz, sağda üç araçlık koyu kompozisyon. Aynı kurguyu koru.</p>
+      <ul class="wf-notes">
+        <li><b>Başlık</b> "ARACIM GELSİN" değil — marka adı logoda zaten var. Başlık işi anlatsın: <b>"Şirketinizin aracı, ihtiyacınız olduğunda."</b></li>
+        <li><b>Alt metin</b> "İzmir'e özel, elektrikli ve talep bazlı yeni nesil kurumsal mobilite modeli."</li>
+        <li><b>30 DK</b> hero'da rozet olarak dursun — markanın tek somut vaadi bu, aşağıda kaybolmasın</li>
+        <li>Tek birincil buton + "Nasıl çalışır" ikincil</li>
+        <li>Araç görseli koyu zeminli; hero'nun tamamı lacivert, sunum kapağının doğrudan karşılığı</li>
+        <li>Web'de çalışan bir talep formu <b>yok</b>. Ziyaretçi henüz müşteri değil.</li>
+      </ul>
+    </div>
+    <div class="wf navy">
+      <div class="grid" style="grid-template-columns:1fr 1.1fr;gap:var(--s7);align-items:center">
+        <div class="stack g4">
+          <div class="ln" style="width:190px;height:12px;background:var(--crimson)"></div>
+          <div class="stack g3" style="margin-top:var(--s2)">
+            <div class="ln w" style="height:34px;width:95%"></div>
+            <div class="ln w" style="height:34px;width:70%"></div>
+          </div>
+          <div class="stack g2" style="margin-top:var(--s2)"><div class="ln wq w90"></div><div class="ln wq w60"></div></div>
+          <div class="row g3" style="margin-top:var(--s3)">
+            <span class="badge badge-crimson">30 DK HEDEF</span><span class="badge" style="background:rgba(255,255,255,.14);color:#fff">ELEKTRİKLİ</span><span class="badge" style="background:rgba(255,255,255,.14);color:#fff">İZMİR</span>
+          </div>
+          <div class="row g3" style="margin-top:var(--s3)"><div class="btnw">Kurumsal görüşme talep edin</div><div class="btnw outw">Nasıl çalışır</div></div>
+        </div>
+        <div class="img dk" style="height:360px"><i>üç araçlık kurumsal kompozisyon</i></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S2 -->
+  <div class="wf-block">
+    <div class="wf-meta">
+      <span class="wf-id">S2</span>
+      <h3>Manifesto şeridi</h3>
+      <p>Steel zeminli tek cümlelik blok. Sunumun "bu bir servis hizmeti değil" sayfasının karşılığı.</p>
+      <ul class="wf-notes">
+        <li>Tek satır serif büyük harf: <b>"TAKSİ DEĞİL. SERVİS DEĞİL."</b> altında italik alt cümle</li>
+        <li>Başka hiçbir şey koyma — buton, ikon, görsel yok. Bloğun işi nefes aldırmak ve konumu çakmak</li>
+        <li>Hero'dan sonra gelen bu duraklama, aşağıdaki problem listesini kurar</li>
+      </ul>
+    </div>
+    <div class="wf steel">
+      <div class="stack g4" style="padding:var(--s7) 0;max-width:820px">
+        <div class="ln w" style="height:30px;width:78%"></div>
+        <div class="ln" style="height:14px;width:56%;background:rgba(20,24,34,.55)"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S3 -->
+  <div class="wf-block">
+    <div class="wf-meta">
+      <span class="wf-id">S3</span>
+      <h3>İş problemi</h3>
+      <p>Sunumdaki numaralı beş madde + sağda koyu soru kutusu. Bu layout doğrudan siteye taşınabilir.</p>
+      <ul class="wf-notes">
+        <li>01–05 numaralandırma burada haklı: bunlar sırayla artan bir maliyet hikâyesi</li>
+        <li>Maddeler arasında ince ayraç çizgisi, sunumdaki gibi</li>
+        <li>Sağ kutu: "Şirketiniz yalnızca ihtiyaç duyduğu anda araç çağırabilse?" — soru cevapsız kalsın, cevap S4</li>
+        <li>Bu bölüm satıcı gibi konuşmuyor, alıcının kendi gününü anlatıyor. Metni değiştirme ihtiyacı duyarsan bu tonu koru.</li>
+      </ul>
+    </div>
+    <div class="wf">
+      <div class="grid" style="grid-template-columns:1.5fr .85fr;gap:var(--s6);align-items:start">
+        <div>
+          <div class="ln" style="width:150px;height:10px;background:var(--crimson);margin-bottom:var(--s4)"></div>
+          <div class="ln h w60" style="margin-bottom:var(--s2)"></div>
+          <div class="ln h w40" style="margin-bottom:var(--s6)"></div>
+          <div class="stack g1">
+            <div class="row g4" style="padding:var(--s3) 0;border-bottom:1px solid var(--line)"><span class="num">01</span><div class="ln w80"></div></div>
+            <div class="row g4" style="padding:var(--s3) 0;border-bottom:1px solid var(--line)"><span class="num">02</span><div class="ln w90"></div></div>
+            <div class="row g4" style="padding:var(--s3) 0;border-bottom:1px solid var(--line)"><span class="num">03</span><div class="ln w70"></div></div>
+            <div class="row g4" style="padding:var(--s3) 0;border-bottom:1px solid var(--line)"><span class="num">04</span><div class="ln w80"></div></div>
+            <div class="row g4" style="padding:var(--s3) 0"><span class="num">05</span><div class="ln w90"></div></div>
+          </div>
+        </div>
+        <div class="card navy" style="padding:var(--s6)">
+          <div class="ln" style="width:52px;height:9px;background:var(--crimson);margin-bottom:var(--s6)"></div>
+          <div class="stack g3">
+            <div class="ln w w90" style="height:16px"></div>
+            <div class="ln w w80" style="height:16px"></div>
+            <div class="ln w w60" style="height:16px"></div>
+            <div class="ln w w70" style="height:16px"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S4 -->
+  <div class="wf-block">
+    <div class="wf-meta">
+      <span class="wf-id">S4</span>
+      <h3>Nasıl çalışır</h3>
+      <p>Dört koyu kart, aralarında ok. Altında 30 dakika hedefi tek satır olarak vurgulanıyor.</p>
+      <ul class="wf-notes">
+        <li>01 Talep oluştur · 02 En uygun aracı eşleştir · 03 Yolculuğu başlat · 04 Operasyonu takip et</li>
+        <li>Sunumda bu akış iki kere geçiyor (çözüm ve dijital sistem sayfaları). Sitede <b>tek bölüm</b> olsun, ikinci kez tekrarlama.</li>
+        <li>Kart içine ikon + numara + başlık + tek cümle</li>
+        <li>Altındaki ayraçtan sonra: "İzmir genelinde taleplere en geç 30 dakika içinde yanıt" — altı çizili, hedef olduğu belirtilerek</li>
+        <li><b>Hukuki not:</b> "hedef" kelimesi metinde kalsın. Taahhüt gibi yazılırsa sözleşmede karşılığını vermek zorunda kalır.</li>
+      </ul>
+    </div>
+    <div class="wf mist">
+      <div class="ln" style="width:110px;height:10px;background:var(--crimson);margin-bottom:var(--s4)"></div>
+      <div class="ln h w40" style="margin-bottom:var(--s6)"></div>
+      <div class="row g3" style="align-items:stretch">
+        <div class="card navy" style="flex:1"><span class="num">01</span><div class="stack g2" style="margin-top:var(--s5)"><div class="ln w w70" style="height:14px"></div><div class="ln wq w90"></div><div class="ln wq w60"></div></div></div>
+        <div class="lbl">→</div>
+        <div class="card navy" style="flex:1"><span class="num">02</span><div class="stack g2" style="margin-top:var(--s5)"><div class="ln w w80" style="height:14px"></div><div class="ln wq w90"></div><div class="ln wq w70"></div></div></div>
+        <div class="lbl">→</div>
+        <div class="card navy" style="flex:1"><span class="num">03</span><div class="stack g2" style="margin-top:var(--s5)"><div class="ln w w60" style="height:14px"></div><div class="ln wq w80"></div><div class="ln wq w50"></div></div></div>
+        <div class="lbl">→</div>
+        <div class="card navy" style="flex:1"><span class="num">04</span><div class="stack g2" style="margin-top:var(--s5)"><div class="ln w w70" style="height:14px"></div><div class="ln wq w90"></div><div class="ln wq w60"></div></div></div>
+      </div>
+      <div class="divider" style="margin:var(--s6) 0 var(--s5)"></div>
+      <div class="row g4"><div class="ln" style="width:60px;height:9px;background:var(--crimson)"></div><div class="ln h w60"></div></div>
+    </div>
+  </div>
+
+  <!-- S5 -->
+  <div class="wf-block">
+    <div class="wf-meta">
+      <span class="wf-id">S5</span>
+      <h3>Kullanım senaryoları</h3>
+      <p>Altı koyu kart, 3×2. Sunumdaki en güçlü sayfa ve sitenin SEO omurgası.</p>
+      <ul class="wf-notes">
+        <li>Mesai sonrası ulaşım · Yönetici transferleri · Havalimanı transferi · Toplantı & iş ulaşımı · Küçük ekip ulaşımı · Evrak & küçük paket</li>
+        <li>Her kart kendi sayfasına gidiyor: <code>/kullanim/havalimani-transferi</code></li>
+        <li>Senaryo sayfası şablonu = problem anlatımı + akış + uygun araç + bölge + SSS + form</li>
+        <li>Bu altı sayfa, aday müşterinin Google'da aradığı altı farklı cümlenin karşılığı. Anasayfaya değil bu sayfalara trafik gelecek.</li>
+        <li><b>Evrak & küçük paket</b> senaryosu diğerlerinden farklı bir iş kolu (kargo/kurye algısı). Metinde "kurumsal evrak transferi" olarak konumlandır, kargo çağrışımından uzak dur.</li>
+      </ul>
+    </div>
+    <div class="wf">
+      <div class="ln" style="width:170px;height:10px;background:var(--crimson);margin-bottom:var(--s4)"></div>
+      <div class="ln h w60" style="margin-bottom:var(--s6)"></div>
+      <div class="grid g3">
+        <div class="card navy"><div class="dot" style="margin-bottom:var(--s4)"></div><div class="ln w w70" style="height:14px;margin-bottom:var(--s3)"></div><div class="stack g2"><div class="ln wq w100"></div><div class="ln wq w80"></div></div></div>
+        <div class="card navy"><div class="dot" style="margin-bottom:var(--s4)"></div><div class="ln w w80" style="height:14px;margin-bottom:var(--s3)"></div><div class="stack g2"><div class="ln wq w100"></div><div class="ln wq w70"></div></div></div>
+        <div class="card navy"><div class="dot" style="margin-bottom:var(--s4)"></div><div class="ln w w60" style="height:14px;margin-bottom:var(--s3)"></div><div class="stack g2"><div class="ln wq w100"></div><div class="ln wq w90"></div></div></div>
+        <div class="card navy"><div class="dot" style="margin-bottom:var(--s4)"></div><div class="ln w w70" style="height:14px;margin-bottom:var(--s3)"></div><div class="stack g2"><div class="ln wq w100"></div><div class="ln wq w60"></div></div></div>
+        <div class="card navy"><div class="dot" style="margin-bottom:var(--s4)"></div><div class="ln w w80" style="height:14px;margin-bottom:var(--s3)"></div><div class="stack g2"><div class="ln wq w100"></div><div class="ln wq w80"></div></div></div>
+        <div class="card navy"><div class="dot" style="margin-bottom:var(--s4)"></div><div class="ln w w60" style="height:14px;margin-bottom:var(--s3)"></div><div class="stack g2"><div class="ln wq w100"></div><div class="ln wq w70"></div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S6 -->
+  <div class="wf-block">
+    <div class="wf-meta">
+      <span class="wf-id">S6</span>
+      <h3>Filo</h3>
+      <p>Üç araç, görev etiketiyle. Fiyat, teknik tablo, "teklif al" butonu yok.</p>
+      <ul class="wf-notes">
+        <li>Görsel dikey (sunumdaki gibi 3:4), altında araç adı serif, üstünde kırmızı görev etiketi</li>
+        <li>Kart → araç sınıfı sayfası: kullanım odağı maddeleri + "bu araç şu senaryolarda çıkar" iç linkleri</li>
+        <li>Filo büyürse ızgara 4'e çıkar; üçten aza düşerse bölümü tek satır yatay şeride çevir</li>
+        <li>Altına tek satır: "Bu araç sınıfları teknik özellikleriyle değil, üstlendiği kurumsal görevle konumlanır." — sunumun kendi cümlesi, iyi bir cümle</li>
+      </ul>
+    </div>
+    <div class="wf steel">
+      <div class="ln" style="width:120px;height:10px;background:var(--crimson);margin-bottom:var(--s4)"></div>
+      <div class="ln w" style="height:24px;width:44%;margin-bottom:var(--s6)"></div>
+      <div class="grid g3">
+        <div class="stack g3"><div class="img dk" style="height:230px"><i>3:4</i></div><div class="ln w" style="height:18px;width:50%;margin:0 auto"></div><div class="ln" style="height:9px;width:70%;margin:0 auto;background:var(--crimson)"></div></div>
+        <div class="stack g3"><div class="img dk" style="height:230px"><i>3:4</i></div><div class="ln w" style="height:18px;width:70%;margin:0 auto"></div><div class="ln" style="height:9px;width:60%;margin:0 auto;background:var(--crimson)"></div></div>
+        <div class="stack g3"><div class="img dk" style="height:230px"><i>3:4</i></div><div class="ln w" style="height:18px;width:80%;margin:0 auto"></div><div class="ln" style="height:9px;width:65%;margin:0 auto;background:var(--crimson)"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S7 -->
+  <div class="wf-block">
+    <div class="wf-meta">
+      <span class="wf-id">S7</span>
+      <h3>Operasyon haritası</h3>
+      <p>Hub modeli. Sunumdaki en özgün fikir bu ve rakiplerden farkı burada anlatılıyor.</p>
+      <ul class="wf-notes">
+        <li>Merkezde İzmir / 30 DK, çevresinde üç hub: Alsancak–Bayraklı, Karşıyaka–Çiğli, Gaziemir–Havalimanı</li>
+        <li>Sağda koyu kutuda hub modelinin dört maddesi</li>
+        <li>Bu şema SVG olarak kodlansın, görsel olarak değil — mobilde dikey listeye dönüşecek ve hub adları metin olarak indekslenecek</li>
+        <li>Her hub adı tıklanabilir olsun ve bölge sayfasına gitsin: <code>/bolge/gaziemir-havalimani</code>. GEO stratejisinin tamamı bu üç sayfa üstüne kuruluyor.</li>
+        <li>Üstteki cümle önemli: araçlar şehirde dolaşmıyor, bekleme noktalarında hazır duruyor. Rakip uygulamalardan ayrıştığı yer bu.</li>
+      </ul>
+    </div>
+    <div class="wf">
+      <div class="grid" style="grid-template-columns:1.4fr .75fr;gap:var(--s6);align-items:center">
+        <div>
+          <div class="ln" style="width:150px;height:10px;background:var(--crimson);margin-bottom:var(--s4)"></div>
+          <div class="ln h w70" style="margin-bottom:var(--s3)"></div>
+          <div class="stack g2" style="margin-bottom:var(--s6)"><div class="ln w90"></div><div class="ln w70"></div></div>
+          <div class="row between" style="padding:var(--s5) 0">
+            <div class="stack g2" style="align-items:center"><div class="dot" style="width:52px;height:52px"></div><div class="ln dk" style="width:110px"></div><div class="ln" style="width:70px"></div></div>
+            <div class="stack g2" style="align-items:center"><div class="box" style="width:96px;height:96px;border-radius:50%;background:var(--navy-900);border:0"></div><div class="ln dk" style="width:60px"></div></div>
+            <div class="stack g2" style="align-items:center"><div class="dot" style="width:52px;height:52px"></div><div class="ln dk" style="width:110px"></div><div class="ln" style="width:70px"></div></div>
+          </div>
+          <div class="stack g2" style="align-items:center;margin-top:var(--s2)"><div class="dot" style="width:52px;height:52px"></div><div class="ln dk" style="width:130px"></div><div class="ln" style="width:80px"></div></div>
+        </div>
+        <div class="card navy" style="padding:var(--s6)">
+          <div class="ln w" style="height:16px;width:60%;margin-bottom:var(--s5)"></div>
+          <div class="stack g4">
+            <div class="row g3"><div class="ln" style="width:14px;height:3px;background:var(--crimson);flex:none"></div><div class="ln wq w80"></div></div>
+            <div class="row g3"><div class="ln" style="width:14px;height:3px;background:var(--crimson);flex:none"></div><div class="ln wq w70"></div></div>
+            <div class="row g3"><div class="ln" style="width:14px;height:3px;background:var(--crimson);flex:none"></div><div class="ln wq w60"></div></div>
+            <div class="row g3"><div class="ln" style="width:14px;height:3px;background:var(--crimson);flex:none"></div><div class="ln wq w90"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S8 -->
+  <div class="wf-block">
+    <div class="wf-meta">
+      <span class="wf-id">S8</span>
+      <h3>Yönetim paneli</h3>
+      <p>Kurumsal alıcının satın alma gerekçesi burada: kontrol ve raporlama. Sunumdaki "tek ekrandan kurumsal kontrol" sayfası.</p>
+      <ul class="wf-notes">
+        <li>Solda panel ekran görüntüsü (gerçek arayüzden), sağda altı özellik iki kolon</li>
+        <li>Canlı yolculuk görünürlüğü · Kullanım ve maliyet raporları · Talep geçmişi · Yetkili kullanıcı ve departman yönetimi · Kurumsal fatura / cari akış · Sürdürülebilirlik göstergeleri</li>
+        <li>Altında dört küçük metrik kartı: Aktif yolculuklar, Aylık kullanım, Departmanlar, Maliyet özeti</li>
+        <li><b>Sürdürülebilirlik göstergesi</b> elektrikli filoyla birleşince ESG raporu tutan büyük şirketler için gerçek bir satın alma sebebi. Bunu bir cümleyle geçme, öne çıkar.</li>
+        <li><b>Kapsam sorusu:</b> bu panel sitede sadece anlatılacak mı, yoksa bu işte geliştirilecek mi? İki durumun maliyeti arasında ciddi fark var — teklif öncesi netleştir.</li>
+      </ul>
+    </div>
+    <div class="wf mist">
+      <div class="grid" style="grid-template-columns:1fr 1fr;gap:var(--s6);align-items:center">
+        <div class="card" style="padding:var(--s3)">
+          <div class="row between" style="margin-bottom:var(--s3)"><div class="ln dk" style="width:80px"></div><div class="row g2"><div class="box" style="width:22px;height:22px"></div><div class="box" style="width:22px;height:22px"></div></div></div>
+          <div class="grid g2" style="gap:var(--s2);margin-bottom:var(--s3)">
+            <div class="box" style="height:44px"></div><div class="box" style="height:44px"></div>
+          </div>
+          <div class="img" style="height:110px"><i>panel ekranı</i></div>
+        </div>
+        <div class="stack g5">
+          <div class="ln" style="width:130px;height:10px;background:var(--crimson)"></div>
+          <div class="ln h w80"></div>
+          <div class="grid g2" style="gap:var(--s4)">
+            <div class="row g3"><div class="box" style="width:32px;height:32px;border-radius:50%;flex:none"></div><div class="ln w80"></div></div>
+            <div class="row g3"><div class="box" style="width:32px;height:32px;border-radius:50%;flex:none"></div><div class="ln w70"></div></div>
+            <div class="row g3"><div class="box" style="width:32px;height:32px;border-radius:50%;flex:none"></div><div class="ln w90"></div></div>
+            <div class="row g3"><div class="box" style="width:32px;height:32px;border-radius:50%;flex:none"></div><div class="ln w60"></div></div>
+            <div class="row g3"><div class="box" style="width:32px;height:32px;border-radius:50%;flex:none"></div><div class="ln w80"></div></div>
+            <div class="row g3"><div class="box" style="width:32px;height:32px;border-radius:50%;flex:none"></div><div class="ln w70"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="grid g4" style="margin-top:var(--s6)">
+        <div class="card navy"><div class="ln w w70" style="height:13px;margin-bottom:var(--s3)"></div><div class="ln" style="width:60%;height:9px;background:var(--crimson)"></div></div>
+        <div class="card navy"><div class="ln w w60" style="height:13px;margin-bottom:var(--s3)"></div><div class="ln" style="width:70%;height:9px;background:var(--crimson)"></div></div>
+        <div class="card navy"><div class="ln w w80" style="height:13px;margin-bottom:var(--s3)"></div><div class="ln" style="width:55%;height:9px;background:var(--crimson)"></div></div>
+        <div class="card navy"><div class="ln w w70" style="height:13px;margin-bottom:var(--s3)"></div><div class="ln" style="width:65%;height:9px;background:var(--crimson)"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S9 -->
+  <div class="wf-block">
+    <div class="wf-meta">
+      <span class="wf-id">S9</span>
+      <h3>Neden farklı + karşılaştırma</h3>
+      <p>Dört kart (30 DK / Elektrikli / İzmir / B2B) ve altında rekabet tablosu.</p>
+      <ul class="wf-notes">
+        <li>Kartlarda büyük serif değer + tek satır açıklama</li>
+        <li>Tablo: Kriter · Geleneksel servis · Taksi / uygulama · Aracım Gelsin</li>
+        <li>Aracım Gelsin kolonu kırmızı başlıklı ve kalın; diğer iki kolon nötr</li>
+        <li>Sunumdaki "Gelişen kapasite" ifadesi dürüst ama sitede zayıf duruyor. O satırı ya çıkar ya da olumlu hâle getir.</li>
+        <li>Mobilde tablo yatay kaydırma yerine kriter başına kart olarak dönsün</li>
+        <li>Rakip isimleri geçmiyor, kategori adı geçiyor. Böyle kalsın.</li>
+      </ul>
+    </div>
+    <div class="wf">
+      <div class="ln" style="width:140px;height:10px;background:var(--crimson);margin-bottom:var(--s4)"></div>
+      <div class="ln h w40" style="margin-bottom:var(--s5)"></div>
+      <div class="grid g4" style="margin-bottom:var(--s7)">
+        <div class="card navy"><div class="ln" style="width:60%;height:22px;background:var(--crimson);margin-bottom:var(--s4)"></div><div class="stack g2"><div class="ln wq w90"></div><div class="ln wq w60"></div></div></div>
+        <div class="card navy"><div class="ln" style="width:80%;height:22px;background:var(--crimson);margin-bottom:var(--s4)"></div><div class="stack g2"><div class="ln wq w80"></div></div></div>
+        <div class="card navy"><div class="ln" style="width:50%;height:22px;background:var(--crimson);margin-bottom:var(--s4)"></div><div class="stack g2"><div class="ln wq w90"></div><div class="ln wq w50"></div></div></div>
+        <div class="card navy"><div class="ln" style="width:45%;height:22px;background:var(--crimson);margin-bottom:var(--s4)"></div><div class="stack g2"><div class="ln wq w90"></div><div class="ln wq w70"></div></div></div>
+      </div>
+      <div class="stack g2">
+        <div class="row g4" style="padding:var(--s3) 0;border-bottom:2px solid var(--navy-900)"><div class="ln dk w25"></div><div class="ln dk w25"></div><div class="ln dk w25"></div><div class="ln w25" style="background:var(--crimson);height:10px"></div></div>
+        <div class="row g4" style="padding:var(--s3) 0;border-bottom:1px solid var(--line-soft)"><div class="ln w25"></div><div class="ln w25"></div><div class="ln w25"></div><div class="ln dk w25"></div></div>
+        <div class="row g4" style="padding:var(--s3) 0;border-bottom:1px solid var(--line-soft)"><div class="ln w25"></div><div class="ln w25"></div><div class="ln w25"></div><div class="ln dk w25"></div></div>
+        <div class="row g4" style="padding:var(--s3) 0;border-bottom:1px solid var(--line-soft)"><div class="ln w25"></div><div class="ln w25"></div><div class="ln w25"></div><div class="ln dk w25"></div></div>
+        <div class="row g4" style="padding:var(--s3) 0;border-bottom:1px solid var(--line-soft)"><div class="ln w25"></div><div class="ln w25"></div><div class="ln w25"></div><div class="ln dk w25"></div></div>
+        <div class="row g4" style="padding:var(--s3) 0"><div class="ln w25"></div><div class="ln w25"></div><div class="ln w25"></div><div class="ln dk w25"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S10 -->
+  <div class="wf-block">
+    <div class="wf-meta">
+      <span class="wf-id">S10</span>
+      <h3>Özikizler güvencesi</h3>
+      <p>Yeni marka için en kritik bölüm: arkasında kim var. Dört kart + kısa kurumsal geçmiş.</p>
+      <ul class="wf-notes">
+        <li>Kurumsal güvenlik standardı · Profesyonel sürücü kadrosu · Deneyimli operasyon · Kesintisiz operasyon desteği</li>
+        <li>Üstte Özikizler logosu ve tek paragraf: markanın yeni ama operasyonun eski olduğu burada söylenir</li>
+        <li>Kaç yıl, kaç araç, kaç kurumsal müşteri — rakam varsa buraya koy. Sunumda rakam yok; müşteriden iste.</li>
+        <li>Belge ve sertifika (D2 yetki belgesi, sigorta, ISO) varsa logolarıyla en altta bir şerit</li>
+      </ul>
+    </div>
+    <div class="wf steel">
+      <div class="ln" style="width:280px;height:10px;background:var(--crimson);margin-bottom:var(--s4)"></div>
+      <div class="ln w" style="height:24px;width:65%;margin-bottom:var(--s3)"></div>
+      <div class="stack g2" style="margin-bottom:var(--s6);max-width:70%"><div class="ln" style="background:rgba(20,24,34,.4)"></div><div class="ln w70" style="background:rgba(20,24,34,.4)"></div></div>
+      <div class="grid g4">
+        <div class="card navy"><div class="dot" style="margin-bottom:var(--s4)"></div><div class="ln w w80" style="height:13px;margin-bottom:var(--s2)"></div><div class="ln w w50" style="height:13px;margin-bottom:var(--s3)"></div><div class="stack g2"><div class="ln wq w100"></div><div class="ln wq w70"></div></div></div>
+        <div class="card navy"><div class="dot" style="margin-bottom:var(--s4)"></div><div class="ln w w90" style="height:13px;margin-bottom:var(--s2)"></div><div class="ln w w40" style="height:13px;margin-bottom:var(--s3)"></div><div class="stack g2"><div class="ln wq w100"></div><div class="ln wq w80"></div></div></div>
+        <div class="card navy"><div class="dot" style="margin-bottom:var(--s4)"></div><div class="ln w w70" style="height:13px;margin-bottom:var(--s2)"></div><div class="ln w w50" style="height:13px;margin-bottom:var(--s3)"></div><div class="stack g2"><div class="ln wq w100"></div><div class="ln wq w60"></div></div></div>
+        <div class="card navy"><div class="dot" style="margin-bottom:var(--s4)"></div><div class="ln w w90" style="height:13px;margin-bottom:var(--s2)"></div><div class="ln w w45" style="height:13px;margin-bottom:var(--s3)"></div><div class="stack g2"><div class="ln wq w100"></div><div class="ln wq w70"></div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S11 -->
+  <div class="wf-block">
+    <div class="wf-meta">
+      <span class="wf-id">S11</span>
+      <h3>Kurumsal görüşme formu</h3>
+      <p>Sitenin tek gerçek dönüşümü. Rezervasyon değil, protokol başlangıcı.</p>
+      <ul class="wf-notes">
+        <li><b>Alanlar</b> firma adı, yetkili ad soyad, görev, kurumsal e-posta, telefon, aylık tahmini talep, hangi senaryolar (çoklu seçim), mesaj</li>
+        <li><b>Zorunlu</b> firma, ad soyad, telefon, e-posta</li>
+        <li>Senaryo çoklu seçimi hem müşteriye hem satış ekibine yarıyor: gelen talebin niteliğini baştan belli ediyor</li>
+        <li>Solda doğrudan kanallar: telefon, WhatsApp, kurumsal e-posta, adres</li>
+        <li>KVKK onayı ve aydınlatma metni linki zorunlu</li>
+        <li>Gönderim sonrası <code>/gorusme-talebi-alindi</code> sayfası — dönüş süresi yazsın, Ads dönüşümü buradan ölçülsün, <code>noindex</code></li>
+        <li>Panelde: talepler listesi, durum akışı, atanan kişi, not, CSV dışa aktarma, yeni talepte e-posta bildirimi</li>
+      </ul>
+    </div>
+    <div class="wf">
+      <div class="grid" style="grid-template-columns:.8fr 1.2fr;gap:var(--s7)">
+        <div class="stack g4">
+          <div class="ln" style="width:120px;height:10px;background:var(--crimson)"></div>
+          <div class="ln h w80"></div>
+          <div class="stack g2"><div class="ln w100"></div><div class="ln w80"></div></div>
+          <div class="divider" style="margin:var(--s2) 0"></div>
+          <div class="stack g3">
+            <div class="row g3"><div class="dot" style="width:34px;height:34px"></div><div class="stack g1" style="flex:1"><div class="lbl">Telefon</div><div class="ln dk w60"></div></div></div>
+            <div class="row g3"><div class="dot" style="width:34px;height:34px"></div><div class="stack g1" style="flex:1"><div class="lbl">WhatsApp</div><div class="ln dk w60"></div></div></div>
+            <div class="row g3"><div class="dot" style="width:34px;height:34px"></div><div class="stack g1" style="flex:1"><div class="lbl">E-posta</div><div class="ln dk w70"></div></div></div>
+          </div>
+        </div>
+        <div class="card" style="box-shadow:var(--sh-2)">
+          <div class="grid g2" style="gap:var(--s4)">
+            <div class="stack g1"><span class="lbl">Firma adı *</span><div class="box" style="height:46px"></div></div>
+            <div class="stack g1"><span class="lbl">Yetkili ad soyad *</span><div class="box" style="height:46px"></div></div>
+            <div class="stack g1"><span class="lbl">Telefon *</span><div class="box" style="height:46px"></div></div>
+            <div class="stack g1"><span class="lbl">Kurumsal e-posta *</span><div class="box" style="height:46px"></div></div>
+          </div>
+          <div class="stack g1" style="margin-top:var(--s4)"><span class="lbl">Hangi ihtiyaçlar için?</span>
+            <div class="row g2" style="flex-wrap:wrap"><span class="pill">Mesai sonrası</span><span class="pill">Yönetici</span><span class="pill">Havalimanı</span><span class="pill">Toplantı</span><span class="pill">Ekip</span><span class="pill">Evrak</span></div>
+          </div>
+          <div class="stack g1" style="margin-top:var(--s4)"><span class="lbl">Mesajınız</span><div class="box" style="height:80px"></div></div>
+          <div class="row g2" style="margin-top:var(--s4)"><div class="box" style="width:18px;height:18px;flex:none"></div><div class="ln w80"></div></div>
+          <div class="btnw" style="margin-top:var(--s4)">Kurumsal görüşme talep edin</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S12 -->
+  <div class="wf-block">
+    <div class="wf-meta">
+      <span class="wf-id">S12</span>
+      <h3>Uygulama</h3>
+      <p>Kapsamdaki "app'e yönlendirme" burada, ama v1'dekinden farklı bir mantıkla.</p>
+      <ul class="wf-notes">
+        <li>Uygulama <b>anlaşmalı kurumsal müşterinin talep kanalı</b>. Rastgele indiren giriş yapamaz.</li>
+        <li>Bölüm başlığı bunu söylesin: "Anlaşmalı müşterilerimiz talebi uygulamadan oluşturur."</li>
+        <li>Sol: telefon mockup'ı, talep ekranı. Sağ: üç madde (talep oluştur, canlı takip, geçmiş) + mağaza rozetleri + masaüstünde QR</li>
+        <li>Rozet tıklamalarını olay olarak izle — kapsamdaki yönlendirmenin ölçülebilir olması gerekiyor</li>
+        <li>Uygulama henüz yayında değilse rozetleri koyma; yerine "Panele giriş" ve tek satır "mobil uygulama yakında"</li>
+        <li>Mobilden gelene cihazına göre tek rozet göster</li>
+      </ul>
+    </div>
+    <div class="wf navy">
+      <div class="grid" style="grid-template-columns:.7fr 1.3fr;gap:var(--s7);align-items:center">
+        <div class="row" style="justify-content:center">
+          <div style="width:180px;border:8px solid #39435A;border-radius:26px;padding:var(--s2);background:var(--navy-800)">
+            <div style="width:56px;height:4px;background:#39435A;border-radius:99px;margin:0 auto var(--s2)"></div>
+            <div class="stack g2"><div class="img dk" style="height:64px"><i>harita</i></div><div class="ln wq w80"></div><div class="ln wq w60"></div><div class="btnw" style="padding:8px">Talep oluştur</div></div>
+          </div>
+        </div>
+        <div class="stack g5">
+          <div class="ln" style="width:110px;height:10px;background:var(--crimson)"></div>
+          <div class="ln w" style="height:24px;width:70%"></div>
+          <div class="stack g2"><div class="ln wq w90"></div><div class="ln wq w60"></div></div>
+          <div class="stack g3">
+            <div class="row g3"><div class="ln" style="width:14px;height:3px;background:var(--crimson);flex:none"></div><div class="ln wq w70"></div></div>
+            <div class="row g3"><div class="ln" style="width:14px;height:3px;background:var(--crimson);flex:none"></div><div class="ln wq w60"></div></div>
+            <div class="row g3"><div class="ln" style="width:14px;height:3px;background:var(--crimson);flex:none"></div><div class="ln wq w80"></div></div>
+          </div>
+          <div class="row g4">
+            <div class="box" style="width:132px;height:42px;background:transparent;border-color:#39435A"></div>
+            <div class="box" style="width:132px;height:42px;background:transparent;border-color:#39435A"></div>
+            <div class="img dk" style="width:72px;height:72px"><i>QR</i></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S13 -->
+  <div class="wf-block">
+    <div class="wf-meta">
+      <span class="wf-id">S13</span>
+      <h3>SSS + rehber içerikleri</h3>
+      <p>İki bloğu yan yana koyabilirsin: solda akordiyon SSS, sağda üç yazı kartı.</p>
+      <ul class="wf-notes">
+        <li><b>SSS</b> anlaşma nasıl kuruluyor, faturalama nasıl işliyor, hangi saatlerde hizmet var, İzmir dışına çıkılıyor mu, sürücüler kim, iptal nasıl</li>
+        <li><code>FAQPage</code> şeması ekle</li>
+        <li><b>Rehber</b> kurumsal ulaşım maliyeti, servis vs talep bazlı model, elektrikli filo ve karbon raporlaması</li>
+        <li>Blog burada bir SEO aracı; ayda 2 yazı bile yeterli ama düzenli olmalı</li>
+      </ul>
+    </div>
+    <div class="wf mist">
+      <div class="grid" style="grid-template-columns:1.1fr .9fr;gap:var(--s6)">
+        <div class="stack g3">
+          <div class="ln h w50" style="margin-bottom:var(--s2)"></div>
+          <div class="card"><div class="row between" style="margin-bottom:var(--s3)"><div class="ln dk w70"></div><div class="box" style="width:16px;height:16px;flex:none"></div></div><div class="stack g2"><div class="ln w100"></div><div class="ln w80"></div></div></div>
+          <div class="card" style="padding:var(--s4)"><div class="row between"><div class="ln dk w60"></div><div class="box" style="width:16px;height:16px;flex:none"></div></div></div>
+          <div class="card" style="padding:var(--s4)"><div class="row between"><div class="ln dk w80"></div><div class="box" style="width:16px;height:16px;flex:none"></div></div></div>
+          <div class="card" style="padding:var(--s4)"><div class="row between"><div class="ln dk w50"></div><div class="box" style="width:16px;height:16px;flex:none"></div></div></div>
+        </div>
+        <div class="stack g3">
+          <div class="ln h w40" style="margin-bottom:var(--s2)"></div>
+          <div class="card" style="padding:var(--s3)"><div class="row g3"><div class="img" style="width:80px;height:60px;flex:none"><i>16:9</i></div><div class="stack g2" style="flex:1"><div class="ln dk w90"></div><div class="ln w60"></div></div></div></div>
+          <div class="card" style="padding:var(--s3)"><div class="row g3"><div class="img" style="width:80px;height:60px;flex:none"><i>16:9</i></div><div class="stack g2" style="flex:1"><div class="ln dk w80"></div><div class="ln w50"></div></div></div></div>
+          <div class="card" style="padding:var(--s3)"><div class="row g3"><div class="img" style="width:80px;height:60px;flex:none"><i>16:9</i></div><div class="stack g2" style="flex:1"><div class="ln dk w90"></div><div class="ln w60"></div></div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S14 -->
+  <div class="wf-block">
+    <div class="wf-meta">
+      <span class="wf-id">S14</span>
+      <h3>Kapanış</h3>
+      <p>Sunumun son sayfası zaten bu: "Ulaşımı planlamayın. İhtiyacınız olduğunda çağırın."</p>
+      <ul class="wf-notes">
+        <li>Steel zemin, ortalanmış, marka adı büyük kırmızı serif</li>
+        <li>Altında tek buton. İki buton koyma — kapanışta seçenek dönüşümü düşürür.</li>
+        <li>Sayfadaki tek ortalanmış blok bu ve son blok</li>
+      </ul>
+    </div>
+    <div class="wf steel">
+      <div class="stack g4" style="align-items:center;padding:var(--s8) 0">
+        <div class="ln w" style="height:26px;width:520px;max-width:90%"></div>
+        <div class="ln" style="height:40px;width:400px;max-width:80%;background:var(--crimson)"></div>
+        <div class="ln" style="height:12px;width:260px;background:rgba(20,24,34,.5)"></div>
+        <div class="btnw" style="margin-top:var(--s3)">Kurumsal görüşme talep edin</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S15 -->
+  <div class="wf-block">
+    <div class="wf-meta">
+      <span class="wf-id">S15</span>
+      <h3>Footer</h3>
+      <p>Koyu lacivert, beş kolon. İç linkleme burada yoğunlaşıyor.</p>
+      <ul class="wf-notes">
+        <li><b>K1</b> Aracım Gelsin logosu, "powered by Özikizler Turizm", 2 satır tanıtım, sosyal</li>
+        <li><b>K2</b> Kullanım senaryoları (6 link)</li>
+        <li><b>K3</b> Filo (3 araç sınıfı) + Yönetim paneli</li>
+        <li><b>K4</b> Hizmet bölgeleri (3 hub + İzmir ilçeleri)</li>
+        <li><b>K5</b> Kurumsal: Hakkımızda, Rehber, İletişim, KVKK, Çerez, Kullanım koşulları</li>
+        <li><b>Alt şerit</b> © yıl, Özikizler Turizm tam ünvanı, adres, vergi dairesi/no, D2 yetki belgesi no</li>
+        <li>Tam ünvan ve adresin footer'da yazılı olması yerel aramada işe yarıyor</li>
+      </ul>
+    </div>
+    <div class="wf navy">
+      <div class="grid" style="grid-template-columns:1.4fr 1fr 1fr 1fr 1fr;gap:var(--s5)">
+        <div class="stack g3">
+          <div class="ln w" style="width:130px;height:20px"></div>
+          <div class="ln wq" style="width:110px;height:6px"></div>
+          <div class="stack g2" style="margin-top:var(--s2)"><div class="ln wq w90"></div><div class="ln wq w70"></div></div>
+          <div class="row g2" style="margin-top:var(--s2)"><div class="dot" style="width:28px;height:28px"></div><div class="dot" style="width:28px;height:28px"></div><div class="dot" style="width:28px;height:28px"></div></div>
+        </div>
+        <div class="stack g3"><div class="ln w w70" style="height:12px"></div><div class="ln wq w80"></div><div class="ln wq w60"></div><div class="ln wq w90"></div><div class="ln wq w70"></div><div class="ln wq w60"></div><div class="ln wq w80"></div></div>
+        <div class="stack g3"><div class="ln w w50" style="height:12px"></div><div class="ln wq w70"></div><div class="ln wq w90"></div><div class="ln wq w60"></div><div class="ln wq w80"></div></div>
+        <div class="stack g3"><div class="ln w w80" style="height:12px"></div><div class="ln wq w60"></div><div class="ln wq w80"></div><div class="ln wq w70"></div><div class="ln wq w90"></div></div>
+        <div class="stack g3"><div class="ln w w60" style="height:12px"></div><div class="ln wq w80"></div><div class="ln wq w60"></div><div class="ln wq w70"></div><div class="ln wq w90"></div><div class="ln wq w60"></div></div>
+      </div>
+      <div class="divider w" style="margin:var(--s5) 0"></div>
+      <div class="row between"><div class="ln wq" style="width:420px;max-width:60%"></div><div class="ln wq" style="width:140px"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= MOBİL ================= -->
+<section class="chapter" id="mobile">
+  <header>
+    <h2>4 — Mobil</h2>
+    <p>Kurumsal karar verici de siteye çoğunlukla telefondan bakıyor. 375px'ten başla.</p>
+  </header>
+  <div class="panel">
+    <div class="phones">
+      <div class="phone">
+        <div class="notch"></div>
+        <div style="background:var(--navy-900);margin:calc(var(--s3)*-1);padding:var(--s3);border-radius:0 0 8px 8px">
+          <div class="row between" style="margin-bottom:var(--s5)">
+            <div class="ln w" style="width:90px;height:16px"></div>
+            <div class="box" style="width:26px;height:26px;background:transparent;border-color:#39435A"></div>
+          </div>
+          <div class="ln" style="width:120px;height:8px;background:var(--crimson);margin-bottom:var(--s3)"></div>
+          <div class="stack g2" style="margin-bottom:var(--s4)"><div class="ln w" style="height:22px;width:95%"></div><div class="ln w" style="height:22px;width:75%"></div></div>
+          <div class="stack g2" style="margin-bottom:var(--s4)"><div class="ln wq w90"></div><div class="ln wq w70"></div></div>
+          <div class="row g2" style="margin-bottom:var(--s4)"><span class="badge badge-crimson" style="font-size:10px">30 DK</span><span class="badge" style="background:rgba(255,255,255,.14);color:#fff;font-size:10px">ELEKTRİKLİ</span></div>
+          <div class="btnw" style="margin-bottom:var(--s2)">Kurumsal görüşme</div>
+          <div class="btnw outw" style="margin-bottom:var(--s4)">Nasıl çalışır</div>
+          <div class="img dk" style="height:120px"><i>araç</i></div>
+        </div>
+        <p class="lbl" style="margin-top:var(--s5)">Hero — koyu blok ekranın tamamını kaplıyor, sunum kapağının mobil hâli.</p>
+      </div>
+
+      <div class="phone">
+        <div class="notch"></div>
+        <div class="ln" style="width:110px;height:8px;background:var(--crimson);margin-bottom:var(--s3)"></div>
+        <div class="ln h w70" style="margin-bottom:var(--s4)"></div>
+        <div class="stack g3">
+          <div class="card navy" style="padding:var(--s3)"><div class="dot" style="width:34px;height:34px;margin-bottom:var(--s3)"></div><div class="ln w w70" style="height:12px;margin-bottom:var(--s2)"></div><div class="ln wq w90"></div></div>
+          <div class="card navy" style="padding:var(--s3)"><div class="dot" style="width:34px;height:34px;margin-bottom:var(--s3)"></div><div class="ln w w60" style="height:12px;margin-bottom:var(--s2)"></div><div class="ln wq w80"></div></div>
+          <div class="card navy" style="padding:var(--s3)"><div class="dot" style="width:34px;height:34px;margin-bottom:var(--s3)"></div><div class="ln w w80" style="height:12px;margin-bottom:var(--s2)"></div><div class="ln wq w90"></div></div>
+        </div>
+        <p class="lbl" style="margin-top:var(--s3)">Senaryolar — tek kolon, kartlar tam genişlik.</p>
+      </div>
+
+      <div class="phone">
+        <div class="notch"></div>
+        <div class="stack g4">
+          <div class="ln h w60"></div>
+          <div class="stack g3">
+            <div class="row g3"><div class="dot" style="width:30px;height:30px"></div><div class="stack g1" style="flex:1"><div class="ln dk w70"></div><div class="ln w50"></div></div></div>
+            <div class="divider"></div>
+            <div class="row g3"><div class="dot" style="width:30px;height:30px"></div><div class="stack g1" style="flex:1"><div class="ln dk w80"></div><div class="ln w60"></div></div></div>
+            <div class="divider"></div>
+            <div class="row g3"><div class="dot" style="width:30px;height:30px"></div><div class="stack g1" style="flex:1"><div class="ln dk w70"></div><div class="ln w50"></div></div></div>
+          </div>
+        </div>
+        <p class="lbl" style="margin-top:var(--s3)">Hub haritası — mobilde şema yerine dikey liste. Şemayı küçültmeye çalışma.</p>
+        <div class="divider" style="margin:var(--s4) 0"></div>
+        <div class="row g2"><div class="btnw" style="flex:1">Görüşme talebi</div><div class="btnw out" style="flex:none">Ara</div></div>
+        <p class="lbl" style="margin-top:var(--s2)">Alt sabit çubuk — %20 kaydırınca çıkar.</p>
+      </div>
+    </div>
+    <h4>Mobil kuralları</h4>
+    <ul class="wf-notes">
+      <li>Dokunma hedefi en az 44×44px.</li>
+      <li>Bölüm arası 48px.</li>
+      <li>Rekabet tablosu mobilde kriter başına karta dönüşür, yatay kaydırmaya bırakma.</li>
+      <li>Serif büyük harf başlıklar mobilde 28px'i geçmesin, uzun Türkçe kelimeler taşıyor.</li>
+      <li>Telefon numarası her yerde <code>tel:</code>.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= İÇ SAYFALAR ================= -->
+<section class="chapter" id="pages">
+  <header>
+    <h2>5 — İç sayfa şablonları</h2>
+    <p>Beş şablon yetiyor. Anasayfa blokları yeniden kullanılıyor.</p>
+  </header>
+  <div class="panel">
+    <table>
+      <tr><th style="width:22%">Şablon</th><th style="width:30%">URL</th><th>Yapı</th></tr>
+      <tr><td><b>Senaryo detay</b> ×6</td><td><code>/kullanim/havalimani-transferi</code></td><td>Başlık + problem anlatımı (CMS) → akış (S4) → uygun araçlar (S6) → hangi bölgelerden karşılanıyor (S7) → SSS → form. <b>Sitenin en önemli şablonu.</b></td></tr>
+      <tr><td><b>Araç sınıfı</b> ×3</td><td><code>/filo/togg</code></td><td>Büyük görsel + görev etiketi + kullanım odağı maddeleri + bu araçla karşılanan senaryolar + form</td></tr>
+      <tr><td><b>Bölge</b> ×3</td><td><code>/bolge/gaziemir-havalimani</code></td><td>Bölgeye özel metin (CMS) → kapsanan ilçeler → o bölgede öne çıkan senaryolar → harita + <code>LocalBusiness</code> şeması → form. <b>Her bölgenin metni farklı olmalı.</b></td></tr>
+      <tr><td><b>Yönetim paneli</b></td><td><code>/yonetim-paneli</code></td><td>S8'in genişletilmiş hâli: ekran görüntüleri, raporlama örnekleri, yetkilendirme mantığı, faturalama akışı</td></tr>
+      <tr><td><b>Hakkımızda</b></td><td><code>/hakkimizda</code></td><td>Özikizler Turizm geçmişi, güvence kartları, belgeler, ekip</td></tr>
+      <tr><td><b>Rehber liste / detay</b></td><td><code>/rehber</code>, <code>/rehber/slug</code></td><td>Kategori filtreli liste; detayda içindekiler, gövde, ilgili yazılar, sonda CTA</td></tr>
+      <tr><td><b>İletişim</b></td><td><code>/iletisim</code></td><td>Form + merkez adresi + harita + çalışma saatleri</td></tr>
+      <tr><td><b>Panel girişi</b></td><td><code>/giris</code></td><td>Sözleşmeli müşteri girişi. Sade, marka kimliğinde, şifre sıfırlama akışıyla. <code>noindex</code>.</td></tr>
+      <tr><td><b>Talep alındı</b></td><td><code>/gorusme-talebi-alindi</code></td><td>Onay + dönüş süresi + 3 yönlendirme linki. Dönüşüm sayfası, <code>noindex</code>.</td></tr>
+    </table>
+    <h4>Sayfa sayısı</h4>
+    <p class="muted">6 senaryo + 3 araç + 3 bölge + 6 sabit sayfa = <b>18 sayfa</b> (rehber hariç). Teklifte sayfa bazlı fiyatlıyorsan bu rakamı kullan.</p>
+  </div>
+</section>
+
+<!-- ================= PANEL & SEO ================= -->
+<section class="chapter" id="cms">
+  <header>
+    <h2>6 — Admin panel, SEO ve GEO</h2>
+    <p>Kapsamdaki SEO + GEO bölümünün bu işte ne anlama geldiği.</p>
+  </header>
+
+  <div class="panel">
+    <h3>Modüller</h3>
+    <table>
+      <tr><th style="width:20%">Modül</th><th style="width:36%">Alanlar</th><th>Beslediği yer</th></tr>
+      <tr><td><b>Senaryolar</b></td><td>başlık, slug, ikon, kısa açıklama, uzun içerik, ilgili araçlar, ilgili bölgeler, sıra</td><td>S5, senaryo sayfaları, footer, mega menü</td></tr>
+      <tr><td><b>Filo</b></td><td>araç adı, görev etiketi, alt başlık, görsel, kullanım odağı maddeleri, sıra</td><td>S6, araç sayfaları</td></tr>
+      <tr><td><b>Bölgeler / hub</b></td><td>hub adı, kapsanan ilçeler, koordinat, tanıtım metni, öne çıkan senaryolar</td><td>S7, bölge sayfaları, footer</td></tr>
+      <tr><td><b>Talepler</b></td><td>form kayıtları, seçilen senaryolar, durum, not, atanan kişi, CSV, e-posta bildirimi</td><td>S11, tüm formlar</td></tr>
+      <tr><td><b>Rehber</b></td><td>başlık, slug, kategori, kapak, özet, içerik, yayın tarihi, durum</td><td>S13</td></tr>
+      <tr><td><b>SSS</b></td><td>soru, cevap, kategori, hangi sayfalarda görünsün, sıra</td><td>S13, senaryo ve bölge sayfaları</td></tr>
+      <tr><td><b>Sayfa içerikleri</b></td><td>hero metinleri, manifesto, problem maddeleri, akış adımları, güvence kartları, rekabet tablosu satırları, CTA metinleri</td><td>S1–S3, S9, S10, S14</td></tr>
+      <tr><td><b>SEO</b></td><td>kayıt başına meta başlık/açıklama, OG görsel, kanonik, robots; global sitemap, robots.txt, 301 yönetimi, şema (Organization, LocalBusiness, FAQPage, Service)</td><td>Tüm sayfalar</td></tr>
+      <tr><td><b>Ayarlar</b></td><td>iletişim, sosyal, mağaza linkleri, panel giriş adresi, KVKK metinleri, çerez tercihleri, izleme kodları</td><td>Header, footer, formlar</td></tr>
+    </table>
+  </div>
+
+  <div class="panel">
+    <h3>GEO stratejisi — v1'den farkı</h3>
+    <p class="muted" style="margin-bottom:var(--s4)">Tek şehir olduğu için "şehir sayfası üret" mantığı işlemiyor. Bunun yerine iki eksen çarpılıyor:</p>
+    <table>
+      <tr><th>Eksen</th><th>Değerler</th><th>Sonuç</th></tr>
+      <tr><td><b>Senaryo</b></td><td>6</td><td rowspan="2">6 senaryo × 3 bölge = <b>18 olası kombinasyon sayfası</b>. Hepsini birden üretme — arama hacmi olan 5–6 tanesini seç, elle yaz. Otomatik üretilen ve birbirine benzeyen sayfalar bu ölçekte fayda değil zarar veriyor.</td></tr>
+      <tr><td><b>Bölge</b></td><td>Alsancak–Bayraklı, Karşıyaka–Çiğli, Gaziemir–Havalimanı</td></tr>
+    </table>
+    <h4>Yerel için asıl iş</h4>
+    <ul class="wf-notes">
+      <li><b>Google Business Profile</b> — İzmir'de tek merkez kaydı. Site içi GEO'dan daha çok getirisi olur.</li>
+      <li><b>LocalBusiness şeması</b> anasayfada, <code>areaServed</code> alanına İzmir ilçeleri.</li>
+      <li><b>Havalimanı transferi</b> altı senaryo içinde arama hacmi en yüksek olanı. Bu sayfayı diğerlerinden daha detaylı yaz.</li>
+      <li>Yeni marka olduğu için ilk 6 ay organik trafik sınırlı olacak. Müşteriye bunu baştan söyle; Google Ads olmadan ilk müşteriler saha satışından gelecek.</li>
+    </ul>
+  </div>
+
+  <div class="panel">
+    <h3>Teklif öncesi netleşmesi gerekenler</h3>
+    <ul class="wf-notes">
+      <li><b>Yönetim paneli bu kapsamda mı?</b> Sunumda tanıtılan panel gerçek bir yazılım. Sitede sadece anlatılacaksa iş küçük; geliştirilecekse bu ayrı bir proje ve ayrı bütçe.</li>
+      <li><b>Uygulama var mı, hangi aşamada?</b> Yoksa S12 "yakında" olarak kurulur ve mağaza rozetleri sonradan eklenir.</li>
+      <li><b>Araç görselleri</b> sunumdakiler kullanılabilir mi, telifleri kimde? Aynı kurguda yeni çekim gerekirse maliyet kalemi.</li>
+      <li><b>Marka fontu</b> sunumda kullanılan serif hangisi? Web lisansı var mı? Yoksa Google Fonts'tan en yakınını seç ve müşteriye onaylat.</li>
+      <li><b>30 dakika</b> hedef mi taahhüt mü — metin diline etkisi var.</li>
+      <li><b>İngilizce sürüm</b> kurumsal müşteri profili çokuluslu firmaları içeriyorsa gerekebilir. Baştan kurmak sonradan eklemekten ucuz.</li>
+    </ul>
+  </div>
+</section>
+
+</div>
+</body>
+</html>
