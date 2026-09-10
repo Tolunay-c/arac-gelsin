@@ -18,7 +18,7 @@ function e(?string $value): string
 /** Build an absolute URL to a file under /assets. */
 function asset(string $path): string
 {
-    return '/assets/' . ltrim($path, '/');
+    return '/design-2/assets/' . ltrim($path, '/');
 }
 /**
  * Build an absolute URL to an uploaded file — or, when $path is already a
