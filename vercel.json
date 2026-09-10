@@ -22,6 +22,18 @@
       "dest": "/assets/$1"
     },
     {
+      "src": "/design-4(.*)",
+      "dest": "/api/index.php"
+    },
+    {
+      "src": "/design-3(.*)",
+      "dest": "/api/index.php"
+    },
+    {
+      "src": "/design-2(.*)",
+      "dest": "/api/index.php"
+    },
+    {
       "handle": "filesystem"
     },
     {
