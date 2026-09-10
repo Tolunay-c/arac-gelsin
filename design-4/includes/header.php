@@ -6,17 +6,20 @@
  * mevcut müşteri "Panele giriş", aday firma "Kurumsal görüşme talep edin".
  */
 $siteName = $settings['site_name'] ?? 'Aracım Gelsin';
-$currentPath = '/' . trim((string) parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH), '/');
+$baseUri  = '/design-4';
 
 $navLinks = [
-    '/'                       => 'Nasıl Çalışır',
-    '/kullanim-senaryolari'   => 'Senaryolar',
-    '/filo'                   => 'Filo',
-    '/yonetim-paneli'         => 'Yönetim Paneli',
-    '/hakkimizda'             => 'Hakkımızda',
-    '/iletisim'               => 'İletişim',
+    $baseUri . '/'                     => 'Nasıl Çalışır',
+    $baseUri . '/kullanim-senaryolari' => 'Senaryolar',
+    $baseUri . '/filo'                 => 'Filo',
+    $baseUri . '/yonetim-paneli'       => 'Yönetim Paneli',
+    $baseUri . '/hakkimizda'           => 'Hakkımızda',
+    $baseUri . '/iletisim'             => 'İletişim',
 ];
-$panelUrl = $settings['panel_url'] ?? '#';
+
+$rawPath     = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH);
+$currentPath = rtrim($rawPath, '/') ?: '/';
+$panelUrl    = $settings['panel_url'] ?? '#';
 ?>
 <!doctype html>
 <html lang="tr">
@@ -75,7 +78,7 @@ $panelUrl = $settings['panel_url'] ?? '#';
 
 <header class="site-header" id="siteHeader">
   <div class="container">
-    <a href="<?= e(APP_URL) ?>/" class="brand" aria-label="<?= e($siteName) ?> anasayfa">
+    <a href="/design-4/" class="brand" aria-label="<?= e($siteName) ?> anasayfa">
       <span class="brand__disc" aria-hidden="true">A</span>
       <span class="brand__text">
         <span class="brand__mark">ARACIM<strong>GELSİN</strong></span>
@@ -86,7 +89,7 @@ $panelUrl = $settings['panel_url'] ?? '#';
     <nav class="main-nav" id="mainNav" aria-label="Ana menü">
       <ul>
         <?php foreach ($navLinks as $href => $label): ?>
-          <li><a href="<?= e(APP_URL . $href) ?>" class="<?= $currentPath === $href ? 'active' : '' ?>"><?= e($label) ?></a></li>
+          <li><a href="<?= e($href) ?>" class="<?= $currentPath === rtrim($href, '/') ? 'active' : '' ?>"><?= e($label) ?></a></li>
         <?php endforeach; ?>
       </ul>
     </nav>
