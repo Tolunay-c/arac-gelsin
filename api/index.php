@@ -8,17 +8,15 @@ if ($uri === 'design-4' || str_starts_with($uri, 'design-4/')) {
     $baseDir = realpath(__DIR__ . '/../design-4');
     chdir($baseDir);
 
-    if ($subPath === '' || $subPath === 'index.php') {
-        require $baseDir . '/index.php';
+    // Eğer doğrudan fiziksel bir dosya istenmişse (örn: senaryolar.php)
+    if ($subPath !== '' && file_exists($baseDir . '/' . $subPath) && !is_dir($baseDir . '/' . $subPath)) {
+        require $baseDir . '/' . $subPath;
         exit;
     }
 
-    $target = realpath($baseDir . '/' . $subPath);
-    if ($target && str_starts_with($target, $baseDir) && file_exists($target) && !is_dir($target)) {
-        require $target;
-    } else {
-        require $baseDir . '/index.php';
-    }
+    // Geri kalan tüm rotaları (örn: /kullanim-senaryolari) ana index.php'ye aktar
+    $_SERVER['SCRIPT_NAME'] = '/design-4/index.php';
+    require $baseDir . '/index.php';
     exit;
 }
 
