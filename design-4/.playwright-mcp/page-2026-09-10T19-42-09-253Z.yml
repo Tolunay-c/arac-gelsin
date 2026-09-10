@@ -1,0 +1,524 @@
+- generic [active] [ref=e1]:
+  - link "İçeriğe geç" [ref=e2] [cursor=pointer]:
+    - /url: "#main"
+  - generic [ref=e4]:
+    - generic [ref=e5]: İzmir · Kurumsal Mobilite · 30 dakika hedef
+    - generic [ref=e10]:
+      - link "+90 232 000 00 00" [ref=e11] [cursor=pointer]:
+        - /url: tel:+902320000000
+      - link "info@aracimgelsin.com" [ref=e14] [cursor=pointer]:
+        - /url: mailto:info@aracimgelsin.com
+  - banner [ref=e18]:
+    - generic [ref=e19]:
+      - link "Aracım Gelsin anasayfa" [ref=e20] [cursor=pointer]:
+        - /url: http://127.0.0.1:8645/
+        - text: A
+        - generic [ref=e21]:
+          - generic [ref=e22]:
+            - text: ARACIM
+            - strong [ref=e23]: GELSİN
+          - text: powered by Özikizler Turizm
+      - navigation "Ana menü" [ref=e24]:
+        - list [ref=e25]:
+          - listitem [ref=e26]:
+            - link "Nasıl Çalışır" [ref=e27] [cursor=pointer]:
+              - /url: http://127.0.0.1:8645/
+          - listitem [ref=e28]:
+            - link "Senaryolar" [ref=e29] [cursor=pointer]:
+              - /url: http://127.0.0.1:8645/kullanim-senaryolari
+          - listitem [ref=e30]:
+            - link "Filo" [ref=e31] [cursor=pointer]:
+              - /url: http://127.0.0.1:8645/filo
+          - listitem [ref=e32]:
+            - link "Yönetim Paneli" [ref=e33] [cursor=pointer]:
+              - /url: http://127.0.0.1:8645/yonetim-paneli
+          - listitem [ref=e34]:
+            - link "Hakkımızda" [ref=e35] [cursor=pointer]:
+              - /url: http://127.0.0.1:8645/hakkimizda
+          - listitem [ref=e36]:
+            - link "İletişim" [ref=e37] [cursor=pointer]:
+              - /url: http://127.0.0.1:8645/iletisim
+      - generic [ref=e38]:
+        - link "Panele giriş" [ref=e39] [cursor=pointer]:
+          - /url: "#"
+        - link "Kurumsal görüşme" [ref=e40] [cursor=pointer]:
+          - /url: "#"
+      - button "Menüyü aç/kapat" [ref=e41]
+  - main [ref=e46]:
+    - generic [ref=e48]:
+      - generic [ref=e49]:
+        - text: Kurumsal Mobilite
+        - heading "Şirketinizin Aracı, İhtiyacınız Olduğunda." [level=1] [ref=e50]
+        - paragraph [ref=e51]: İzmir'e özel, elektrikli ve talep bazlı yeni nesil kurumsal mobilite modeli.
+        - generic [ref=e52]: 30 DK HEDEF ELEKTRİKLİ İZMİR B2B
+        - generic [ref=e53]:
+          - link "Kurumsal görüşme talep edin" [ref=e54] [cursor=pointer]:
+            - /url: "#"
+          - link "Nasıl çalışır" [ref=e55] [cursor=pointer]:
+            - /url: "#nasil-calisir"
+      - generic [ref=e58]: Üç araçlık kurumsal kompozisyon
+    - generic [ref=e67]:
+      - heading "Bu Bir Servis Hizmeti Değil. Yeni Bir Kurumsal Ulaşım Modeli." [level=2] [ref=e68]
+      - paragraph [ref=e69]: Özikizler Turizm yeni bir servis hizmeti çıkarmıyor; yeni bir mobilite markası yaratıyor.
+    - generic [ref=e72]:
+      - generic [ref=e73]:
+        - text: İş Problemi
+        - heading "Her Ulaşım İhtiyacı Servis Planına Uymaz." [level=2] [ref=e74]
+        - list [ref=e75]:
+          - listitem [ref=e76]: 01 Mesai beklenmedik şekilde uzar.
+          - listitem [ref=e77]: 02 Yönetici veya misafir havalimanına yetişmelidir.
+          - listitem [ref=e78]: 03 Toplantı ve saha ziyareti aniden oluşur.
+          - listitem [ref=e79]: 04 1–3 kişi için servis çıkarmak verimsizleşir.
+          - listitem [ref=e80]: 05 Evrak veya küçük paket aynı gün ulaştırılmalıdır.
+      - complementary [ref=e81]:
+        - text: Peki,
+        - heading "Şirketiniz Yalnızca İhtiyaç Duyduğu Anda Araç Çağırabilse?" [level=3] [ref=e82]
+        - paragraph [ref=e83]: Sabit filo maliyeti yok. Kullanmadığınız araca ödeme yok. Tek bir kurumsal panelde tüm operasyon.
+    - generic [ref=e85]:
+      - generic [ref=e86]:
+        - text: Çözüm
+        - heading "İşte Aracım Gelsin." [level=2] [ref=e87]
+        - paragraph [ref=e88]: Kurumsal şirketlerin anlık ve planlı ulaşım ihtiyaçlarını tek sistemden karşılayan yeni nesil mobilite modeli.
+      - generic [ref=e89]:
+        - generic [ref=e90]:
+          - generic [ref=e91]: "01"
+          - heading "Talep Oluştur" [level=3] [ref=e92]
+          - paragraph [ref=e93]: Kurumsal kullanıcı ihtiyacı ve konumu iletir.
+        - generic [ref=e94]:
+          - generic [ref=e95]: "02"
+          - heading "En Uygun Aracı Eşleştir" [level=3] [ref=e96]
+          - paragraph [ref=e97]: En uygun araç ve operasyon noktası belirlenir.
+        - generic [ref=e98]:
+          - generic [ref=e99]: "03"
+          - heading "Yolculuğu Başlat" [level=3] [ref=e100]
+          - paragraph [ref=e101]: Lisanslı sürücü ile güvenli yolculuk başlar.
+        - generic [ref=e102]:
+          - generic [ref=e103]: "04"
+          - heading "Operasyonu Takip Et" [level=3] [ref=e104]
+          - paragraph [ref=e105]: Canlı takip, operasyon ve maliyet otomatik kayda alınır.
+      - generic [ref=e106]:
+        - text: Hedef
+        - paragraph [ref=e107]: İzmir genelinde taleplere en geç 30 dakika içinde yanıt
+    - generic [ref=e109]:
+      - generic [ref=e110]:
+        - text: Kullanım Senaryoları
+        - heading "Tek Platform. Altı Kurumsal İhtiyaç." [level=2] [ref=e111]
+        - paragraph [ref=e112]: Her senaryonun kendi sayfası, kendi anlatımı ve kendi araç önerisi var.
+      - generic [ref=e113]:
+        - link [ref=e114] [cursor=pointer]:
+          - /url: http://127.0.0.1:8645/kullanim/mesai-sonras-ula-m
+          - heading "Mesai Sonrası Ulaşım" [level=3] [ref=e118]
+          - paragraph [ref=e119]: Mesaiye kalan çalışanların güvenli ve planlı biçimde evlerine ulaştırılması.
+          - generic [ref=e120]: Detay
+        - link [ref=e123] [cursor=pointer]:
+          - /url: http://127.0.0.1:8645/kullanim/y-netici-transferleri
+          - heading "Yönetici Transferleri" [level=3] [ref=e128]
+          - paragraph [ref=e129]: Üst düzey yöneticilerin kurumsal standartta, planlı ulaşımı.
+          - generic [ref=e130]: Detay
+        - link [ref=e133] [cursor=pointer]:
+          - /url: http://127.0.0.1:8645/kullanim/havaliman-transferi
+          - heading "Havalimanı Transferi" [level=3] [ref=e138]
+          - paragraph [ref=e139]: Yönetici, çalışan ve kurumsal misafirlerin karşılama ve uğurlama operasyonları.
+          - generic [ref=e140]: Detay
+        - link [ref=e143] [cursor=pointer]:
+          - /url: http://127.0.0.1:8645/kullanim/toplant-i-ula-m-
+          - heading "Toplantı & İş Ulaşımı" [level=3] [ref=e148]
+          - paragraph [ref=e149]: Şehir içi ve bölgesel toplantılar, saha ziyaretleri ve iş hareketliliği.
+          - generic [ref=e150]: Detay
+        - link [ref=e153] [cursor=pointer]:
+          - /url: http://127.0.0.1:8645/kullanim/k-k-ekip-ula-m-
+          - heading "Küçük Ekip Ulaşımı" [level=3] [ref=e159]
+          - paragraph [ref=e160]: Küçük ekiplerin şehir içi hareketliliğinin tek talep ile karşılanması.
+          - generic [ref=e161]: Detay
+        - link [ref=e164] [cursor=pointer]:
+          - /url: http://127.0.0.1:8645/kullanim/evrak-k-k-paket
+          - heading "Evrak & Küçük Paket" [level=3] [ref=e169]
+          - paragraph [ref=e170]: Şirket evrakı ve küçük paketlerin kontrollü, hızlı operasyonel transferi.
+          - generic [ref=e171]: Detay
+    - generic [ref=e175]:
+      - generic [ref=e176]:
+        - generic [ref=e177]:
+          - text: Filo Mimarisi
+          - heading "Her Görev İçin Doğru Araç." [level=2] [ref=e178]
+        - link "Tüm filoyu incele" [ref=e179] [cursor=pointer]:
+          - /url: http://127.0.0.1:8645/filo
+      - generic [ref=e182]:
+        - generic [ref=e183]:
+          - generic [ref=e184]: Araç görseli eklenecek
+          - text: Yönetici & Kurumsal Ulaşım TOGG
+          - paragraph [ref=e190]: Kurumsal Temsilin Prestij Sınıfı
+        - generic [ref=e191]:
+          - generic [ref=e192]: Araç görseli eklenecek
+          - text: Yönetici / Ekip Ulaşımı Ford Explorer
+          - paragraph [ref=e198]: Güçlü ve Konforlu Yönetim Sınıfı
+        - generic [ref=e199]:
+          - generic [ref=e200]: Araç görseli eklenecek
+          - text: Personel & Grup Ulaşımı Ford Tourneo Custom
+          - paragraph [ref=e206]: Ekipler İçin Esnek Ulaşım
+      - paragraph [ref=e207]: Bu araç sınıfları teknik özellikleriyle değil, üstlendiği kurumsal görevle konumlanır.
+    - generic [ref=e209]:
+      - generic [ref=e210]:
+        - text: Operasyon Modeli
+        - heading "İzmir Geneli Stratejik Konumlanma." [level=2] [ref=e211]
+        - paragraph [ref=e212]: Araçlar şehirde rastgele dolaşmak yerine stratejik bekleme noktalarında hazır tutulur. Talep, konuma en uygun operasyon noktasından karşılanır.
+      - generic [ref=e213]:
+        - application "İzmir operasyon bölgeleri haritası" [ref=e214]: İzmir Körfezi
+        - complementary [ref=e215]:
+          - text: Hub Modeli
+          - list [ref=e216]:
+            - listitem [ref=e217]:
+              - strong [ref=e219]: Stratejik bekleme noktaları
+            - listitem [ref=e220]:
+              - strong [ref=e222]: Bölgesel talep dengesi
+            - listitem [ref=e223]:
+              - strong [ref=e225]: Kısa yanıt mesafesi
+            - listitem [ref=e226]:
+              - strong [ref=e228]: Merkezi operasyon kontrolü
+    - generic [ref=e230]:
+      - generic [ref=e231]:
+        - text: Yönetim Paneli
+        - heading "Tek Ekrandan Kurumsal Kontrol." [level=2] [ref=e232]
+        - paragraph [ref=e233]: Talepten faturaya, filodaki her yolculuk tek panelden izlenir ve raporlanır.
+      - generic [ref=e234]:
+        - generic [ref=e235]: Panel ekran görüntüsü
+        - generic [ref=e241]:
+          - strong [ref=e248]: Canlı yolculuk görünürlüğü
+          - strong [ref=e256]: Yetkili kullanıcı ve departman yönetimi
+          - strong [ref=e262]: Kullanım ve maliyet raporları
+          - strong [ref=e269]: Kurumsal fatura / cari hesap akışı
+          - strong [ref=e276]: Talep geçmişi ve operasyon kayıtları
+          - strong [ref=e283]: Sürdürülebilirlik göstergeleri
+      - generic [ref=e284]:
+        - generic [ref=e285]: Aktif Yolculuklar Anlık Görünürlük
+        - generic [ref=e286]: Aylık Kullanım Merkezi Kontrol
+        - generic [ref=e287]: Departmanlar Merkezi Kontrol
+        - generic [ref=e288]: Maliyet Özeti Anlık Görünürlük
+    - generic [ref=e290]:
+      - generic [ref=e291]:
+        - text: NEDEN FARKLI
+        - heading "Kurumsal ulaşımda pazarın boş bıraktığı yer." [level=2] [ref=e292]
+      - generic [ref=e293]:
+        - generic [ref=e294]:
+          - text: 30 DK Hızlı Yanıt
+          - paragraph [ref=e295]: Hedeflenen maksimum yanıt süresi
+        - generic [ref=e296]:
+          - text: Elektrikli Yeni Nesil Filo
+          - paragraph [ref=e297]: Yeni nesil filo yaklaşımı
+        - generic [ref=e298]:
+          - text: İzmir Bölgesel Odak
+          - paragraph [ref=e299]: Stratejik bölgesel konuşlanma
+      - table [ref=e301]:
+        - rowgroup [ref=e302]:
+          - row [ref=e303]:
+            - columnheader "Kriter" [ref=e304]
+            - columnheader "Geleneksel servis" [ref=e305]
+            - columnheader "Taksi / uygulama" [ref=e306]
+            - columnheader "Aracım Gelsin" [ref=e307]
+        - rowgroup [ref=e308]:
+          - row [ref=e309]:
+            - rowheader "Anlık talep" [ref=e310]
+            - cell "Sınırlı" [ref=e311]
+            - cell "Güçlü" [ref=e312]
+            - cell "Güçlü" [ref=e313]
+          - row [ref=e314]:
+            - rowheader "Kurumsal filo" [ref=e315]
+            - cell "Güçlü" [ref=e316]
+            - cell "Değişken" [ref=e317]
+            - cell "Güçlü" [ref=e318]
+          - row [ref=e319]:
+            - rowheader "Personel ulaşımı" [ref=e320]
+            - cell "Güçlü" [ref=e321]
+            - cell "Mümkün" [ref=e322]
+            - cell "Odak Alanı" [ref=e323]
+          - row [ref=e324]:
+            - rowheader "Operasyonel transfer" [ref=e325]
+            - cell "Değişken" [ref=e326]
+            - cell "Sınırlı" [ref=e327]
+            - cell "Odak Alanı" [ref=e328]
+          - row [ref=e329]:
+            - rowheader "Yerel hub modeli" [ref=e330]
+            - cell "Değişken" [ref=e331]
+            - cell "Platform Bazlı" [ref=e332]
+            - cell "İzmir Odaklı" [ref=e333]
+          - row [ref=e334]:
+            - rowheader "Kurumsal raporlama" [ref=e335]
+            - cell "Değişken" [ref=e336]
+            - cell "Güçlü" [ref=e337]
+            - cell "Gelişen Kapasite" [ref=e338]
+    - generic [ref=e340]:
+      - generic [ref=e341]:
+        - text: Özikizler Turizm Şirketler Grubu Güvencesi
+        - heading "Özikizler Turizm Şirketler Grubu Güvencesiyle." [level=2] [ref=e342]
+        - paragraph [ref=e343]: Aracım Gelsin, yıllardır kurumsal taşımacılıkta deneyim kazanmış Özikizler Turizm'in operasyon gücü ve hizmet disipliniyle yürütülür.
+      - generic [ref=e344]:
+        - generic [ref=e345]:
+          - heading "Kurumsal Güvenlik Standardı" [level=3] [ref=e350]
+          - paragraph [ref=e351]: Her yolculuk kurumsal güvenlik ve kalite standardıyla yürütülür.
+        - generic [ref=e352]:
+          - heading "Profesyonel Sürücü Kadrosu" [level=3] [ref=e357]
+          - paragraph [ref=e358]: Deneyimli ve kurumsal hizmet standardına sahip sürücü ekibi.
+        - generic [ref=e359]:
+          - heading "Deneyimli Operasyon" [level=3] [ref=e364]
+          - paragraph [ref=e365]: Yıllara dayanan filo ve operasyon yönetimi tecrübesi.
+        - generic [ref=e366]:
+          - heading "Kesintisiz Operasyon Desteği" [level=3] [ref=e373]
+          - paragraph [ref=e374]: Talep anından yolculuğun sonuna kadar aktif operasyon takibi.
+    - generic [ref=e377]:
+      - generic [ref=e378]:
+        - text: KURUMSAL GÖRÜŞME
+        - heading "Rezervasyon değil, protokol başlangıcı." [level=2] [ref=e379]
+        - paragraph [ref=e380]: Ekibimiz şirketinize özel bir mobilite planıyla en kısa sürede sizinle iletişime geçer. Zorunlu 4 alan yeterli.
+        - list [ref=e381]:
+          - listitem [ref=e382]:
+            - generic [ref=e386]:
+              - text: Telefon
+              - link "+90 232 000 00 00" [ref=e387] [cursor=pointer]:
+                - /url: tel:+902320000000
+          - listitem [ref=e388]:
+            - generic [ref=e393]:
+              - text: E-posta
+              - link "info@aracimgelsin.com" [ref=e394] [cursor=pointer]:
+                - /url: mailto:info@aracimgelsin.com
+      - generic [ref=e395]:
+        - generic [ref=e396]:
+          - generic [ref=e397]:
+            - generic [ref=e398]: Firma adı *
+            - textbox "Örn. Özikizler Turizm" [ref=e399]
+          - generic [ref=e400]:
+            - generic [ref=e401]: Yetkili ad soyad *
+            - textbox [ref=e402]
+          - generic [ref=e403]:
+            - generic [ref=e404]: Telefon *
+            - textbox [ref=e405]
+          - generic [ref=e406]:
+            - generic [ref=e407]: Kurumsal e-posta *
+            - textbox [ref=e408]
+        - generic [ref=e409]:
+          - text: Hangi ihtiyaçlar için?
+          - generic [ref=e410]:
+            - generic [ref=e411]:
+              - checkbox "Mesai sonrası" [ref=e412]
+              - text: Mesai sonrası
+            - generic [ref=e413]:
+              - checkbox "Yönetici" [ref=e414]
+              - text: Yönetici
+            - generic [ref=e415]:
+              - checkbox "Havalimanı" [ref=e416]
+              - text: Havalimanı
+            - generic [ref=e417]:
+              - checkbox "Toplantı" [ref=e418]
+              - text: Toplantı
+            - generic [ref=e419]:
+              - checkbox "Ekip" [ref=e420]
+              - text: Ekip
+            - generic [ref=e421]:
+              - checkbox "Evrak" [ref=e422]
+              - text: Evrak
+        - generic [ref=e423]:
+          - text: Mesajınız
+          - textbox "Aylık tahmini talep, öncelikli senaryolar…" [ref=e424]
+        - generic [ref=e425]:
+          - checkbox "KVKK aydınlatma metnini okudum, iletişim için verdiğim bilgilerin işlenmesini onaylıyorum." [ref=e426]
+          - generic [ref=e427]:
+            - link "KVKK aydınlatma metnini" [ref=e428] [cursor=pointer]:
+              - /url: /kvkk
+            - text: okudum, iletişim için verdiğim bilgilerin işlenmesini onaylıyorum.
+        - button "Kurumsal görüşme talep edin" [ref=e429]
+    - generic [ref=e432]:
+      - generic [ref=e433]: Talep oluştur
+      - generic [ref=e437]:
+        - text: MOBİL UYGULAMA
+        - heading "Anlaşmalı müşterilerimiz talebi uygulamadan oluşturur." [level=2] [ref=e438]
+        - paragraph [ref=e439]: Uygulama kamuya açık bir çağrı platformu değil; kurumsal müşterinin sözleşmeli talep kanalı.
+        - list [ref=e440]:
+          - listitem [ref=e441]: Kurumsal profil ile giriş, tek tık talep oluşturma
+          - listitem [ref=e442]: Yolculuğu canlı olarak takip edin
+          - listitem [ref=e443]: Departman ve dönem bazlı talep geçmişi
+        - generic [ref=e444]:
+          - link "App Store" [ref=e445] [cursor=pointer]:
+            - /url: https://apps.apple.com/
+            - generic [ref=e449]:
+              - text: İndirin
+              - strong [ref=e450]: App Store
+          - link "Google Play" [ref=e451] [cursor=pointer]:
+            - /url: https://play.google.com/
+            - generic [ref=e455]:
+              - text: Şuradan edinin
+              - strong [ref=e456]: Google Play
+          - text: QR
+    - generic [ref=e458]:
+      - generic [ref=e459]:
+        - text: SIK SORULAN SORULAR
+        - heading "Kurumsal görüşme öncesi hızlı yanıtlar." [level=2] [ref=e460]
+      - generic [ref=e461]:
+        - generic [ref=e462]:
+          - group [ref=e463]:
+            - generic "Anlaşma nasıl kuruluyor?" [ref=e464]
+            - generic [ref=e465]: Kurumsal görüşme sonrası şirketinize özel bir kullanım protokolü tanımlanır; sözleşme imzalanır ve panel/uygulama erişimi açılır.
+          - group [ref=e466]:
+            - generic "Faturalama nasıl işliyor?" [ref=e467]
+          - group [ref=e468]:
+            - generic "Hangi saatlerde hizmet var?" [ref=e469]
+          - group [ref=e470]:
+            - generic "İzmir dışına çıkılıyor mu?" [ref=e471]
+          - group [ref=e472]:
+            - generic "Sürücüler kim?" [ref=e473]
+        - generic [ref=e474]:
+          - link [ref=e475] [cursor=pointer]:
+            - /url: /rehber/kurumsal-ulasim-maliyeti
+            - generic [ref=e476]:
+              - strong [ref=e477]: Kurumsal ulaşım maliyetinizi hangi kalemler oluşturur?
+              - text: REHBER · 4 dk okuma
+          - link [ref=e478] [cursor=pointer]:
+            - /url: /rehber/servis-vs-talep-bazli
+            - generic [ref=e479]:
+              - strong [ref=e480]: Servis mi, talep bazlı mobilite mi? Karar tablosu.
+              - text: REHBER · 6 dk okuma
+          - link [ref=e481] [cursor=pointer]:
+            - /url: /rehber/elektrikli-filo-esg
+            - generic [ref=e482]:
+              - strong [ref=e483]: Elektrikli filo ve karbon raporlama — ESG için ne değişir?
+              - text: REHBER · 5 dk okuma
+    - generic [ref=e486]:
+      - text: ARACIM GELSİN
+      - heading "Ulaşımı planlamayın. İhtiyacınız olduğunda çağırın." [level=2] [ref=e487]
+      - paragraph [ref=e488]: Şirketinizin aracı, 30 dakika içinde kapınızda.
+      - link "Kurumsal görüşme talep edin" [ref=e489] [cursor=pointer]:
+        - /url: "#"
+  - contentinfo [ref=e490]:
+    - generic [ref=e491]:
+      - generic [ref=e492]:
+        - link [ref=e493] [cursor=pointer]:
+          - /url: http://127.0.0.1:8645/
+          - text: A
+          - generic [ref=e494]:
+            - generic [ref=e495]:
+              - text: ARACIM
+              - strong [ref=e496]: GELSİN
+            - text: powered by Özikizler Turizm
+        - paragraph [ref=e497]: Kurumsal mobilitenin yeni adı.
+        - list [ref=e498]:
+          - listitem [ref=e499]:
+            - link "LinkedIn" [ref=e500] [cursor=pointer]:
+              - /url: "#"
+          - listitem [ref=e504]:
+            - link "Instagram" [ref=e505] [cursor=pointer]:
+              - /url: "#"
+          - listitem [ref=e509]:
+            - link "X" [ref=e510] [cursor=pointer]:
+              - /url: "#"
+      - generic [ref=e514]:
+        - heading "Kullanım Senaryoları" [level=4] [ref=e515]
+        - list [ref=e516]:
+          - listitem [ref=e517]:
+            - link "Mesai sonrası ulaşım" [ref=e518] [cursor=pointer]:
+              - /url: http://127.0.0.1:8645/kullanim/mesai-sonrasi
+          - listitem [ref=e519]:
+            - link "Yönetici transferleri" [ref=e520] [cursor=pointer]:
+              - /url: http://127.0.0.1:8645/kullanim/yonetici-transferi
+          - listitem [ref=e521]:
+            - link "Havalimanı transferi" [ref=e522] [cursor=pointer]:
+              - /url: http://127.0.0.1:8645/kullanim/havalimani-transferi
+          - listitem [ref=e523]:
+            - link "Toplantı & iş ulaşımı" [ref=e524] [cursor=pointer]:
+              - /url: http://127.0.0.1:8645/kullanim/toplanti-is-ulasimi
+          - listitem [ref=e525]:
+            - link "Küçük ekip ulaşımı" [ref=e526] [cursor=pointer]:
+              - /url: http://127.0.0.1:8645/kullanim/kucuk-ekip-ulasimi
+          - listitem [ref=e527]:
+            - link "Evrak & küçük paket" [ref=e528] [cursor=pointer]:
+              - /url: http://127.0.0.1:8645/kullanim/evrak-paket
+      - generic [ref=e529]:
+        - heading "Filo & Panel" [level=4] [ref=e530]
+        - list [ref=e531]:
+          - listitem [ref=e532]:
+            - link "TOGG" [ref=e533] [cursor=pointer]:
+              - /url: http://127.0.0.1:8645/filo/togg
+          - listitem [ref=e534]:
+            - link "Ford Explorer" [ref=e535] [cursor=pointer]:
+              - /url: http://127.0.0.1:8645/filo/ford-explorer
+          - listitem [ref=e536]:
+            - link "Tourneo Custom" [ref=e537] [cursor=pointer]:
+              - /url: http://127.0.0.1:8645/filo/tourneo-custom
+          - listitem [ref=e538]:
+            - link "Yönetim Paneli" [ref=e539] [cursor=pointer]:
+              - /url: http://127.0.0.1:8645/yonetim-paneli
+      - generic [ref=e540]:
+        - heading "Hizmet Bölgeleri" [level=4] [ref=e541]
+        - list [ref=e542]:
+          - listitem [ref=e543]:
+            - link "Alsancak & Bayraklı" [ref=e544] [cursor=pointer]:
+              - /url: http://127.0.0.1:8645/bolge/alsancak-bayrakli
+          - listitem [ref=e545]:
+            - link "Karşıyaka & Çiğli" [ref=e546] [cursor=pointer]:
+              - /url: http://127.0.0.1:8645/bolge/karsiyaka-cigli
+          - listitem [ref=e547]:
+            - link "Gaziemir & Havalimanı" [ref=e548] [cursor=pointer]:
+              - /url: http://127.0.0.1:8645/bolge/gaziemir-havalimani
+          - listitem [ref=e549]:
+            - link "Tüm İzmir ilçeleri" [ref=e550] [cursor=pointer]:
+              - /url: http://127.0.0.1:8645/hizmet-bolgeleri
+      - generic [ref=e551]:
+        - heading "Kurumsal" [level=4] [ref=e552]
+        - list [ref=e553]:
+          - listitem [ref=e554]:
+            - link "Hakkımızda" [ref=e555] [cursor=pointer]:
+              - /url: http://127.0.0.1:8645/hakkimizda
+          - listitem [ref=e556]:
+            - link "Rehber" [ref=e557] [cursor=pointer]:
+              - /url: http://127.0.0.1:8645/rehber
+          - listitem [ref=e558]:
+            - link "İletişim" [ref=e559] [cursor=pointer]:
+              - /url: http://127.0.0.1:8645/iletisim
+          - listitem [ref=e560]:
+            - link "KVKK" [ref=e561] [cursor=pointer]:
+              - /url: http://127.0.0.1:8645/kvkk
+          - listitem [ref=e562]:
+            - link "Çerez Politikası" [ref=e563] [cursor=pointer]:
+              - /url: http://127.0.0.1:8645/cerez
+        - list [ref=e564]:
+          - listitem [ref=e565]:
+            - link "+90 232 000 00 00" [ref=e568] [cursor=pointer]:
+              - /url: tel:+902320000000
+          - listitem [ref=e569]:
+            - link "info@aracimgelsin.com" [ref=e573] [cursor=pointer]:
+              - /url: mailto:info@aracimgelsin.com
+    - generic [ref=e574]:
+      - paragraph [ref=e575]: © 2026 Aracım Gelsin — Powered by Özikizler Turizm. Tüm hakları saklıdır.
+      - paragraph [ref=e576]: D2 Yetki Belgesi · Kurumsal Sigorta
+  - link "Bizi arayın" [ref=e577] [cursor=pointer]:
+    - /url: tel:+902320000000
+  - dialog [ref=e581]:
+    - button [ref=e582]
+    - text: KURUMSAL GÖRÜŞME
+    - heading [level=3] [ref=e584]: Şirketinize özel plan için sizinle iletişime geçelim.
+    - paragraph [ref=e585]: Zorunlu 4 alan yeterli — geri kalanı görüşmede konuşuruz.
+    - generic [ref=e586]:
+      - generic [ref=e587]:
+        - generic [ref=e588]:
+          - generic [ref=e589]: Firma adı *
+          - textbox [ref=e590]:
+            - /placeholder: Örn. Özikizler Turizm
+        - generic [ref=e591]:
+          - generic [ref=e592]: Yetkili ad soyad *
+          - textbox [ref=e593]
+      - generic [ref=e594]:
+        - generic [ref=e595]:
+          - generic [ref=e596]: Telefon *
+          - textbox [ref=e597]:
+            - /placeholder: +90 5xx xxx xx xx
+        - generic [ref=e598]:
+          - generic [ref=e599]: Kurumsal e-posta *
+          - textbox [ref=e600]
+      - generic [ref=e601]:
+        - text: Mesajınız
+        - textbox [ref=e602]:
+          - /placeholder: Aylık tahmini talep, hangi senaryolar…
+      - generic [ref=e603]:
+        - checkbox [ref=e604]
+        - generic [ref=e605]:
+          - link [ref=e606] [cursor=pointer]:
+            - /url: /kvkk
+            - text: KVKK aydınlatma metnini
+          - text: okudum, iletişim için verdiğim bilgilerin işlenmesini onaylıyorum.
+      - button [ref=e607]: Kurumsal görüşme talep edin

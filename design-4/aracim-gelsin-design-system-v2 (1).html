@@ -15,9 +15,9 @@
   --steel-600:#6E7A90;
   --steel-500:#8B95A8;   /* sunum zemini */
   --steel-300:#A9B2C1;
-  --crimson:#E4142C;
-  --crimson-dark:#B80F22;
-  --crimson-soft:#FDE9EB;
+  --crimson:#DE2018;
+  --crimson-dark:#B3160F;
+  --crimson-soft:#FDEAE8;
   --ink-900:#141822;
   --ink-700:#3A4252;
   --ink-500:#6B7385;
@@ -227,6 +227,7 @@ td b{font-weight:700}
       <tr><td class="del">Teklif formu = tek dönüşüm</td><td><b>Kurumsal görüşme talebi</b> + sözleşmeli müşteri için <b>panel girişi</b>. İki farklı kitle, iki farklı kapı.</td></tr>
       <tr><td class="del">Uygulama = herkese açık indirme</td><td><b>Uygulama = anlaşmalı müşterinin talep kanalı.</b> Rastgele indirenin işine yaramıyor, bölüm buna göre yazılmalı.</td></tr>
       <tr><td>—</td><td><b>Yeni:</b> iş problemi bloğu, hub haritası, yönetim paneli tanıtımı, rekabet tablosu, Özikizler güvencesi.</td></tr>
+      <tr><td>—</td><td><b>Logo geldi:</b> kırmızı ton logodan alındı (#DE2018), yazım kuralları ve kilit (lockup) tanımlandı. <b style="color:#B3160F">Marka adı çelişkisi çözülmeden yazıya geçilmemeli</b> — aşağıda.</td></tr>
     </table>
   </div>
 </header>
@@ -244,7 +245,7 @@ td b{font-weight:700}
       <div class="sw"><div class="chip" style="background:#141C2E"></div><div class="meta"><b>--navy-900</b><span>#141C2E · kart, koyu blok</span></div></div>
       <div class="sw"><div class="chip" style="background:#1B2436"></div><div class="meta"><b>--navy-800</b><span>#1B2436 · footer, hero zemin</span></div></div>
       <div class="sw"><div class="chip" style="background:#8B95A8"></div><div class="meta"><b>--steel-500</b><span>#8B95A8 · sunumun imza zemini</span></div></div>
-      <div class="sw"><div class="chip" style="background:#E4142C"></div><div class="meta"><b>--crimson</b><span>#E4142C · eylem, vurgu, ikon</span></div></div>
+      <div class="sw"><div class="chip" style="background:#DE2018"></div><div class="meta"><b>--crimson</b><span>#DE2018 · logodan · eylem, vurgu, ikon</span></div></div>
       <div class="sw"><div class="chip" style="background:#F2F4F7"></div><div class="meta"><b>--mist</b><span>#F2F4F7 · açık bölüm zemini</span></div></div>
     </div>
     <h4>Kural</h4>
@@ -253,6 +254,69 @@ td b{font-weight:700}
       <li><b>Crimson</b> yalnızca üç iş yapar: birincil buton, eyebrow etiketi, ikon dolgusu. Gövde metninde ve büyük alanlarda kullanma — sunumda da öyle.</li>
       <li>Koyu lacivert kart, açık zemin üstünde içeriği ayırmanın ana yolu. Kutu gölgesi yerine bunu kullan.</li>
       <li>Kırmızı üstüne beyaz metin kontrastı 4.6:1 — 14px altında kullanma.</li>
+    </ul>
+  </div>
+
+  <div class="panel" style="border-left:4px solid var(--crimson)">
+    <h3>Logo</h3>
+
+    <div class="alert" style="margin-top:0;margin-bottom:var(--s6)">
+      <h3>Önce çözülmesi gereken: marka adı hangisi?</h3>
+      <p class="muted" style="margin-bottom:var(--s3)">Logoda <b>ARAÇ GELSİN</b> yazıyor, sunumun her sayfasında <b>ARACIM GELSİN</b> geçiyor. Bunlar iki farklı marka adı ve tek harflik fark değil — biri "araç gelsin" (jenerik talep), diğeri "aracım gelsin" (şirketin kendi aracı). Sunumun tüm konumlandırması ikincisi üzerine kurulu: "Şirketinizin Aracı", "Şirketinizin ihtiyaç anında devreye giren mobil filosu".</p>
+      <table>
+        <tr><th style="width:26%">Etkilenen</th><th>Neden kritik</th></tr>
+        <tr><td><b>Alan adı</b></td><td>aracimgelsin.com mu aracgelsin.com mu? İkisi de alınmalı, biri diğerine 301.</td></tr>
+        <tr><td><b>Title / H1 / şema</b></td><td>Marka araması tek isimde toplanmalı. İki isim ikiye bölünmüş marka otoritesi demek.</td></tr>
+        <tr><td><b>Uygulama adı</b></td><td>Mağaza adı sonradan değiştirilebiliyor ama indirenlerin kafası karışıyor.</td></tr>
+        <tr><td><b>Sözleşme ve fatura</b></td><td>Marka adı hukuki metinlerde geçiyor; sonradan değiştirmek işi katlıyor.</td></tr>
+      </table>
+      <p class="muted" style="margin-top:var(--s3)"><b>Öneri:</b> ARACIM GELSİN'de karar kıl, logo yazısı ona göre güncellensin. Sunumdaki tüm anlatı zaten bunun üstünde duruyor ve "aracım" sahiplik duygusu markanın asıl vaadi. Logoda "ARAÇ" daha kısa olduğu için tercih edilmiş olabilir; "ARACIM" da aynı kilide sığar.</p>
+    </div>
+
+    <h4>Kilit (lockup)</h4>
+    <p class="muted" style="margin-bottom:var(--s4)">Logo dairesel. Dairesel logolar yatay header'da yer yakar, o yüzden üç ayrı kullanım tanımlanmalı:</p>
+    <div class="grid g3">
+      <div class="card">
+        <div class="row g3" style="margin-bottom:var(--s4)">
+          <div style="width:52px;height:52px;border-radius:50%;background:var(--crimson);flex:none"></div>
+          <div class="stack g1"><div class="ln dk" style="width:96px;height:14px"></div><div class="ln" style="width:70px;height:7px"></div></div>
+        </div>
+        <div class="txt b" style="margin-bottom:var(--s2)">Yatay kilit</div>
+        <p class="lbl">Header, footer, e-posta imzası. Daire solda 48px, sağında marka adı ve altında "powered by ÖZİKİZLER TURİZM". <b>Bu versiyon henüz yok, üretilmeli.</b></p>
+      </div>
+      <div class="card">
+        <div style="width:84px;height:84px;border-radius:50%;background:var(--crimson);margin-bottom:var(--s4)"></div>
+        <div class="txt b" style="margin-bottom:var(--s2)">Daire — tam hâl</div>
+        <p class="lbl">Sosyal medya profili, uygulama ikonu, araç giydirmesi, kapanış bloğu. 96px ve üstünde kullan; altında yol grafiği okunmuyor.</p>
+      </div>
+      <div class="card">
+        <div class="row g3" style="margin-bottom:var(--s4)">
+          <div style="width:32px;height:32px;border-radius:50%;background:var(--crimson);flex:none"></div>
+          <div style="width:20px;height:20px;border-radius:50%;background:var(--crimson);flex:none"></div>
+          <div style="width:16px;height:16px;border-radius:4px;background:var(--crimson);flex:none"></div>
+        </div>
+        <div class="txt b" style="margin-bottom:var(--s2)">Sadeleştirilmiş</div>
+        <p class="lbl">Favicon ve 32px altı. Yazı ve yol çıkar, sadece araç silueti kalır. Mevcut logoyu küçültmek işe yaramaz — ayrı çizilmeli.</p>
+      </div>
+    </div>
+
+    <h4>Kullanım kuralları</h4>
+    <ul class="wf-notes">
+      <li><b>Dosya</b> elinde JPEG var, beyaza yakın bir zemini de beraberinde geliyor. Müşteriden <b>SVG</b> (yoksa şeffaf PNG @2x) iste. Sitede JPEG logo kullanma.</li>
+      <li><b>Zemin</b> logo kendi kırmızı dairesini taşıdığı için lacivert ve beyaz zeminde doğrudan çalışır. <b>Kırmızı zemine koyma</b> — daire kaybolur. Kırmızı üstünde beyaz konturlu tek renk versiyon gerekir.</li>
+      <li><b>Boşluk</b> logonun çevresinde en az dairenin yarıçapının %15'i kadar temiz alan bırak.</li>
+      <li><b>Deforme etme</b> döndürme, gölge, gradyan, oran bozma yok.</li>
+      <li><b>Header'da</b> daire 40–44px. Daha büyüğü 76px'lik header'ı şişirir.</li>
+      <li><b>Özikizler logosu</b> ile yan yana gelirse aralarında dikey ayraç çizgisi ve "powered by" ifadesi olsun; ikisi eşit ağırlıkta durmasın.</li>
+    </ul>
+
+    <h4>Logo ile sunum arasındaki üslup farkı</h4>
+    <p class="muted">Logo hızlı ve dinamik: eğik kalın sans, hız çizgileri, yol perspektifi — tüketici mobilite dili. Sunum ise ağır ve kurumsal: büyük harf serif, koyu lacivert, prestij vurgusu. İkisi aynı sayfada çatışabilir. Çözüm:</p>
+    <ul class="wf-notes">
+      <li>Logo bir <b>logotype</b>'tır, sitenin yazı karakteri değil. Logodaki eğik sans'ı başlıklarda taklit etme.</li>
+      <li>Site tipografisi sunumdaki serif düzende kalsın; kurumsal alıcıya satış yapan taraf o.</li>
+      <li>Logoyu serif bir başlığın hemen yanına, benzer boyutta koyma. Header'da ve footer'da kendi başına dursun.</li>
+      <li>Hız çizgileri, yol grafiği gibi logo öğelerini sayfa içinde dekoratif olarak tekrar kullanma. Bir kez logoda görülüyor, yeter.</li>
     </ul>
   </div>
 
@@ -435,7 +499,8 @@ td b{font-weight:700}
         <li><b>Menü</b> Nasıl Çalışır · Kullanım Senaryoları · Filo · Yönetim Paneli · Hakkımızda · İletişim</li>
         <li><b>Sağ</b> "Panele giriş" (çerçeveli) + "Kurumsal görüşme" (kırmızı dolgulu)</li>
         <li>İki farklı kitle burada ayrışıyor: mevcut müşteri panele, aday firma forma gider</li>
-        <li>Logo kilidi: Aracım Gelsin ana marka, altında küçük "powered by ÖZİKİZLER TURİZM"</li>
+        <li>Logo: 40–44px kırmızı daire + sağında marka adı, altında küçük "powered by ÖZİKİZLER TURİZM". Yatay kilit versiyonu üretilmeli.</li>
+        <li>Lacivert header üstünde kırmızı daire iyi duruyor; hero da lacivert olduğu için logo sayfanın tek parlak noktası olarak açılışı taşıyor</li>
       </ul>
     </div>
     <div class="wf navy">
@@ -1088,6 +1153,8 @@ td b{font-weight:700}
       <li><b>Yönetim paneli bu kapsamda mı?</b> Sunumda tanıtılan panel gerçek bir yazılım. Sitede sadece anlatılacaksa iş küçük; geliştirilecekse bu ayrı bir proje ve ayrı bütçe.</li>
       <li><b>Uygulama var mı, hangi aşamada?</b> Yoksa S12 "yakında" olarak kurulur ve mağaza rozetleri sonradan eklenir.</li>
       <li><b>Araç görselleri</b> sunumdakiler kullanılabilir mi, telifleri kimde? Aynı kurguda yeni çekim gerekirse maliyet kalemi.</li>
+      <li><b>Marka adı ARAÇ GELSİN mi ARACIM GELSİN mi?</b> Logo ile sunum çelişiyor. Alan adı alınmadan, title yazılmadan, app adı belirlenmeden bu netleşmeli. Listedeki en acil madde bu.</li>
+      <li><b>Logonun vektörü</b> kimde? SVG yoksa mevcut JPEG'den yeniden çizim gerekir; bu ayrı bir kalem.</li>
       <li><b>Marka fontu</b> sunumda kullanılan serif hangisi? Web lisansı var mı? Yoksa Google Fonts'tan en yakınını seç ve müşteriye onaylat.</li>
       <li><b>30 dakika</b> hedef mi taahhüt mü — metin diline etkisi var.</li>
       <li><b>İngilizce sürüm</b> kurumsal müşteri profili çokuluslu firmaları içeriyorsa gerekebilir. Baştan kurmak sonradan eklemekten ucuz.</li>
