@@ -14,7 +14,6 @@ function e(?string $value): string
     return htmlspecialchars($value ?? '', ENT_QUOTES, 'UTF-8');
 }
 
-/** Build an absolute URL to a file under /design-4/assets. */
 function asset(string $path): string
 {
     return '/design-4/assets/' . ltrim($path, '/');
