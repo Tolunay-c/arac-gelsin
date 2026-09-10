@@ -1,0 +1,177 @@
+- generic [active] [ref=f3e1]:
+  - link "İçeriğe geç" [ref=f3e2] [cursor=pointer]:
+    - /url: "#main"
+  - generic [ref=f3e4]:
+    - generic [ref=f3e5]: İzmir · Kurumsal Mobilite · 30 dakika hedef
+    - generic [ref=f3e10]:
+      - link "+90 232 000 00 00" [ref=f3e11] [cursor=pointer]:
+        - /url: tel:+902320000000
+      - link "info@aracimgelsin.com" [ref=f3e14] [cursor=pointer]:
+        - /url: mailto:info@aracimgelsin.com
+  - banner [ref=f3e18]:
+    - generic [ref=f3e19]:
+      - link "Aracım Gelsin anasayfa" [ref=f3e20] [cursor=pointer]:
+        - /url: /design-4/
+        - generic [ref=f3e21]:
+          - generic [ref=f3e22]:
+            - text: ARACIM
+            - strong [ref=f3e23]: GELSİN
+          - generic [ref=f3e24]: powered by Özikizler Turizm
+      - navigation "Ana menü" [ref=f3e25]:
+        - list [ref=f3e26]:
+          - listitem [ref=f3e27]:
+            - link "Nasıl Çalışır" [ref=f3e28] [cursor=pointer]:
+              - /url: /design-4/
+          - listitem [ref=f3e29]:
+            - link "Senaryolar" [ref=f3e30] [cursor=pointer]:
+              - /url: /design-4/kullanim-senaryolari
+          - listitem [ref=f3e31]:
+            - link "Filo" [ref=f3e32] [cursor=pointer]:
+              - /url: /design-4/filo
+          - listitem [ref=f3e33]:
+            - link "Yönetim Paneli" [ref=f3e34] [cursor=pointer]:
+              - /url: /design-4/yonetim-paneli
+          - listitem [ref=f3e35]:
+            - link "Hakkımızda" [ref=f3e36] [cursor=pointer]:
+              - /url: /design-4/hakkimizda
+          - listitem [ref=f3e37]:
+            - link "İletişim" [ref=f3e38] [cursor=pointer]:
+              - /url: /design-4/iletisim
+      - generic [ref=f3e39]:
+        - link "Panele giriş" [ref=f3e40] [cursor=pointer]:
+          - /url: "#"
+        - link "Kurumsal görüşme" [ref=f3e41] [cursor=pointer]:
+          - /url: "#"
+  - main [ref=f3e42]:
+    - generic [ref=f3e44]:
+      - generic [ref=f3e45]:
+        - generic [ref=f3e46]: HATA · 404
+        - paragraph [aria-hidden] [ref=f3e47]: "404"
+        - heading "Bu bağlantı bir yere çıkmıyor." [level=1] [ref=f3e48]
+        - paragraph [ref=f3e49]: Aradığınız sayfa taşınmış, kaldırılmış ya da adres yanlış yazılmış olabilir. Anasayfadan devam edebilir veya öne çıkan sayfalara göz atabilirsiniz.
+        - generic [ref=f3e50]:
+          - link "Anasayfaya dön" [ref=f3e51] [cursor=pointer]:
+            - /url: http://127.0.0.1:8091/
+          - link "Kurumsal görüşme" [ref=f3e54] [cursor=pointer]:
+            - /url: "#"
+      - navigation "Öne çıkan sayfalar" [ref=f3e55]:
+        - paragraph [ref=f3e56]: Buradan devam edebilirsiniz
+        - list [ref=f3e57]:
+          - listitem [ref=f3e58]:
+            - link "Kullanım senaryoları Mesai sonrası, transfer, toplantı ulaşımı" [ref=f3e59] [cursor=pointer]:
+              - /url: /design-4/kullanim-senaryolari
+              - generic [ref=f3e60]: Kullanım senaryoları
+              - generic [ref=f3e61]: Mesai sonrası, transfer, toplantı ulaşımı
+          - listitem [ref=f3e64]:
+            - link "Filo TOGG · Ford Explorer · Tourneo Custom" [ref=f3e65] [cursor=pointer]:
+              - /url: /design-4/filo
+              - generic [ref=f3e66]: Filo
+              - generic [ref=f3e67]: TOGG · Ford Explorer · Tourneo Custom
+          - listitem [ref=f3e70]:
+            - link "İletişim Bize ulaşın, kurumsal görüşme talep edin" [ref=f3e71] [cursor=pointer]:
+              - /url: /design-4/iletisim
+              - generic [ref=f3e72]: İletişim
+              - generic [ref=f3e73]: Bize ulaşın, kurumsal görüşme talep edin
+  - contentinfo [ref=f3e76]:
+    - generic [ref=f3e77]:
+      - generic [ref=f3e78]:
+        - link "ARACIMGELSİN powered by Özikizler Turizm" [ref=f3e79] [cursor=pointer]:
+          - /url: http://127.0.0.1:8091/
+          - generic [ref=f3e80]:
+            - generic [ref=f3e81]:
+              - text: ARACIM
+              - strong [ref=f3e82]: GELSİN
+            - generic [ref=f3e83]: powered by Özikizler Turizm
+        - paragraph [ref=f3e84]: Kurumsal mobilitenin yeni adı.
+        - list [ref=f3e85]:
+          - listitem [ref=f3e86]:
+            - link "LinkedIn" [ref=f3e87] [cursor=pointer]:
+              - /url: "#"
+          - listitem [ref=f3e91]:
+            - link "Instagram" [ref=f3e92] [cursor=pointer]:
+              - /url: "#"
+          - listitem [ref=f3e96]:
+            - link "X" [ref=f3e97] [cursor=pointer]:
+              - /url: "#"
+      - generic [ref=f3e101]:
+        - heading "Kullanım Senaryoları" [level=4] [ref=f3e102]
+        - list [ref=f3e103]:
+          - listitem [ref=f3e104]:
+            - link "Mesai sonrası ulaşım" [ref=f3e105] [cursor=pointer]:
+              - /url: http://127.0.0.1:8091/kullanim/mesai-sonrasi
+          - listitem [ref=f3e106]:
+            - link "Yönetici transferleri" [ref=f3e107] [cursor=pointer]:
+              - /url: http://127.0.0.1:8091/kullanim/yonetici-transferi
+          - listitem [ref=f3e108]:
+            - link "Havalimanı transferi" [ref=f3e109] [cursor=pointer]:
+              - /url: http://127.0.0.1:8091/kullanim/havalimani-transferi
+          - listitem [ref=f3e110]:
+            - link "Toplantı & iş ulaşımı" [ref=f3e111] [cursor=pointer]:
+              - /url: http://127.0.0.1:8091/kullanim/toplanti-is-ulasimi
+          - listitem [ref=f3e112]:
+            - link "Küçük ekip ulaşımı" [ref=f3e113] [cursor=pointer]:
+              - /url: http://127.0.0.1:8091/kullanim/kucuk-ekip-ulasimi
+          - listitem [ref=f3e114]:
+            - link "Evrak & küçük paket" [ref=f3e115] [cursor=pointer]:
+              - /url: http://127.0.0.1:8091/kullanim/evrak-paket
+      - generic [ref=f3e116]:
+        - heading "Filo & Panel" [level=4] [ref=f3e117]
+        - list [ref=f3e118]:
+          - listitem [ref=f3e119]:
+            - link "TOGG" [ref=f3e120] [cursor=pointer]:
+              - /url: http://127.0.0.1:8091/filo/togg
+          - listitem [ref=f3e121]:
+            - link "Ford Explorer" [ref=f3e122] [cursor=pointer]:
+              - /url: http://127.0.0.1:8091/filo/ford-explorer
+          - listitem [ref=f3e123]:
+            - link "Tourneo Custom" [ref=f3e124] [cursor=pointer]:
+              - /url: http://127.0.0.1:8091/filo/tourneo-custom
+          - listitem [ref=f3e125]:
+            - link "Yönetim Paneli" [ref=f3e126] [cursor=pointer]:
+              - /url: http://127.0.0.1:8091/yonetim-paneli
+      - generic [ref=f3e127]:
+        - heading "Hizmet Bölgeleri" [level=4] [ref=f3e128]
+        - list [ref=f3e129]:
+          - listitem [ref=f3e130]:
+            - link "Alsancak & Bayraklı" [ref=f3e131] [cursor=pointer]:
+              - /url: http://127.0.0.1:8091/bolge/alsancak-bayrakli
+          - listitem [ref=f3e132]:
+            - link "Karşıyaka & Çiğli" [ref=f3e133] [cursor=pointer]:
+              - /url: http://127.0.0.1:8091/bolge/karsiyaka-cigli
+          - listitem [ref=f3e134]:
+            - link "Gaziemir & Havalimanı" [ref=f3e135] [cursor=pointer]:
+              - /url: http://127.0.0.1:8091/bolge/gaziemir-havalimani
+          - listitem [ref=f3e136]:
+            - link "Tüm İzmir ilçeleri" [ref=f3e137] [cursor=pointer]:
+              - /url: http://127.0.0.1:8091/hizmet-bolgeleri
+      - generic [ref=f3e138]:
+        - heading "Kurumsal" [level=4] [ref=f3e139]
+        - list [ref=f3e140]:
+          - listitem [ref=f3e141]:
+            - link "Hakkımızda" [ref=f3e142] [cursor=pointer]:
+              - /url: http://127.0.0.1:8091/hakkimizda
+          - listitem [ref=f3e143]:
+            - link "Rehber" [ref=f3e144] [cursor=pointer]:
+              - /url: http://127.0.0.1:8091/rehber
+          - listitem [ref=f3e145]:
+            - link "İletişim" [ref=f3e146] [cursor=pointer]:
+              - /url: http://127.0.0.1:8091/iletisim
+          - listitem [ref=f3e147]:
+            - link "KVKK" [ref=f3e148] [cursor=pointer]:
+              - /url: http://127.0.0.1:8091/kvkk
+          - listitem [ref=f3e149]:
+            - link "Çerez Politikası" [ref=f3e150] [cursor=pointer]:
+              - /url: http://127.0.0.1:8091/cerez
+        - list [ref=f3e151]:
+          - listitem [ref=f3e152]:
+            - link "+90 232 000 00 00" [ref=f3e155] [cursor=pointer]:
+              - /url: tel:+902320000000
+          - listitem [ref=f3e156]:
+            - link "info@aracimgelsin.com" [ref=f3e160] [cursor=pointer]:
+              - /url: mailto:info@aracimgelsin.com
+    - generic [ref=f3e161]:
+      - paragraph [ref=f3e162]: © 2026 Aracım Gelsin — Powered by Özikizler Turizm. Tüm hakları saklıdır.
+      - paragraph [ref=f3e163]: D2 Yetki Belgesi · Kurumsal Sigorta
+  - link "Bizi arayın" [ref=f3e164] [cursor=pointer]:
+    - /url: tel:+902320000000
+    - generic [ref=f3e168]: Bize ulaşın

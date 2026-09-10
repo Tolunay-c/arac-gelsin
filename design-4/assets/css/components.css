@@ -3,37 +3,68 @@
    Buton, kart, form, rozet, ikon dairesi, süreç, tablo, harita.
    ============================================================ */
 
-/* ---------- Butonlar ---------- */
+/* ---------- Butonlar ----------
+   Sistematik ölçek:
+     boy   → padding · font-size
+     sm    → 8×14  · fs-xs
+     base  → 12×20 · fs-sm   (default)
+     lg    → 16×28 · fs-base
+   Hiyerarşi (Fitts + görsel ağırlık):
+     primary  → tam dolu kırmızı, ana eylem
+     secondary→ navy konturlu (dolu değil), ikincil
+     quiet    → nötr yüzey, tersiyer form eylemleri
+     ghost    → sadece metin, inline eylem
+     onDark   → koyu zeminde outline
+*/
 .btn {
-  display: inline-flex; align-items: center; justify-content: center; gap: var(--s2);
-  padding: 12px 22px;
+  --btn-py: 12px;
+  --btn-px: 20px;
+  display: inline-flex; align-items: center; justify-content: center;
+  gap: var(--sp-2);
+  padding: var(--btn-py) var(--btn-px);
   border-radius: var(--r-md);
-  border: 1px solid transparent;
-  font-family: var(--font-sans); font-weight: 700; font-size: var(--fs-sm); line-height: 1;
-  letter-spacing: .01em;
+  border: var(--bw-solid) solid transparent;
+  font-family: var(--font-sans); font-weight: 700; font-size: var(--fs-sm);
+  line-height: 1; letter-spacing: .01em;
+  text-align: center; white-space: nowrap;
+  cursor: pointer; user-select: none;
   transition: background var(--dur) var(--ease), color var(--dur) var(--ease),
               border-color var(--dur) var(--ease), transform var(--dur) var(--ease),
               box-shadow var(--dur) var(--ease);
-  cursor: pointer;
 }
 .btn:active { transform: translateY(1px); }
+.btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(222,32,24,.28);
+}
 .btn svg { width: 18px; height: 18px; flex-shrink: 0; transition: transform var(--dur) var(--ease); }
 .btn:hover svg.icon-arrow { transform: translateX(3px); }
 
-.btn--primary { background: var(--crimson); color: #fff; }
-.btn--primary:hover { background: var(--crimson-dark); box-shadow: var(--shadow-red); }
+/* Primary — kırmızı, tam ağırlıklı */
+.btn--primary { background: var(--crimson); color: #fff; border-color: var(--crimson); }
+.btn--primary:hover  { background: var(--crimson-dark); border-color: var(--crimson-dark); box-shadow: var(--shadow-red); }
 
+/* Secondary — navy konturlu, ana eyleme rakip değil */
 .btn--secondary { background: transparent; color: var(--navy-900); border-color: var(--navy-900); }
-.btn--secondary:hover { background: var(--navy-900); color: #fff; }
+.btn--secondary:hover  { background: var(--navy-900); color: #fff; }
 
-.btn--outline-onDark { background: transparent; color: #fff; border-color: rgba(255,255,255,.45); }
+/* Quiet — nötr yüzey, tersiyer eylem */
+.btn--quiet { background: var(--mist); color: var(--ink-900); border-color: transparent; }
+.btn--quiet:hover  { background: #E4E7EC; }
+
+/* Ghost — sadece metin */
+.btn--ghost { background: transparent; color: var(--crimson); border-color: transparent; padding-inline: 4px; }
+.btn--ghost:hover  { color: var(--crimson-dark); background: var(--crimson-soft); }
+
+/* onDark — koyu header/hero üstünde */
+.btn--outline-onDark { background: transparent; color: #fff; border-color: rgba(255,255,255,.35); }
 .btn--outline-onDark:hover { border-color: #fff; background: rgba(255,255,255,.08); }
+.btn--outline-onDark:focus-visible { box-shadow: 0 0 0 3px rgba(255,255,255,.28); }
 
-.btn--ghost { background: transparent; color: var(--crimson); padding-inline: 0; }
-.btn--ghost:hover { color: var(--crimson-dark); }
+/* Boyutlar */
+.btn--sm { --btn-py: 8px;  --btn-px: 14px; font-size: var(--fs-xs); }
+.btn--lg { --btn-py: 16px; --btn-px: 28px; font-size: var(--fs-base); }
 
-.btn--sm { padding: 9px 16px; font-size: var(--fs-xs); }
-.btn--lg { padding: 16px 28px; font-size: var(--fs-base); }
 .btn--block { width: 100%; }
 .btn[disabled] { opacity: .5; pointer-events: none; }
 

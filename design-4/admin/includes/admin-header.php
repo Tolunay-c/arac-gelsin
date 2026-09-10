@@ -46,7 +46,13 @@ $initials = mb_strtoupper(mb_substr($fullName, 0, 1) . mb_substr((string) strrch
   <div class="admin-nav-backdrop" id="adminNavBackdrop"></div>
 
   <aside class="admin-sidebar">
-    <a href="index.php" class="admin-sidebar__brand">Aracım<strong>Gelsin</strong><span>Yönetim Paneli</span></a>
+    <a href="index.php" class="admin-sidebar__brand">
+      <img class="admin-sidebar__logo" src="<?= e(asset('images/logo.jpg')) ?>" alt="" width="40" height="40" decoding="async">
+      <span class="admin-sidebar__brand-text">
+        <span class="admin-sidebar__brand-mark">Aracım<strong>Gelsin</strong></span>
+        <span class="admin-sidebar__brand-sub">Yönetim Paneli</span>
+      </span>
+    </a>
     <nav class="admin-sidebar__nav">
       <?php foreach ($navGroups as $navGroupLabel => $navGroupItems): ?>
         <div class="nav-label"><?= e($navGroupLabel) ?></div>

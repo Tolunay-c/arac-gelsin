@@ -58,12 +58,26 @@ h1, h2, h3 { font-family: var(--font-display); font-weight: 700; letter-spacing:
   display: flex; flex-direction: column; z-index: 50;
 }
 .admin-sidebar__brand {
-  display: flex; flex-direction: column; gap: 2px;
-  padding: 22px 20px 18px; border-bottom: 1px solid rgb(255 255 255 / .07);
-  font-family: var(--font-display); font-weight: 700; font-size: 1.15rem; color: #fff;
+  display: flex; align-items: center; gap: 12px;
+  padding: 18px 18px 16px; border-bottom: 1px solid rgb(255 255 255 / .07);
+  color: #fff; text-decoration: none;
 }
-.admin-sidebar__brand strong { color: var(--cyan); }
-.admin-sidebar__brand span { font-family: var(--font-sans); font-size: 10.5px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: rgb(255 255 255 / .4); }
+.admin-sidebar__logo {
+  width: 40px; height: 40px; border-radius: 50%; object-fit: cover;
+  background: var(--crimson, #DE2018); flex-shrink: 0;
+  box-shadow: 0 0 0 1px rgb(255 255 255 / .06);
+}
+.admin-sidebar__brand-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.admin-sidebar__brand-mark {
+  font-family: var(--font-display); font-weight: 700; font-size: 1.05rem;
+  color: #fff; letter-spacing: .01em; line-height: 1.1;
+}
+.admin-sidebar__brand-mark strong { color: var(--cyan); font-weight: 800; }
+.admin-sidebar__brand-sub {
+  font-family: var(--font-sans); font-size: 10px; font-weight: 600;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: rgb(255 255 255 / .4);
+}
 
 .admin-sidebar__nav { flex: 1; padding: 14px 12px; overflow-y: auto; }
 .admin-sidebar__nav .nav-label {
