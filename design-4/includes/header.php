@@ -35,6 +35,9 @@ $panelUrl    = $settings['panel_url'] ?? '#';
 <meta name="geo.placename" content="İzmir">
 <link rel="canonical" href="<?= e(APP_URL . $currentPath) ?>">
 
+<link rel="icon" type="image/jpeg" href="<?= e(asset('images/logo.jpg')) ?>">
+<link rel="apple-touch-icon" href="<?= e(asset('images/logo.jpg')) ?>">
+
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="<?= e($siteName) ?>">
 <meta property="og:title" content="<?= e($pageTitle ?? ($settings['meta_title'] ?? $siteName)) ?>">
@@ -79,7 +82,7 @@ $panelUrl    = $settings['panel_url'] ?? '#';
 <header class="site-header" id="siteHeader">
   <div class="container">
     <a href="/design-4/" class="brand" aria-label="<?= e($siteName) ?> anasayfa">
-      <span class="brand__disc" aria-hidden="true">A</span>
+      <img class="brand__logo" src="<?= e(asset('images/logo.jpg')) ?>" alt="" width="48" height="48" decoding="async">
       <span class="brand__text">
         <span class="brand__mark">ARACIM<strong>GELSİN</strong></span>
         <span class="brand__powered">powered by <?= e($settings['powered_by'] ?? 'ÖZİKİZLER TURİZM') ?></span>

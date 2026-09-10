@@ -35,7 +35,7 @@ $corpLinks = [
   <div class="container footer-grid">
     <div>
       <a href="<?= e(APP_URL) ?>/" class="brand">
-        <span class="brand__disc" aria-hidden="true">A</span>
+        <img class="brand__logo" src="<?= e(asset('images/logo.jpg')) ?>" alt="" width="52" height="52" decoding="async">
         <span class="brand__text">
           <span class="brand__mark">ARACIM<strong>GELSİN</strong></span>
           <span class="brand__powered">powered by <?= e($settings['powered_by'] ?? 'ÖZİKİZLER TURİZM') ?></span>
@@ -103,7 +103,10 @@ $corpLinks = [
 </footer>
 
 <?php if (!empty($settings['contact_phone'])): ?>
-<a class="call-float" href="tel:<?= e(preg_replace('/\s+/', '', $settings['contact_phone'])) ?>" aria-label="Bizi arayın"><?= icon('phone') ?></a>
+<a class="call-float" href="tel:<?= e(preg_replace('/\s+/', '', $settings['contact_phone'])) ?>" aria-label="Bizi arayın">
+  <span class="call-float__icon" aria-hidden="true"><?= icon('phone') ?></span>
+  <span class="call-float__label">Bize ulaşın</span>
+</a>
 <?php endif; ?>
 
 <!-- Kurumsal görüşme modal -->

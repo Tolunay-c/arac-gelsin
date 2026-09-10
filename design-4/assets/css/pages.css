@@ -572,18 +572,88 @@
 .about-lead h2 { font-family: var(--font-serif); margin-bottom: var(--s4); }
 .about-lead p { font-size: var(--fs-md); color: var(--ink-700); }
 
-/* ============ 404 ============ */
+/* ============ 404 ============
+   Hiyerarşi: eyebrow → 404 rakamı (dekoratif, aria-hidden) → h1 → lead → 2 eylem
+   → yardımcı gezinme (Miller: 3 kart). Sol hizalı, üstten padding'li — hero değil.
+*/
 .error-page {
-  min-height: 60vh;
-  display: flex; align-items: center; justify-content: center; text-align: center;
-  padding-block: var(--s9);
+  padding-block: clamp(48px, 4vw + 32px, 96px) var(--s9);
+  background: var(--paper);
+}
+.error-page .container {
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 380px);
+  gap: var(--s8) var(--s7); align-items: start;
+}
+@media (max-width: 900px) {
+  .error-page .container { grid-template-columns: 1fr; gap: var(--s7); }
+}
+
+.error-page__body { max-width: 640px; }
+.error-page__eyebrow {
+  color: var(--crimson);
+  display: inline-block; margin-bottom: var(--s5);
 }
 .error-page__num {
-  font-family: var(--font-serif); font-weight: 700; color: var(--crimson);
-  font-size: clamp(4rem, 3rem + 6vw, 8rem); line-height: 1;
+  font-family: var(--font-serif); font-weight: 700; color: var(--ink-900);
+  font-size: clamp(4.5rem, 3rem + 7vw, 9rem); line-height: .9;
+  letter-spacing: -.03em; margin: 0;
+  background: linear-gradient(180deg, var(--ink-900) 0%, var(--ink-900) 55%, var(--line) 55%, var(--line) 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
 }
-.error-page h1 {
-  font-family: var(--font-serif); margin: var(--s4) 0 var(--s3);
+.error-page__title {
+  font-family: var(--font-serif); font-weight: 700;
+  font-size: var(--fs-3xl); line-height: var(--lh-tight);
+  color: var(--ink-900); margin: var(--s5) 0 var(--s4);
+  letter-spacing: -.01em;
+}
+.error-page__lead {
+  color: var(--ink-700); font-size: var(--fs-md); line-height: var(--lh-base);
+  max-width: 52ch; margin: 0 0 var(--s7);
+}
+.error-page__actions {
+  display: flex; gap: var(--s3); flex-wrap: wrap;
+}
+
+/* Yardımcı gezinme — 3 kart, sağ kolon */
+.error-page__helpful {
+  border-left: 3px solid var(--crimson);
+  padding: var(--s2) 0 var(--s2) var(--s5);
+}
+.error-page__helpful-title {
+  font-family: var(--font-sans); font-weight: 700;
+  font-size: var(--fs-xs); letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase; color: var(--ink-500);
+  margin: 0 0 var(--s4);
+}
+.error-page__helpful ul { display: flex; flex-direction: column; gap: var(--s2); }
+.error-page__helpful a {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: auto auto;
+  column-gap: var(--s3); row-gap: 2px;
+  padding: var(--s4) var(--s4);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: var(--paper);
   color: var(--ink-900);
+  transition: border-color var(--dur) var(--ease), background var(--dur) var(--ease), transform var(--dur) var(--ease);
 }
-.error-page p { color: var(--ink-500); margin-bottom: var(--s6); }
+.error-page__helpful a:hover {
+  border-color: var(--navy-900); background: var(--mist); transform: translateX(2px);
+}
+.error-page__helpful-label {
+  font-weight: 700; font-size: var(--fs-base); color: var(--ink-900);
+  grid-column: 1; grid-row: 1;
+}
+.error-page__helpful-desc {
+  color: var(--ink-500); font-size: var(--fs-sm);
+  grid-column: 1; grid-row: 2;
+}
+.error-page__helpful-icon {
+  grid-column: 2; grid-row: 1 / span 2;
+  align-self: center;
+  width: 18px; height: 18px; color: var(--crimson);
+  transition: transform var(--dur) var(--ease);
+}
+.error-page__helpful a:hover .error-page__helpful-icon { transform: translateX(3px); }
